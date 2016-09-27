@@ -1,9 +1,7 @@
 package org.danilopianini.jirf;
 
 import java.util.List;
-import java.util.function.Function;
 import java.util.function.Supplier;
-import org.jgrapht.GraphPath;
 
 public interface Factory {
 
