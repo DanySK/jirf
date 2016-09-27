@@ -195,7 +195,7 @@ public final class FactoryImpl implements Factory {
             final Class<? super E> lowerBound,
             final Class<? super E> upperBound,
             final E object) {
-        register(singletons, lowerBound, upperBound, object.getClass(), object);
+        register(singletons, lowerBound, upperBound, (Class<E>)object.getClass(), object);
     }
 
     @SuppressWarnings("unchecked")
