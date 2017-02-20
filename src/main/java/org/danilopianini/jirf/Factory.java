@@ -1,6 +1,7 @@
 package org.danilopianini.jirf;
 
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public interface Factory {
@@ -46,6 +47,8 @@ public interface Factory {
     <E> E build(Class<E> clazz, Object... parameters);
 
     <E> E build(Class<? super E> clazz, List<?> args);
+
+    <S, D> void registerImplicit(Class<S> source, Class<D> destination, Function<? super S, ? extends D> implicit);
 
 //    <E> E build(String clazz, Object... parameters);
     

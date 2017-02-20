@@ -13,7 +13,7 @@ import com.google.common.collect.Table;
 /**
  *
  */
-public class ImplicitEdgeFactory implements EdgeFactory<Class<?>, Function<?, ?>> {
+class ImplicitEdgeFactory implements EdgeFactory<Class<?>, FunctionEdge> {
 
     private final Table<Class<?>, Class<?>, Function<?, ?>> implicitConversions = HashBasedTable.create();
 
@@ -29,12 +29,12 @@ public class ImplicitEdgeFactory implements EdgeFactory<Class<?>, Function<?, ?>
     }
 
     @Override
-    public Function<?, ?> createEdge(final Class<?> sourceVertex, final Class<?> targetVertex) {
+    public FunctionEdge createEdge(final Class<?> sourceVertex, final Class<?> targetVertex) {
         final Function<?, ?> result = implicitConversions.get(sourceVertex, targetVertex);
         if (result == null) {
             throw new IllegalStateException("No conversion function was provided for " + sourceVertex.getSimpleName() + " -> " + targetVertex.getSimpleName());
         }
-        return result;
+        return new FunctionEdge(sourceVertex, targetVertex, result);
     }
 
 }

@@ -13,59 +13,53 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
-import org.jgrapht.Graph;
+import org.jgrapht.DirectedGraph;
 import org.jgrapht.alg.DijkstraShortestPath;
 import org.jgrapht.graph.DefaultDirectedGraph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public final class FactoryImpl implements Factory {
+final class FactoryImpl implements Factory {
 
     private static final Logger L = LoggerFactory.getLogger(Factory.class);
 
     private final Map<Class<?>, Object> singletons = new LinkedHashMap<>();
     private final Map<Class<?>, Supplier<?>> suppliers = new LinkedHashMap<>();
     private final ImplicitEdgeFactory edgeFactory = new ImplicitEdgeFactory();
-    private final Graph<Class<?>, Function<?, ?>> implicits = new DefaultDirectedGraph<>(edgeFactory);
+    private final DirectedGraph<Class<?>, FunctionEdge> implicits = new DefaultDirectedGraph<>(edgeFactory);
 
-    public FactoryImpl() {
-        // TODO Auto-generated constructor stub
-    }
-
-    private static void checkSuperclass(final Class<?> lower, final Class<?> upper) {
-        if (upper.isAssignableFrom(lower)) {
-            throw new IllegalArgumentException(upper + " must be a superclass of " + lower);
-        }
-    }
-    
-    private static <E, O> void register(
-            final Map<Class<?>, O> map,
-            final Class<? super E> lowerbound,
-            final Class<? super E> upperbound,
-            final Class<? super E> clazz,
-            final O object) {
-        checkSuperclass(Objects.requireNonNull(lowerbound), Objects.requireNonNull(clazz));
-        checkSuperclass(Objects.requireNonNull(upperbound), lowerbound);
-        for (Class<? super E> c = lowerbound; c != null && upperbound.isAssignableFrom(c); c = c.getSuperclass()) {
-            map.put(c, Objects.requireNonNull(object));
-        }
-    }
-
-    private <S, D> Optional<List<Function<?, ?>>> findConversionChain(final Class<S> source, final Class<D> destination) {
-        return Optional.ofNullable(DijkstraShortestPath.findPathBetween(implicits, source.getClass(), destination));
+    FactoryImpl() {
     }
 
     @SuppressWarnings("unchecked")
-    private <S, D> Optional<D> convert(final S source, final Class<D> destination) {
-        return findConversionChain(source.getClass(), destination)
-            .map(chain -> {
-                Object in = source;
-                for (final Function<?, ?> implicit : chain) {
-                    in = ((Function<Object, ?>) implicit).apply(in);
-                }
-                return (D) in;
-            });
+    @Override
+    public <E> E build(final Class<? super E> clazz, final List<?> args) {
+        final Constructor<E>[] constructors = (Constructor<E>[]) clazz.getConstructors();
+        final List<Throwable> exceptions = new LinkedList<>();
+        return Arrays.stream(constructors)
+                .map(c -> new ConstructorBenchmark<E>(c, args))
+                .sorted()
+                .map(cb -> createBestEffort(cb.constructor, args))
+                .filter(e -> {
+                    if (e instanceof Throwable) {
+                        exceptions.add((Throwable) e);
+                        return false;
+                    }
+                    return true;
+                })
+                .map(e -> (E) e)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "Cannot create "
+                        + clazz.getName()
+                        + " with arguments "
+                        + args
+                        + exceptions.stream()
+                            .map(Throwable::getMessage)
+                            .map(m -> '\n' + m)
+                            .collect(Collectors.joining())));
     }
 
     @Override
@@ -73,21 +67,19 @@ public final class FactoryImpl implements Factory {
         return build(clazz, Arrays.asList(parameters));
     }
 
-    @Override
-    public <E> E build(final Class<? super E> clazz, final List<?> args) {
-        @SuppressWarnings("unchecked")
-        final Constructor<E>[] constructors = (Constructor<E>[]) clazz.getConstructors();
-        return Arrays.stream(constructors)
-                .map(c -> new ConstructorBenchmark<E>(c, args))
-                .sorted()
-                .map(cb -> createBestEffort(cb.constructor, args))
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .findFirst()
-                .orElse(null);
+    @SuppressWarnings("unchecked")
+    private <S, D> Optional<D> convert(final S source, final Class<D> destination) {
+        return findConversionChain(source.getClass(), destination)
+            .map(chain -> {
+                Object in = source;
+                for (final FunctionEdge implicit : chain) {
+                    in = ((Function<Object, ?>) implicit.getFunction()).apply(in);
+                }
+                return (D) in;
+            });
     }
 
-    private <O> Optional<O> createBestEffort(final Constructor<O> constructor, final List<?> params) {
+    private Object createBestEffort(final Constructor<?> constructor, final List<?> params) {
         final Deque<?> paramsLeft = new LinkedList<>(Collections.unmodifiableList(params));
         final Object[] actualArgs = Arrays.stream(constructor.getParameterTypes())
             .map(expectedClass -> {
@@ -97,6 +89,13 @@ public final class FactoryImpl implements Factory {
                 final Object singleton = singletons.get(expectedClass);
                 if (singleton != null) {
                     return singleton;
+                }
+                /*
+                 * Check if the object can be supplied
+                 */
+                final Supplier<?> supplier = suppliers.get(expectedClass);
+                if (supplier != null) {
+                    return supplier.get();
                 }
                 /*
                  * Then, try to use the next available parameter
@@ -115,87 +114,40 @@ public final class FactoryImpl implements Factory {
                     }
                 }
                 /*
-                 * Check if the object can be supplied
-                 */
-                final Supplier<?> supplier = suppliers.get(expectedClass);
-                if (supplier != null) {
-                    return supplier.get();
-                }
-                /*
                  * Give up.
                  */
                 return null;
             }).toArray();
         try {
-            final O result = constructor.newInstance(actualArgs);
-            L.debug("{} produced {} with arguments {}", constructor, result, actualArgs);
-            return Optional.of(result);
+            return constructor.newInstance(actualArgs);
         } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-            L.debug("No luck with {} and arguments {}", constructor, actualArgs);
-        }
-        return Optional.empty();
-    }
-
-    private class ConstructorBenchmark<T> implements Comparable<ConstructorBenchmark<T>> {
-        private final Constructor<T> constructor;
-        private final int score;
-
-        ConstructorBenchmark(final Constructor<T> constructor, final Object... args) {
-            this.constructor = constructor;
-            /*
-             * Filter out constructor arguments that will be assigned to singletons
-             */
-            final Class<?>[] filteredParams = Arrays.stream(constructor.getParameterTypes())
-                    .filter(clazz -> !singletons.containsKey(clazz))
-                    .toArray(i -> new Class<?>[i]);
-            score = computeScore(filteredParams, args);
-        }
-
-        private int computeScore(final Class<?>[] filteredParams, final Object... args) {
-            final int numDiff = filteredParams.length - args.length;
-            if (numDiff == 0) {
-                int tempScore = 0;
-                for (int i = 0; i < args.length; i++) {
-                    final Class<?> expected = filteredParams[i];
-                    final Class<?> actual = args[i].getClass();
-                    if (!expected.isAssignableFrom(actual)) {
-                        tempScore += findConversionChain(actual, expected)
-                            .map(List::size)
-                            .orElse(100);
-                    }
-                }
-                return tempScore;
-            } else {
-                return Short.MAX_VALUE + numDiff;
-            }
-        }
-
-        @Override
-        public boolean equals(final Object obj) {
-            return obj instanceof ConstructorBenchmark
-                    && constructor.equals(((ConstructorBenchmark<?>) obj).constructor)
-                    && score == ((ConstructorBenchmark<?>) obj).score;
-        }
-
-        @Override
-        public int hashCode() {
-            return constructor.hashCode() ^ score;
-        }
-
-        @Override
-        public int compareTo(final ConstructorBenchmark<T> o) {
-            return score == o.score
-                    ? constructor.toString().compareTo(o.constructor.toString())
-                    : Integer.compare(score, o.score);
+            return e;
         }
     }
 
+    private <S, D> Optional<List<FunctionEdge>> findConversionChain(final Class<S> source, final Class<D> destination) {
+        return Optional.ofNullable(DijkstraShortestPath.findPathBetween(implicits, source, destination));
+    }
+
+    @Override
+    public <S, D> void registerImplicit(
+            final Class<S> source,
+            final Class<D> target,
+            final Function<? super S, ? extends D> implicit) {
+        System.out.println("Registering " + source.getSimpleName() + " --> " + target.getSimpleName());
+        implicits.addVertex(source);
+        implicits.addVertex(target);
+        edgeFactory.addImplicitConversion(source, target, implicit);
+        Objects.requireNonNull(implicits.addEdge(source, target));
+    }
+
+    @SuppressWarnings("unchecked")
     @Override
     public <E> void registerSingleton(
             final Class<? super E> lowerBound,
             final Class<? super E> upperBound,
             final E object) {
-        register(singletons, lowerBound, upperBound, (Class<E>)object.getClass(), object);
+        register(singletons, lowerBound, upperBound, (Class<E>) object.getClass(), object);
     }
 
     @SuppressWarnings("unchecked")
@@ -232,6 +184,80 @@ public final class FactoryImpl implements Factory {
             final Class<? super E> clazz,
             final Supplier<? extends E> object) {
         registerSupplier(clazz, clazz, object);
+    }
+
+    private static void checkSuperclass(final Class<?> lower, final Class<?> upper) {
+        if (upper.isAssignableFrom(lower)) {
+            throw new IllegalArgumentException(upper + " must be a superclass of " + lower);
+        }
+    }
+
+    private static <E, O> void register(
+            final Map<Class<?>, O> map,
+            final Class<? super E> lowerbound,
+            final Class<? super E> upperbound,
+            final Class<? super E> clazz,
+            final O object) {
+        checkSuperclass(Objects.requireNonNull(lowerbound), Objects.requireNonNull(clazz));
+        checkSuperclass(Objects.requireNonNull(upperbound), lowerbound);
+        for (Class<? super E> c = lowerbound; c != null && upperbound.isAssignableFrom(c); c = c.getSuperclass()) {
+            map.put(c, Objects.requireNonNull(object));
+        }
+    }
+
+    private class ConstructorBenchmark<T> implements Comparable<ConstructorBenchmark<T>> {
+        private final Constructor<T> constructor;
+        private final int score;
+
+        ConstructorBenchmark(final Constructor<T> constructor, final Object... args) {
+            this.constructor = constructor;
+            /*
+             * Filter out constructor arguments that will be assigned to singletons
+             */
+            final Class<?>[] filteredParams = Arrays.stream(constructor.getParameterTypes())
+                    .filter(clazz -> !singletons.containsKey(clazz))
+                    .filter(clazz -> !suppliers.containsKey(clazz))
+                    .toArray(i -> new Class<?>[i]);
+            score = computeScore(filteredParams, args);
+        }
+
+        @Override
+        public int compareTo(final ConstructorBenchmark<T> o) {
+            return score == o.score
+                    ? constructor.toString().compareTo(o.constructor.toString())
+                    : Integer.compare(score, o.score);
+        }
+
+        private int computeScore(final Class<?>[] filteredParams, final Object... args) {
+            final int numDiff = filteredParams.length - args.length;
+            if (numDiff == 0) {
+                int tempScore = 0;
+                for (int i = 0; i < args.length; i++) {
+                    final Class<?> expected = filteredParams[i];
+                    final Class<?> actual = args[i].getClass();
+                    if (!expected.isAssignableFrom(actual)) {
+                        tempScore += findConversionChain(actual, expected)
+                            .map(List::size)
+                            .orElse(implicits.edgeSet().size());
+                    }
+                }
+                return tempScore;
+            } else {
+                return Short.MAX_VALUE + numDiff;
+            }
+        }
+
+        @Override
+        public boolean equals(final Object obj) {
+            return obj instanceof ConstructorBenchmark
+                    && constructor.equals(((ConstructorBenchmark<?>) obj).constructor)
+                    && score == ((ConstructorBenchmark<?>) obj).score;
+        }
+
+        @Override
+        public int hashCode() {
+            return constructor.hashCode() ^ score;
+        }
     }
 
 }
