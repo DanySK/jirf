@@ -18,17 +18,15 @@ dependencies {
     doclet "org.jboss.apiviz:apiviz:${apivizVersion}"
 }
 
-println project.configurations.doclet.asPath
-
 uploadArchives {
     repositories {
         mavenDeployer {
             pom.project {
                 developers {
                     developer {
-                            name 'Danilo Pianini'
-                            email 'danilo.pianini@gmail.com'
-                            url 'http://www.danilopianini.org/'
+                        name 'Danilo Pianini'
+                        email 'danilo.pianini@gmail.com'
+                        url 'http://www.danilopianini.org/'
                     }
                 }
             }
