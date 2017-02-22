@@ -12,7 +12,9 @@ apply plugin: 'org.danilopianini.build-commons'
 
 dependencies {
     compile "com.google.guava:guava:${guavaVersion}"
+    compile "org.apache.commons:commons-lang3:$lang3Version"
     compile "org.jgrapht:jgrapht-core:${jgraphtVersion}"
+    compile "org.slf4j:slf4j-api:$slf4jVersion"
     compile "org.slf4j:slf4j-api:$slf4jVersion"
     testCompile "junit:junit:${junitVersion}"
     doclet "org.jboss.apiviz:apiviz:${apivizVersion}"

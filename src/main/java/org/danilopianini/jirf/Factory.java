@@ -46,7 +46,7 @@ public interface Factory {
 
     <E> E build(Class<E> clazz, Object... parameters);
 
-    <E> E build(Class<? super E> clazz, List<?> args);
+    <E> E build(Class<E> clazz, List<?> args);
 
     <S, D> void registerImplicit(Class<S> source, Class<D> destination, Function<? super S, ? extends D> implicit);
 

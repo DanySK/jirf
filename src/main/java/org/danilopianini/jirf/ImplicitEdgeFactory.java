@@ -25,6 +25,7 @@ class ImplicitEdgeFactory implements EdgeFactory<Class<?>, FunctionEdge> {
      * @param D
      */
     public <S, D> void addImplicitConversion(final Class<S> source, final Class<D> dest, final Function<? super S, ? extends D> implicit) {
+        System.out.println("Registering: " + source.getSimpleName() + " --> " + dest.getSimpleName());
         implicitConversions.put(source, dest, implicit);
     }
 
