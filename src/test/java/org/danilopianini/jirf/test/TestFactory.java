@@ -26,7 +26,7 @@ public final class TestFactory {
     @Test
     public void testNonWidening() {
         final Factory f = new FactoryBuilder()
-                .withAllConversions()
+                .withNarrowingConversions()
                 .build();
         Assert.assertNotNull(f.build(MyObj.class, 1, 2, 3.0));
     }
@@ -75,12 +75,6 @@ public final class TestFactory {
     public static class MyObj {
         public MyObj(double a, Double b, byte c) {
         }
-    }
-
-    public static void main(String...strings) {
-        final Factory f = new FactoryBuilder()
-                .withWideningConversions()
-                .build();
     }
 
 }

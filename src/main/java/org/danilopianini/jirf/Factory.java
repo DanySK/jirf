@@ -1,8 +1,11 @@
 package org.danilopianini.jirf;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Supplier;
+
+import com.google.common.reflect.TypeToken;
 
 public interface Factory {
 
@@ -12,7 +15,8 @@ public interface Factory {
 
     <E> void registerSingleton(E object);
 
-//    void registerSingleton(String clazz, Object object);
+    <E> boolean deregisterSingleton(E object);
+
     <E> void registerSupplier(Class<? super E> lowerBound, Class<? super E> upperBound, Class<? super E> clazz, Supplier<? extends E> object);
 
     <E> void registerSupplier(Class<? super E> bound, Class<? super E> clazz, Supplier<? extends E> object);
@@ -48,8 +52,10 @@ public interface Factory {
 
     <E> E build(Class<E> clazz, List<?> args);
 
+    <I, O> Optional<O> convert(Class<O> clazz, I target);
+    
+    <I, O> O convertOrFail(Class<O> clazz, I target);
+    
     <S, D> void registerImplicit(Class<S> source, Class<D> destination, Function<? super S, ? extends D> implicit);
 
-//    <E> E build(String clazz, Object... parameters);
-    
 }

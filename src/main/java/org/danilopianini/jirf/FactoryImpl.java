@@ -3,6 +3,7 @@ package org.danilopianini.jirf;
 import java.lang.reflect.Constructor;
 import java.util.Arrays;
 import java.util.Deque;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -13,11 +14,14 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.ClassUtils;
 import org.jgrapht.DirectedGraph;
 import org.jgrapht.alg.DijkstraShortestPath;
 import org.jgrapht.graph.DefaultDirectedGraph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.common.reflect.TypeToken;
 
 final class FactoryImpl implements Factory {
 
@@ -41,9 +45,7 @@ final class FactoryImpl implements Factory {
                     final List<Throwable> exceptions = new LinkedList<>();
                     return Arrays.stream(constructors)
                             .map(c -> new ConstructorBenchmark<E>(c, args))
-                            .peek(System.out::println)
                             .filter(cb -> cb.score >= 0)
-                            .peek(System.out::println)
                             .sorted()
                             .map(cb -> createBestEffort(cb.constructor, args))
                             .filter(e -> {
@@ -76,14 +78,14 @@ final class FactoryImpl implements Factory {
     }
 
     @SuppressWarnings("unchecked")
-    private Optional<Object> convert(final Object source, final Class<?> destination) {
-        return findConversionChain(source.getClass(), destination)
+    public <I, O> Optional<O> convert(final Class<O> destination, final I source) {
+        return findConversionChain(Objects.requireNonNull(source.getClass()), Objects.requireNonNull(destination))
             .map(chain -> {
                 Object in = source;
                 for (final FunctionEdge implicit : chain) {
                     in = ((Function<Object, ?>) implicit.getFunction()).apply(in);
                 }
-                return in;
+                return (O) in;
             });
     }
 
@@ -98,7 +100,7 @@ final class FactoryImpl implements Factory {
                 .map(Supplier::get);
     }
 
-    private <E> Optional<E> getFromStaticSources(final Class<? super E> clazz) {
+    private <E> Optional<E> getFromStaticSources(final Class<E> clazz) {
         final Optional<E> fromSingleton = getSingleton(clazz);
         if (fromSingleton.isPresent()) {
             return fromSingleton;
@@ -120,7 +122,7 @@ final class FactoryImpl implements Factory {
                 if (param == null || expected.isAssignableFrom(param.getClass())) {
                     actualArgs[i] = param;
                 } else {
-                    final Optional<?> result = convert(param, expected);
+                    final Optional<?> result = convert(expected, param);
                     if (result.isPresent()) {
                         actualArgs[i] = result.get();
                     } else {
@@ -157,6 +159,7 @@ final class FactoryImpl implements Factory {
             final Class<D> target,
             final Function<? super S, ? extends D> implicit) {
         edgeFactory.addImplicitConversion(source, target, implicit);
+        implicits.removeEdge(source, target);
         Objects.requireNonNull(implicits.addEdge(source, target));
     }
 
@@ -185,19 +188,19 @@ final class FactoryImpl implements Factory {
             final Class<? super E> lowerBound,
             final Class<? super E> upperBound,
             final E object) {
-        register(singletons, lowerBound, upperBound, (Class<E>) object.getClass(), object);
+        register(singletons, Objects.requireNonNull(lowerBound), Objects.requireNonNull(upperBound), (Class<E>) Objects.requireNonNull(object).getClass(), object);
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public <E> void registerSingleton(final Class<? super E> bound, final E object) {
-        registerSingleton((Class<E>) object.getClass(), bound, object);
+        registerSingleton((Class<E>) Objects.requireNonNull(object).getClass(), bound, object);
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public <E> void registerSingleton(final E object) {
-        registerSingleton((Class<E>) object.getClass(), object);
+        registerSingleton((Class<E>) Objects.requireNonNull(object).getClass(), object);
     }
 
     @Override
@@ -240,6 +243,14 @@ final class FactoryImpl implements Factory {
         checkSuperclass(lowerbound, Objects.requireNonNull(upperbound));
         for (Class<? super E> c = lowerbound; c != null && upperbound.isAssignableFrom(c); c = c.getSuperclass()) {
             map.put(c, Objects.requireNonNull(object));
+        }
+        if (upperbound.isInterface()) {
+            final boolean li = lowerbound.isInterface();
+            for (final Class<?> i : ClassUtils.getAllInterfaces(clazz)) {
+                if (upperbound.isAssignableFrom(i) && (!li || i.isAssignableFrom(lowerbound))) {
+                    map.put(i, object);
+                }
+            }
         }
     }
 
@@ -302,6 +313,26 @@ final class FactoryImpl implements Factory {
         public String toString() {
             return constructor + "->" + score;
         }
+    }
+
+    @Override
+    public <I, O> O convertOrFail(final Class<O> clazz, final I target) {
+        return this.<I, O>convert(clazz, target)
+                .orElseThrow(() -> new IllegalArgumentException("Unable to convert " + target + " to " + clazz));
+    }
+
+    @Override
+    public <E> boolean deregisterSingleton(final E object) {
+        final Iterator<Object> regSingletons = singletons.values().iterator();
+        boolean found = false;
+        while (regSingletons.hasNext()) {
+            final Object singleton = regSingletons.next();
+            if (singleton.equals(object)) {
+                regSingletons.remove();
+                found = true;
+            }
+        }
+        return found;
     }
 
 }

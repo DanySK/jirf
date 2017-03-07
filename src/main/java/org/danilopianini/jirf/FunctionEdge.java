@@ -3,7 +3,7 @@ package org.danilopianini.jirf;
 import java.util.Objects;
 import java.util.function.Function;
 
-import org.jgrapht.graph.DefaultEdge;
+import com.google.common.reflect.TypeToken;
 
 final class FunctionEdge {
 
@@ -47,7 +47,7 @@ final class FunctionEdge {
         }
         return hash;
     }
-    
+
     @Override
     public String toString() {
         return source + " => " + destination;
