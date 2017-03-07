@@ -15,7 +15,6 @@ dependencies {
     compile "org.apache.commons:commons-lang3:$lang3Version"
     compile "org.danilopianini:boilerplate:${boilerplateVersion}"
     compile "org.jgrapht:jgrapht-core:${jgraphtVersion}"
-    compile "org.slf4j:slf4j-api:${slf4jVersion}"
     testCompile "junit:junit:${junitVersion}"
     doclet "org.jboss.apiviz:apiviz:${apivizVersion}"
 }
