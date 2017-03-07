@@ -7,6 +7,9 @@ import org.danilopianini.jirf.FactoryBuilder;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ *
+ */
 public final class TestFactory {
 
     /**
@@ -72,9 +75,16 @@ public final class TestFactory {
     }
 
 
+    /**
+     *
+     */
     public static class MyObj {
-        public MyObj(double a, Double b, byte c) {
-        }
+        /**
+         * @param a unused
+         * @param b unused
+         * @param c unused
+         */
+        public MyObj(final double a, final Double b, final byte c) { } // NOPMD
     }
 
 }
