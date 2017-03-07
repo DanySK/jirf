@@ -11,24 +11,16 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.ClassUtils;
 import org.jgrapht.DirectedGraph;
 import org.jgrapht.alg.DijkstraShortestPath;
 import org.jgrapht.graph.DefaultDirectedGraph;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.google.common.reflect.TypeToken;
 
 final class FactoryImpl implements Factory {
 
-    private static final Logger L = LoggerFactory.getLogger(Factory.class);
-
     private final Map<Class<?>, Object> singletons = new LinkedHashMap<>();
-    private final Map<Class<?>, Supplier<?>> suppliers = new LinkedHashMap<>();
     private final ImplicitEdgeFactory edgeFactory = new ImplicitEdgeFactory();
     private final DirectedGraph<Class<?>, FunctionEdge> implicits = new DefaultDirectedGraph<>(edgeFactory);
 
@@ -94,18 +86,8 @@ final class FactoryImpl implements Factory {
         return Optional.ofNullable((E) singletons.get(clazz));
     }
 
-    @SuppressWarnings("unchecked")
-    private <E> Optional<E> getFromSupplier(final Class<? super E> clazz) {
-        return Optional.ofNullable((Supplier<E>) suppliers.get(clazz))
-                .map(Supplier::get);
-    }
-
     private <E> Optional<E> getFromStaticSources(final Class<E> clazz) {
-        final Optional<E> fromSingleton = getSingleton(clazz);
-        if (fromSingleton.isPresent()) {
-            return fromSingleton;
-        }
-        return getFromSupplier(clazz);
+        return getSingleton(clazz);
     }
 
     private Object createBestEffort(final Constructor<?> constructor, final List<?> params) {
@@ -203,30 +185,6 @@ final class FactoryImpl implements Factory {
         registerSingleton((Class<E>) Objects.requireNonNull(object).getClass(), object);
     }
 
-    @Override
-    public <E> void registerSupplier(
-            final Class<? super E> lowerBound,
-            final Class<? super E> upperBound,
-            final Class<? super E> clazz,
-            final Supplier<? extends E> supplier) {
-        register(suppliers, lowerBound, upperBound, clazz, supplier);
-    }
-
-    @Override
-    public <E> void registerSupplier(
-            final Class<? super E> bound,
-            final Class<? super E> clazz,
-            final Supplier<? extends E> object) {
-        registerSupplier(clazz, bound, clazz, object);
-    }
-
-    @Override
-    public <E> void registerSupplier(
-            final Class<? super E> clazz,
-            final Supplier<? extends E> object) {
-        registerSupplier(clazz, clazz, object);
-    }
-
     private static void checkSuperclass(final Class<?> lower, final Class<?> upper) {
         if (!upper.isAssignableFrom(lower)) {
             throw new IllegalArgumentException(upper + " must be a superclass of " + lower);
@@ -265,7 +223,6 @@ final class FactoryImpl implements Factory {
              */
             final Class<?>[] filteredParams = Arrays.stream(constructor.getParameterTypes())
                     .filter(clazz -> !singletons.containsKey(clazz))
-                    .filter(clazz -> !suppliers.containsKey(clazz))
                     .toArray(i -> new Class<?>[i]);
             score = computeScore(filteredParams, args);
         }
