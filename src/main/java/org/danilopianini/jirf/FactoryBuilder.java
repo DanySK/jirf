@@ -4,13 +4,15 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Semaphore;
 import java.util.function.Function;
-import java.util.stream.Stream;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.danilopianini.util.PrimitiveArrays;
 
 import com.google.common.primitives.Primitives;
 
+/**
+ * Preconfigures and builds a {@link Factory} implementation.
+ */
 public class FactoryBuilder {
 
     private final Factory factory = new FactoryImpl();
@@ -20,6 +22,11 @@ public class FactoryBuilder {
     private Semaphore mutex = new Semaphore(1);
     private boolean consumed;
 
+    /**
+     * Enables the widening conversions that the Java language provides by default.
+     * 
+     * @return the {@link FactoryBuilder} itself, for method chaining
+     */
     public FactoryBuilder withWideningConversions() {
         withAutoBoxing();
         factory.registerImplicit(byte.class, short.class, Number::shortValue);
@@ -44,6 +51,14 @@ public class FactoryBuilder {
         return this;
     }
 
+    /**
+     * Enables the auto (un) boxing that the Java language provides by default.
+     * 
+     * @param <S>
+     *            used internally to make Javac happy
+     * 
+     * @return the {@link FactoryBuilder} itself, for method chaining
+     */
     @SuppressWarnings("unchecked")
     public <S> FactoryBuilder withAutoBoxing() {
         Primitives.allPrimitiveTypes().stream()
@@ -55,6 +70,12 @@ public class FactoryBuilder {
         return this;
     }
 
+    /**
+     * Enables the narrowing conversions between primitives. Includes widening
+     * conversions.
+     * 
+     * @return the {@link FactoryBuilder} itself, for method chaining
+     */
     public FactoryBuilder withNarrowingConversions() {
         withWideningConversions();
         factory.registerImplicit(short.class, byte.class, Number::byteValue);
@@ -66,7 +87,12 @@ public class FactoryBuilder {
         return this;
     }
 
-    public <T> FactoryBuilder withArrayBoxing() {
+    /**
+     * Enables autoboxing for linear arrays (e.g. byte[] and Byte[] become interchangeable)
+     * 
+     * @return the {@link FactoryBuilder} itself, for method chaining
+     */
+    public FactoryBuilder withArrayBoxing() {
         factory.registerImplicit(boolean[].class, Boolean[].class, ArrayUtils::toObject);
         factory.registerImplicit(byte[].class, Byte[].class, ArrayUtils::toObject);
         factory.registerImplicit(short[].class, Short[].class, ArrayUtils::toObject);
@@ -84,7 +110,12 @@ public class FactoryBuilder {
         return this;
     }
 
-    public <T> FactoryBuilder withBooleanIntConversions() {
+    /**
+     * Enables converting booleans to integers.
+     * 
+     * @return the {@link FactoryBuilder} itself, for method chaining
+     */
+    public FactoryBuilder withBooleanIntConversions() {
         factory.registerImplicit(boolean.class, int.class, BOOL_TO_INT);
         factory.registerImplicit(int.class, boolean.class, INT_TO_BOOL);
         factory.registerImplicit(Boolean.class, Integer.class, BOOL_TO_INT);
@@ -92,12 +123,23 @@ public class FactoryBuilder {
         return this;
     }
 
-    public <T> FactoryBuilder withAutomaticToString() {
+    /**
+     * Automatically converts objects to {@link String} when needed, by means of {@link Object#toString()}.
+     * 
+     * @return the {@link FactoryBuilder} itself, for method chaining
+     */
+    public FactoryBuilder withAutomaticToString() {
         factory.registerImplicit(Object.class, String.class, Object::toString);
         return this;
     }
 
-    public <T> FactoryBuilder withArrayWideningConversions() {
+    /**
+     * Enables widening conversions for linear arrays (e.g. int[] can get
+     * converted to long[]). Includes array autoboxing.
+     * 
+     * @return the {@link FactoryBuilder} itself, for method chaining
+     */
+    public FactoryBuilder withArrayWideningConversions() {
         withArrayBoxing();
         factory.registerImplicit(byte[].class, short[].class, PrimitiveArrays::toShortArray);
         factory.registerImplicit(byte[].class, int[].class, PrimitiveArrays::toIntArray);
@@ -121,6 +163,12 @@ public class FactoryBuilder {
         return this;
     }
 
+    /**
+     * Enables narrowing conversions for linear arrays (e.g. double[] can get
+     * converted to int[]). Includes widening conversions.
+     * 
+     * @return the {@link FactoryBuilder} itself, for method chaining
+     */
     public FactoryBuilder withArrayNarrowingConversions() {
         withArrayWideningConversions();
         factory.registerImplicit(Byte[].class, Number[].class, Function.identity());
@@ -139,7 +187,13 @@ public class FactoryBuilder {
     }
 
 
-    public <T> FactoryBuilder withArrayBooleanIntConversions() {
+    /**
+     * Enables converting linear arrays of booleans to linear arrays of
+     * integers. Includes array boxing.
+     * 
+     * @return the {@link FactoryBuilder} itself, for method chaining
+     */
+    public FactoryBuilder withArrayBooleanIntConversions() {
         withArrayBoxing();
         factory.registerImplicit(boolean[].class, int[].class, PrimitiveArrays::toIntArray);
         factory.registerImplicit(int[].class, boolean[].class, PrimitiveArrays::toBooleanArray);
@@ -148,7 +202,15 @@ public class FactoryBuilder {
         return this;
     }
 
-    public <T> FactoryBuilder withArrayListConversions(Class<?>... classes) {
+    /**
+     * Enables converting linear arrays to lists for the provided classes and
+     * Object. Includes array autoboxing.
+     * 
+     * @param classes
+     *            the target classes
+     * @return the {@link FactoryBuilder} itself, for method chaining
+     */
+    public FactoryBuilder withArrayListConversions(final Class<?>... classes) {
         withArrayBoxing();
         for (final Class<?> clazz: classes) {
             if (!clazz.isArray()) {
@@ -162,6 +224,9 @@ public class FactoryBuilder {
     }
 
 
+    /**
+     * @return the configured factory. Must be called exactly once.
+     */
     public Factory build() {
         checkConsumed();
         return factory;
