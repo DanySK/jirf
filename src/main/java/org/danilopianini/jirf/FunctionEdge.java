@@ -3,8 +3,6 @@ package org.danilopianini.jirf;
 import java.util.Objects;
 import java.util.function.Function;
 
-import com.google.common.reflect.TypeToken;
-
 final class FunctionEdge {
 
     private final Class<?> source;
@@ -12,7 +10,7 @@ final class FunctionEdge {
     private final Function<?, ?> function;
     private int hash;
 
-    public FunctionEdge(final Class<?> source, final Class<?> destination, final Function<?, ?> function) {
+    FunctionEdge(final Class<?> source, final Class<?> destination, final Function<?, ?> function) {
         this.source = Objects.requireNonNull(source);
         this.destination = Objects.requireNonNull(destination);
         this.function = Objects.requireNonNull(function);
