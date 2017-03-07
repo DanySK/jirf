@@ -2,3 +2,5 @@
 /bin
 version.info
 build/
+/prepare_environment.sh
+.directory
