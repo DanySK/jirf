@@ -1,11 +1,15 @@
 buildscript {
     repositories {
-        mavenLocal()
         maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
         classpath "org.danilopianini:build-commons:${buildCommonsVersion}"
+        classpath "org.danilopianini:javadoc.io-linker:${javadocIOLinkerVersion}"
     }
+}
+
+repositories {
+    mavenCentral()
 }
 
 apply plugin: 'org.danilopianini.build-commons'
@@ -16,8 +20,9 @@ dependencies {
     compile "org.danilopianini:boilerplate:${boilerplateVersion}"
     compile "org.jgrapht:jgrapht-core:${jgraphtVersion}"
     testCompile "junit:junit:${junitVersion}"
-    doclet "org.jboss.apiviz:apiviz:${apivizVersion}"
 }
+
+apply plugin: 'org.danilopianini.javadoc.io-linker'
 
 uploadArchives {
     repositories {
