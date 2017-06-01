@@ -19,7 +19,7 @@ public class FactoryBuilder {
     private static final Function<Boolean, Integer> BOOL_TO_INT = b -> b ? 1 : 0;
     private static final Function<Integer, Boolean> INT_TO_BOOL = i -> i == 0;
 
-    private Semaphore mutex = new Semaphore(1);
+    private final Semaphore mutex = new Semaphore(1);
     private boolean consumed;
 
     /**

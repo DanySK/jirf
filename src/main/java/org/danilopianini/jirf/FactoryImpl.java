@@ -129,8 +129,8 @@ final class FactoryImpl implements Factory {
             return new InstancingImpossibleException(constructor, e);
         }
     }
-    
-    private Object convertIfNeeded(Object param, Class<?> expected, Constructor<?> constructor) {
+
+    private Object convertIfNeeded(final Object param, final Class<?> expected, final Constructor<?> constructor) {
         if (param == null || expected.isAssignableFrom(param.getClass())) {
             return param;
         } else {
@@ -142,7 +142,7 @@ final class FactoryImpl implements Factory {
             }
         }
     }
-    
+
     private <S, D> Optional<List<FunctionEdge>> findConversionChain(final Class<S> source, final Class<D> destination) {
         registerHierarchy(source);
         registerHierarchy(destination);
