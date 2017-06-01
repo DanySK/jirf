@@ -1,5 +1,6 @@
 package org.danilopianini.jirf;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.util.Arrays;
 import java.util.Deque;
@@ -55,7 +56,7 @@ final class FactoryImpl implements Factory {
                                                 + " with arguments "
                                                 + '['
                                                 + args.stream()
-                                                    .map(o -> o.toString() + ':' + o.getClass().getSimpleName())
+                                                    .map(o -> o == null ? "null" : o.toString() + ':' + o.getClass().getSimpleName())
                                                     .collect(Collectors.joining(", "))
                                                 + "]");
                                 exceptions.forEach(ex::addSuppressed);
@@ -94,22 +95,31 @@ final class FactoryImpl implements Factory {
         final Deque<?> paramsLeft = new LinkedList<>(params);
         final Class<?>[] expectedTypes = constructor.getParameterTypes();
         final Object[] actualArgs = new Object[expectedTypes.length];
+        final boolean varArgs = constructor.isVarArgs();
         for (int i = 0; i < expectedTypes.length; i++) {
             final Class<?> expected = expectedTypes[i];
             final Optional<?> single = getFromStaticSources(expected);
             if (single.isPresent()) {
                 actualArgs[i] = single.get();
             } else {
-                final Object param = paramsLeft.pop();
-                if (param == null || expected.isAssignableFrom(param.getClass())) {
-                    actualArgs[i] = param;
-                } else {
-                    final Optional<?> result = convert(expected, param);
-                    if (result.isPresent()) {
-                        actualArgs[i] = result.get();
-                    } else {
-                        return new InstancingImpossibleException(constructor, "Couldn't convert " + param + " from " + param.getClass().getName() + " to " + expected.getName());
+                if (varArgs && i == expectedTypes.length - 1) {
+                    final Class<?> type = expected.getComponentType();
+                    final int left = paramsLeft.size();
+                    final Object varargs = Array.newInstance(type, left);
+                    for (int pn = 0; pn < left; pn++) {
+                        final Object param = convertIfNeeded(paramsLeft.pop(), type, constructor);
+                        if (param instanceof InstancingImpossibleException) {
+                            return param;
+                        }
+                        Array.set(varargs, pn, param);
                     }
+                    actualArgs[i] = varargs;
+                } else {
+                    final Object param = convertIfNeeded(paramsLeft.pop(), expected, constructor);
+                    if (param instanceof InstancingImpossibleException) {
+                        return param;
+                    }
+                    actualArgs[i] = param;
                 }
             }
         }
@@ -117,6 +127,19 @@ final class FactoryImpl implements Factory {
             return constructor.newInstance(actualArgs);
         } catch (Exception e) {
             return new InstancingImpossibleException(constructor, e);
+        }
+    }
+
+    private Object convertIfNeeded(final Object param, final Class<?> expected, final Constructor<?> constructor) {
+        if (param == null || expected.isAssignableFrom(param.getClass())) {
+            return param;
+        } else {
+            final Optional<?> result = convert(expected, param);
+            if (result.isPresent()) {
+                return result.get();
+            } else {
+                return new InstancingImpossibleException(constructor, "Couldn't convert " + param + " from " + param.getClass().getName() + " to " + expected.getName());
+            }
         }
     }
 
@@ -240,12 +263,19 @@ final class FactoryImpl implements Factory {
             if (numDiff == 0) {
                 int tempScore = 0;
                 for (int i = 0; i < argsSize; i++) {
+                    final Object param = args.get(i);
                     final Class<?> expected = filteredParams[i];
-                    final Class<?> actual = args.get(i).getClass();
-                    if (!expected.isAssignableFrom(actual)) {
-                        tempScore += findConversionChain(actual, expected)
-                            .map(List::size)
-                            .orElse(implicits.edgeSet().size());
+                    if (param == null) {
+                        if (expected.isPrimitive()) {
+                            return -1;
+                        }
+                    } else {
+                        final Class<?> actual = param.getClass();
+                        if (!expected.isAssignableFrom(actual)) {
+                            tempScore += findConversionChain(actual, expected)
+                                .map(List::size)
+                                .orElse(implicits.edgeSet().size());
+                        }
                     }
                 }
                 return tempScore;
