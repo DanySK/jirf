@@ -1,5 +1,6 @@
 package org.danilopianini.jirf;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Semaphore;
@@ -210,6 +211,7 @@ public class FactoryBuilder {
      *            the target classes
      * @return the {@link FactoryBuilder} itself, for method chaining
      */
+    @SuppressWarnings("unchecked")
     public FactoryBuilder withArrayListConversions(final Class<?>... classes) {
         withArrayBoxing();
         for (final Class<?> clazz: classes) {
@@ -217,6 +219,14 @@ public class FactoryBuilder {
                 throw new IllegalArgumentException("Only array classes can be mapped to Lists");
             }
             factory.registerImplicit(clazz, Object[].class, x -> (Object[]) x);
+            final Class<?> componentType = clazz.getComponentType();
+            factory.registerImplicit(Object[].class, (Class<Object>) clazz, x -> {
+                final Object array = Array.newInstance(componentType, x.length);
+                for (int i = 0; i < x.length; i++) {
+                    Array.set(array, i, factory.convertOrFail(componentType, x[i]));
+                }
+                return array;
+            });
         }
         factory.registerImplicit(Object[].class, List.class, Arrays::asList);
         factory.registerImplicit(List.class, Object[].class, List::toArray);
