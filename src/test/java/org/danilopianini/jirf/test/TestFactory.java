@@ -7,6 +7,8 @@ import org.danilopianini.jirf.FactoryBuilder;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.google.common.collect.ImmutableList;
+
 /**
  *
  */
@@ -32,6 +34,55 @@ public final class TestFactory {
                 .withNarrowingConversions()
                 .build();
         Assert.assertNotNull(f.build(MyObj.class, 1, 2, 3.0));
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testEmptyVarargs() {
+        final Factory f = new FactoryBuilder()
+                .withAutoBoxing()
+                .withWideningConversions()
+                .build();
+        Assert.assertNotNull(f.build(MyObj.class, ""));
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testSingleValuedVarargs() {
+        final Factory f = new FactoryBuilder()
+                .withAutoBoxing()
+                .withWideningConversions()
+                .build();
+        Assert.assertNotNull(f.build(MyObj.class, "", 1));
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testExpandedVarargs() {
+        final Factory f = new FactoryBuilder()
+                .withAutoBoxing()
+                .withWideningConversions()
+                .build();
+        Assert.assertNotNull(f.build(MyObj.class, "", 1, 2, 3, 4));
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testListEmbeddedVarargs() {
+        final Factory f = new FactoryBuilder()
+                .withAutoBoxing()
+                .withWideningConversions()
+                .withArrayListConversions(double[].class)
+                .build();
+        Assert.assertNotNull(f.build(MyObj.class, "", ImmutableList.of(1, 2, 3, 4)));
     }
 
     /**
@@ -74,17 +125,12 @@ public final class TestFactory {
         }
     }
 
-
-    /**
-     *
-     */
+    // CHECKSTYLE:OFF
     public static class MyObj {
-        /**
-         * @param a unused
-         * @param b unused
-         * @param c unused
-         */
         public MyObj(final double a, final Double b, final byte c) { } // NOPMD
+        public MyObj(final String a, final double... b) {
+            for (int i = 0; i < b.length; i++); // NOPMD
+        }
     }
 
 }
