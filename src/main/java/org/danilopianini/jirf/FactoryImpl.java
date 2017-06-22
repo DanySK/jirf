@@ -103,9 +103,24 @@ final class FactoryImpl implements Factory {
                 actualArgs[i] = single.get();
             } else {
                 if (varArgs && i == expectedTypes.length - 1) {
+                    /*
+                     * Last parameter, and it is a varargs. The strategy is to
+                     * first try to use the parameter as-is if there is only one
+                     * parameter left, going through the conversions. Otherwise,
+                     * trying to build an array with the remaining parameters.
+                     */
                     final Class<?> type = expected.getComponentType();
+                    Object varargs = null;
+                    if (paramsLeft.size() == 1) {
+                        final Object lastParam = paramsLeft.peek();
+                        final Object converted = convertIfNeeded(lastParam, expected, constructor);
+                        if (!(converted instanceof InstancingImpossibleException)) {
+                            paramsLeft.pop();
+                            varargs = converted;
+                        }
+                    }
                     final int left = paramsLeft.size();
-                    final Object varargs = Array.newInstance(type, left);
+                    varargs = varargs == null ? Array.newInstance(type, left) : varargs;
                     for (int pn = 0; pn < left; pn++) {
                         final Object param = convertIfNeeded(paramsLeft.pop(), type, constructor);
                         if (param instanceof InstancingImpossibleException) {
@@ -259,8 +274,8 @@ final class FactoryImpl implements Factory {
 
         private int computeScore(final Class<?>[] filteredParams, final List<?> args) {
             final int argsSize = args.size();
-            final int numDiff = argsSize - filteredParams.length;
-            if (numDiff == 0) {
+            final int numDiff = argsSize - filteredParams.length; // Passed - expected
+            if (numDiff == 0 || numDiff == -1 && constructor.isVarArgs()) { // Consider empty varargs
                 int tempScore = 0;
                 for (int i = 0; i < argsSize; i++) {
                     final Object param = args.get(i);
