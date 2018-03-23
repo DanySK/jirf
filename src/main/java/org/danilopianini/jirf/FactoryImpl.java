@@ -15,15 +15,16 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.ClassUtils;
-import org.jgrapht.DirectedGraph;
-import org.jgrapht.alg.DijkstraShortestPath;
+import org.jgrapht.Graph;
+import org.jgrapht.GraphPath;
+import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 import org.jgrapht.graph.DefaultDirectedGraph;
 
 final class FactoryImpl implements Factory {
 
     private final Map<Class<?>, Object> singletons = new LinkedHashMap<>();
     private final ImplicitEdgeFactory edgeFactory = new ImplicitEdgeFactory();
-    private final DirectedGraph<Class<?>, FunctionEdge> implicits = new DefaultDirectedGraph<>(edgeFactory);
+    private final Graph<Class<?>, FunctionEdge> implicits = new DefaultDirectedGraph<>(edgeFactory);
 
     FactoryImpl() {
     }
@@ -33,36 +34,35 @@ final class FactoryImpl implements Factory {
     public <E> E build(final Class<E> clazz, final List<?> args) {
         registerHierarchy(clazz);
         return getFromStaticSources(clazz)
-                .orElseGet(() -> {
-                    final Constructor<E>[] constructors = (Constructor<E>[]) clazz.getConstructors();
-                    final List<Throwable> exceptions = new LinkedList<>();
-                    return Arrays.stream(constructors)
-                            .map(c -> new ConstructorBenchmark<E>(c, args))
-                            .filter(cb -> cb.score >= 0)
-                            .sorted()
-                            .map(cb -> createBestEffort(cb.constructor, args))
-                            .filter(e -> {
-                                if (e instanceof Throwable) {
-                                    exceptions.add((Throwable) e);
-                                    return false;
-                                }
-                                return true;
-                            })
-                            .map(e -> (E) e)
-                            .findFirst()
-                            .orElseThrow(() -> {
-                                final IllegalArgumentException ex = new IllegalArgumentException("Cannot create "
-                                                + clazz.getName()
-                                                + " with arguments "
-                                                + '['
-                                                + args.stream()
-                                                    .map(o -> o == null ? "null" : o.toString() + ':' + o.getClass().getSimpleName())
-                                                    .collect(Collectors.joining(", "))
-                                                + "]");
-                                exceptions.forEach(ex::addSuppressed);
-                                return ex;
-                            });
-                });
+            .orElseGet(() -> {
+                final Constructor<E>[] constructors = (Constructor<E>[]) clazz.getConstructors();
+                final List<Throwable> exceptions = new LinkedList<>();
+                return Arrays.stream(constructors)
+                        .map(c -> new ConstructorBenchmark<E>(c, args))
+                        .filter(cb -> cb.score >= 0)
+                        .sorted()
+                        .map(cb -> createBestEffort(cb.constructor, args))
+                        .filter(e -> {
+                            if (e instanceof Throwable) {
+                                exceptions.add((Throwable) e);
+                                return false;
+                            }
+                            return true;
+                        })
+                        .map(e -> (E) e)
+                        .findFirst()
+                        .orElseThrow(() -> {
+                            final IllegalArgumentException ex = new IllegalArgumentException("Cannot create "
+                                + clazz.getName()
+                                + " with arguments ["
+                                + args.stream()
+                                    .map(o -> o == null ? "null" : o.toString() + ':' + o.getClass().getSimpleName())
+                                    .collect(Collectors.joining(", "))
+                                + ']');
+                            exceptions.forEach(ex::addSuppressed);
+                            return ex;
+                        });
+            });
     }
 
     @Override
@@ -75,7 +75,7 @@ final class FactoryImpl implements Factory {
         return findConversionChain(Objects.requireNonNull(source.getClass()), Objects.requireNonNull(destination))
             .map(chain -> {
                 Object in = source;
-                for (final FunctionEdge implicit : chain) {
+                for (final FunctionEdge implicit : chain.getEdgeList()) {
                     in = ((Function<Object, ?>) implicit.getFunction()).apply(in);
                 }
                 return (O) in;
@@ -158,7 +158,7 @@ final class FactoryImpl implements Factory {
         }
     }
 
-    private <S, D> Optional<List<FunctionEdge>> findConversionChain(final Class<S> source, final Class<D> destination) {
+    private <S, D> Optional<GraphPath<Class<?>,FunctionEdge>> findConversionChain(final Class<S> source, final Class<D> destination) {
         registerHierarchy(source);
         registerHierarchy(destination);
         return Optional.ofNullable(DijkstraShortestPath.findPathBetween(implicits, source, destination));
@@ -288,7 +288,7 @@ final class FactoryImpl implements Factory {
                         final Class<?> actual = param.getClass();
                         if (!expected.isAssignableFrom(actual)) {
                             tempScore += findConversionChain(actual, expected)
-                                .map(List::size)
+                                .map(GraphPath::getLength)
                                 .orElse(implicits.edgeSet().size());
                         }
                     }
