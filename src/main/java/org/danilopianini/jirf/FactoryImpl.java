@@ -23,8 +23,7 @@ import java.util.stream.Collectors;
 final class FactoryImpl implements Factory {
 
     private final Map<Class<?>, Object> singletons = new LinkedHashMap<>();
-    private final ImplicitEdgeFactory edgeFactory = new ImplicitEdgeFactory();
-    private final Graph<Class<?>, FunctionEdge> implicits = new DefaultDirectedGraph<>(edgeFactory);
+    private final Graph<Class<?>, FunctionEdge> implicits = new DefaultDirectedGraph<>(null);
     private static final String UNCHECKED = "unchecked";
 
     @SuppressWarnings(UNCHECKED)
@@ -179,9 +178,8 @@ final class FactoryImpl implements Factory {
             final Class<S> source,
             final Class<D> target,
             final Function<? super S, ? extends D> implicit) {
-        edgeFactory.addImplicitConversion(source, target, implicit);
         implicits.removeEdge(source, target);
-        Objects.requireNonNull(implicits.addEdge(source, target));
+        Objects.requireNonNull(implicits.addEdge(source, target, new FunctionEdge(source, target, implicit)));
     }
 
     @SuppressWarnings(UNCHECKED)

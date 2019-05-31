@@ -25,7 +25,7 @@ object Versions {
 
     const val boilerplate: String = "0.2.1"
 
-    const val jgrapht_core: String = "1.1.0" // available: "1.3.0"
+    const val jgrapht_core: String = "1.3.0"
 
     const val org_jlleitschuh_gradle_ktlint_gradle_plugin: String = "8.0.0" 
 
