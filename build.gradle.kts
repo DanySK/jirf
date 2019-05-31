@@ -1,4 +1,5 @@
 import com.github.spotbugs.SpotBugsTask
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 
 plugins {
     id("de.fayard.buildSrcVersions") version Versions.de_fayard_buildsrcversions_gradle_plugin
@@ -6,6 +7,8 @@ plugins {
     `java-library`
     jacoco
     id("com.github.spotbugs") version Versions.com_github_spotbugs_gradle_plugin
+    pmd
+    checkstyle
 }
 
 repositories {
@@ -24,6 +27,14 @@ dependencies {
     testImplementation(Libs.junit)
 }
 
+tasks.withType<Test> {
+    failFast = true
+    testLogging {
+        events("passed", "skipped", "failed", "standardError")
+        exceptionFormat = TestExceptionFormat.FULL
+    }
+}
+
 spotbugs {
     effort = "max"
     reportLevel = "low"
@@ -37,4 +48,13 @@ tasks.withType<SpotBugsTask> {
         xml.setEnabled(false)
         html.setEnabled(true)
     }
+}
+
+pmd {
+    ruleSets = listOf()
+    ruleSetConfig = resources.text.fromFile("${project.rootProject.projectDir}/config/pmd/pmd.xml")
+}
+checkstyle {
+    maxErrors = 0
+    maxWarnings = 0
 }
