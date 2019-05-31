@@ -15,6 +15,8 @@ object Versions {
 
     const val commons_lang3: String = "3.9" 
 
+    const val org_danilopianini_git_sensitive_semantic_versioning_gradle_plugin: String = "0.2.2" 
+
     const val boilerplate: String = "0.1.8" // available: "0.2.1"
 
     const val jgrapht_core: String = "1.1.0" // available: "1.3.0"

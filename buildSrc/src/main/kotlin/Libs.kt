@@ -22,6 +22,10 @@ object Libs {
      * http://commons.apache.org/proper/commons-lang/ */
     const val commons_lang3: String = "org.apache.commons:commons-lang3:" + Versions.commons_lang3
 
+    const val org_danilopianini_git_sensitive_semantic_versioning_gradle_plugin: String =
+            "org.danilopianini.git-sensitive-semantic-versioning:org.danilopianini.git-sensitive-semantic-versioning.gradle.plugin:" +
+            Versions.org_danilopianini_git_sensitive_semantic_versioning_gradle_plugin
+
     /**
      * https://github.com/DanySK/boilerplate */
     const val boilerplate: String = "org.danilopianini:boilerplate:" + Versions.boilerplate
