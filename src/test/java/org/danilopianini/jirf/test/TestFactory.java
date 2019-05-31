@@ -125,10 +125,13 @@ public final class TestFactory {
         }
     }
 
-    // CHECKSTYLE:OFF
-    public static class MyObj {
+    // CHECKSTYLE: EmptyStatement OFF
+    // CHECKSTYLE: NeedBraces OFF
+    // CHECKSTYLE: JavadocType OFF
+    // CHECKSTYLE: JavadocMethod OFF
+    public static final class MyObj {
         public MyObj(final double a, final Double b, final byte c) { } // NOPMD
-        public MyObj(final String a, final double... b) {
+        public MyObj(final String a, final double... b) { // NOPMD
             for (int i = 0; i < b.length; i++); // NOPMD
         }
     }

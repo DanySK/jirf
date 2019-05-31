@@ -10,6 +10,9 @@ final class FunctionEdge {
     private final Function<?, ?> function;
     private int hash;
 
+    /*
+     * Only accessible internally
+     */
     FunctionEdge(final Class<?> source, final Class<?> destination, final Function<?, ?> function) {
         this.source = Objects.requireNonNull(source);
         this.destination = Objects.requireNonNull(destination);

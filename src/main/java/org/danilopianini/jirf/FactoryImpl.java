@@ -1,5 +1,11 @@
 package org.danilopianini.jirf;
 
+import org.apache.commons.lang3.ClassUtils;
+import org.jgrapht.Graph;
+import org.jgrapht.GraphPath;
+import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
+import org.jgrapht.graph.DefaultDirectedGraph;
+
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.util.Arrays;
@@ -14,22 +20,13 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import org.apache.commons.lang3.ClassUtils;
-import org.jgrapht.Graph;
-import org.jgrapht.GraphPath;
-import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
-import org.jgrapht.graph.DefaultDirectedGraph;
-
 final class FactoryImpl implements Factory {
 
     private final Map<Class<?>, Object> singletons = new LinkedHashMap<>();
-    private final ImplicitEdgeFactory edgeFactory = new ImplicitEdgeFactory();
-    private final Graph<Class<?>, FunctionEdge> implicits = new DefaultDirectedGraph<>(edgeFactory);
+    private final Graph<Class<?>, FunctionEdge> implicits = new DefaultDirectedGraph<>(null);
+    private static final String UNCHECKED = "unchecked";
 
-    FactoryImpl() {
-    }
-
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings(UNCHECKED)
     @Override
     public <E> E build(final Class<E> clazz, final List<?> args) {
         registerHierarchy(clazz);
@@ -38,7 +35,7 @@ final class FactoryImpl implements Factory {
                 final Constructor<E>[] constructors = (Constructor<E>[]) clazz.getConstructors();
                 final List<Throwable> exceptions = new LinkedList<>();
                 return Arrays.stream(constructors)
-                        .map(c -> new ConstructorBenchmark<E>(c, args))
+                        .map(c -> new ConstructorBenchmark<>(c, args))
                         .filter(cb -> cb.score >= 0)
                         .sorted()
                         .map(cb -> createBestEffort(cb.constructor, args))
@@ -70,7 +67,8 @@ final class FactoryImpl implements Factory {
         return build(clazz, Arrays.asList(parameters));
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings(UNCHECKED)
+    @Override
     public <I, O> Optional<O> convert(final Class<O> destination, final I source) {
         return findConversionChain(Objects.requireNonNull(source.getClass()), Objects.requireNonNull(destination))
             .map(chain -> {
@@ -82,7 +80,7 @@ final class FactoryImpl implements Factory {
             });
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings(UNCHECKED)
     private <E> Optional<E> getSingleton(final Class<? super E> clazz) {
         return Optional.ofNullable((E) singletons.get(clazz));
     }
@@ -140,7 +138,7 @@ final class FactoryImpl implements Factory {
         }
         try {
             return constructor.newInstance(actualArgs);
-        } catch (Exception e) {
+        } catch (Exception e) { // NOPMD
             return new InstancingImpossibleException(constructor, e);
         }
     }
@@ -152,13 +150,15 @@ final class FactoryImpl implements Factory {
             final Optional<?> result = convert(expected, param);
             if (result.isPresent()) {
                 return result.get();
-            } else {
-                return new InstancingImpossibleException(constructor, "Couldn't convert " + param + " from " + param.getClass().getName() + " to " + expected.getName());
             }
+            return new InstancingImpossibleException(constructor,
+                    "Couldn't convert " + param
+                    + " from " + param.getClass().getName()
+                    + " to " + expected.getName());
         }
     }
 
-    private <S, D> Optional<GraphPath<Class<?>,FunctionEdge>> findConversionChain(final Class<S> source, final Class<D> destination) {
+    private <S, D> Optional<GraphPath<Class<?>, FunctionEdge>> findConversionChain(final Class<S> source, final Class<D> destination) {
         registerHierarchy(source);
         registerHierarchy(destination);
         return Optional.ofNullable(DijkstraShortestPath.findPathBetween(implicits, source, destination));
@@ -178,12 +178,11 @@ final class FactoryImpl implements Factory {
             final Class<S> source,
             final Class<D> target,
             final Function<? super S, ? extends D> implicit) {
-        edgeFactory.addImplicitConversion(source, target, implicit);
         implicits.removeEdge(source, target);
-        Objects.requireNonNull(implicits.addEdge(source, target));
+        Objects.requireNonNull(implicits.addEdge(source, target, new FunctionEdge(source, target, implicit)));
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings(UNCHECKED)
     private <T> void registerHierarchy(final Class<T> x) {
         assert x != null;
         if (!implicits.containsVertex(x)) {
@@ -202,22 +201,23 @@ final class FactoryImpl implements Factory {
         }
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public <E> void registerSingleton(
             final Class<? super E> lowerBound,
             final Class<? super E> upperBound,
             final E object) {
-        register(singletons, Objects.requireNonNull(lowerBound), Objects.requireNonNull(upperBound), (Class<E>) Objects.requireNonNull(object).getClass(), object);
+        register(singletons, Objects.requireNonNull(lowerBound),
+                Objects.requireNonNull(upperBound),
+                (Class<E>) Objects.requireNonNull(object).getClass(), object);
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings(UNCHECKED)
     @Override
     public <E> void registerSingleton(final Class<? super E> bound, final E object) {
         registerSingleton((Class<E>) Objects.requireNonNull(object).getClass(), bound, object);
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings(UNCHECKED)
     @Override
     public <E> void registerSingleton(final E object) {
         registerSingleton((Class<E>) Objects.requireNonNull(object).getClass(), object);
@@ -250,7 +250,7 @@ final class FactoryImpl implements Factory {
         }
     }
 
-    private class ConstructorBenchmark<T> implements Comparable<ConstructorBenchmark<T>> {
+    private final class ConstructorBenchmark<T> implements Comparable<ConstructorBenchmark<T>> {
         private final Constructor<T> constructor;
         private final int score;
 
@@ -261,7 +261,7 @@ final class FactoryImpl implements Factory {
              */
             final Class<?>[] filteredParams = Arrays.stream(constructor.getParameterTypes())
                     .filter(clazz -> !singletons.containsKey(clazz))
-                    .toArray(i -> new Class<?>[i]);
+                    .toArray(Class[]::new);
             score = computeScore(filteredParams, args);
         }
 
@@ -319,7 +319,7 @@ final class FactoryImpl implements Factory {
 
     @Override
     public <I, O> O convertOrFail(final Class<O> clazz, final I target) {
-        return this.<I, O>convert(clazz, target)
+        return this.convert(clazz, target)
                 .orElseThrow(() -> new IllegalArgumentException("Unable to convert " + target + " to " + clazz));
     }
 
