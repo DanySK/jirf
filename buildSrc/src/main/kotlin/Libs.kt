@@ -6,6 +6,10 @@ import kotlin.String
  * Update this file with
  *   `$ ./gradlew buildSrcVersions` */
 object Libs {
+    const val com_github_spotbugs_gradle_plugin: String =
+            "com.github.spotbugs:com.github.spotbugs.gradle.plugin:" +
+            Versions.com_github_spotbugs_gradle_plugin
+
     /**
      * https://github.com/google/guava */
     const val guava: String = "com.google.guava:guava:" + Versions.guava

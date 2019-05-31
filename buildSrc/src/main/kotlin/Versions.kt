@@ -7,6 +7,8 @@ import kotlin.String
  *
  * YOU are responsible for updating manually the dependency version. */
 object Versions {
+    const val com_github_spotbugs_gradle_plugin: String = "1.6.9" // available: "2.0.0"
+
     const val guava: String = "21.0" // available: "27.1-jre"
 
     const val de_fayard_buildsrcversions_gradle_plugin: String = "0.3.2" 
