@@ -9,7 +9,7 @@ import kotlin.String
 object Versions {
     const val com_github_spotbugs_gradle_plugin: String = "1.6.9" // available: "2.0.0"
 
-    const val guava: String = "21.0" // available: "27.1-jre"
+    const val guava: String = "27.1-jre"
 
     const val ktlint: String = "0.32.0" // available: "0.33.0"
 
