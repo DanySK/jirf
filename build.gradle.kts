@@ -1,3 +1,5 @@
+import com.github.spotbugs.SpotBugsTask
+
 plugins {
     id("de.fayard.buildSrcVersions") version Versions.de_fayard_buildsrcversions_gradle_plugin
     id("org.danilopianini.git-sensitive-semantic-versioning") version Versions.org_danilopianini_git_sensitive_semantic_versioning_gradle_plugin
@@ -28,5 +30,11 @@ spotbugs {
     val excludeFile = File("${project.rootProject.projectDir}/config/spotbugs/excludes.xml")
     if (excludeFile.exists()) {
         excludeFilterConfig = project.resources.text.fromFile(excludeFile)
+    }
+}
+tasks.withType<SpotBugsTask> {
+    reports {
+        xml.setEnabled(false)
+        html.setEnabled(true)
     }
 }
