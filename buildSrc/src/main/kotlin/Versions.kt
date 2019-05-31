@@ -11,6 +11,8 @@ object Versions {
 
     const val guava: String = "21.0" // available: "27.1-jre"
 
+    const val ktlint: String = "0.32.0" // available: "0.33.0"
+
     const val de_fayard_buildsrcversions_gradle_plugin: String = "0.3.2" 
 
     const val junit: String = "4.12" 
@@ -22,6 +24,8 @@ object Versions {
     const val boilerplate: String = "0.1.8" // available: "0.2.1"
 
     const val jgrapht_core: String = "1.1.0" // available: "1.3.0"
+
+    const val org_jlleitschuh_gradle_ktlint_gradle_plugin: String = "8.0.0" 
 
     /**
      *

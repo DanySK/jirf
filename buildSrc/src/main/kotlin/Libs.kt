@@ -14,6 +14,10 @@ object Libs {
      * https://github.com/google/guava */
     const val guava: String = "com.google.guava:guava:" + Versions.guava
 
+    /**
+     * https://github.com/pinterest/ktlint */
+    const val ktlint: String = "com.pinterest:ktlint:" + Versions.ktlint
+
     const val de_fayard_buildsrcversions_gradle_plugin: String =
             "de.fayard.buildSrcVersions:de.fayard.buildSrcVersions.gradle.plugin:" +
             Versions.de_fayard_buildsrcversions_gradle_plugin
@@ -37,4 +41,8 @@ object Libs {
     /**
      * http://www.jgrapht.org */
     const val jgrapht_core: String = "org.jgrapht:jgrapht-core:" + Versions.jgrapht_core
+
+    const val org_jlleitschuh_gradle_ktlint_gradle_plugin: String =
+            "org.jlleitschuh.gradle.ktlint:org.jlleitschuh.gradle.ktlint.gradle.plugin:" +
+            Versions.org_jlleitschuh_gradle_ktlint_gradle_plugin
 }

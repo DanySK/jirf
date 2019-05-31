@@ -9,6 +9,7 @@ plugins {
     id("com.github.spotbugs") version Versions.com_github_spotbugs_gradle_plugin
     pmd
     checkstyle
+    id("org.jlleitschuh.gradle.ktlint") version Versions.org_jlleitschuh_gradle_ktlint_gradle_plugin
 }
 
 repositories {
