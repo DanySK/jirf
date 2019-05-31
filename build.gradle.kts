@@ -10,6 +10,9 @@ plugins {
     pmd
     checkstyle
     id("org.jlleitschuh.gradle.ktlint") version Versions.org_jlleitschuh_gradle_ktlint_gradle_plugin
+    signing
+    `maven-publish`
+    id("org.danilopianini.publish-on-central") version Versions.org_danilopianini_publish_on_central_gradle_plugin
 }
 
 repositories {
@@ -58,4 +61,28 @@ pmd {
 checkstyle {
     maxErrors = 0
     maxWarnings = 0
+}
+
+group = "org.danilopianini" // This must be configured for the generated pom.xml to work correctly
+/*
+ * The plugin comes with defaults that are useful to myself. You should configure it to behave as you please:
+ */
+publishOnCentral {
+    projectDescription.set("An advanced factory supporting implicit type conversions") // Defaults to "No description provided"
+    projectLongName.set("Java Implicit Reflective Factory") // Defaults to the project name
+}
+publishing {
+    publications {
+        withType<MavenPublication> {
+            pom {
+                developers {
+                    developer {
+                        name.set("Danilo Pianini")
+                        email.set("danilo.pianini@gmail.com")
+                        url.set("http://www.danilopianini.org/")
+                    }
+                }
+            }
+        }
+    }
 }

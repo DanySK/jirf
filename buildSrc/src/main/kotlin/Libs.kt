@@ -34,6 +34,10 @@ object Libs {
             "org.danilopianini.git-sensitive-semantic-versioning:org.danilopianini.git-sensitive-semantic-versioning.gradle.plugin:" +
             Versions.org_danilopianini_git_sensitive_semantic_versioning_gradle_plugin
 
+    const val org_danilopianini_publish_on_central_gradle_plugin: String =
+            "org.danilopianini.publish-on-central:org.danilopianini.publish-on-central.gradle.plugin:" +
+            Versions.org_danilopianini_publish_on_central_gradle_plugin
+
     /**
      * https://github.com/DanySK/boilerplate */
     const val boilerplate: String = "org.danilopianini:boilerplate:" + Versions.boilerplate
