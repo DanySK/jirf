@@ -11,7 +11,7 @@ object Versions {
 
     const val guava: String = "27.1-jre"
 
-    const val ktlint: String = "0.32.0" // available: "0.33.0"
+    const val ktlint: String = "0.33.0"
 
     const val de_fayard_buildsrcversions_gradle_plugin: String = "0.3.2" 
 
