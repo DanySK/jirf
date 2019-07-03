@@ -14,8 +14,12 @@ env:
     - PUBLISH="false"
 matrix:
   include:
-    - jdk: openjdk8
+    - jdk: adopt@1.8.212-04
       env: PUBLISH="true"
+  exclude:
+    - os: linux
+      env: PUBLISH="false"
+      jdk: adopt@1.8.212-04
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
