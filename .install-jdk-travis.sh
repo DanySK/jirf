@@ -40,6 +40,9 @@ windows () {
     source ~/.bashrc
 }
 
+echo "running ${TRAVIS_OS_NAME}-specific configuration"
 $TRAVIS_OS_NAME
+echo "installing / switching the JDK"
 install_jdk
+echo "checking if Java works:"
 java -Xmx32m -version
