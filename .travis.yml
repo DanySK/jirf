@@ -47,6 +47,9 @@ install: >-
     bash prepare_environment.sh
   fi
 script:
+  - echo "SCRIPT BEGINS"
+  - echo "Java home is set to: $JAVA_HOME"
+  - echo "Path is set to: $PATH"
   - ./gradlew clean check --scan --parallel
 after_success: >-
   if $SHOULD_CONFIGURE && $PUBLISH; then
