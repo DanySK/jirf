@@ -20,9 +20,13 @@ matrix:
 before_cache:
   - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+  - find $HOME/.gradle/caches/ -name "buildSrc.jar" -type f -delete
+  - find $HOME/.gradle/caches/ -name "file-access.bin" -type f -delete
+  - find $HOME/.gradle/caches/ -name "user-id.txt" -type f -delete
   - find $HOME/.gradle/caches/ -name "*.lock" -type f -delete
   - find $HOME/.gradle/caches/ -name "cache.properties" -type f -delete
   - rm -f $HOME/.gradle/caches/*/fileHashes/*.bin
+  - rm -fr $HOME/.gradle/caches/*/workerMain/
 cache:
   directories:
     - $HOME/.gradle/caches/
