@@ -28,10 +28,15 @@ windows () {
     PowerShell -ExecutionPolicy Bypass -Command '[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Invoke-Expression (Invoke-WebRequest https://github.com/shyiko/jabba/raw/master/install.ps1 -UseBasicParsing).Content'
     export jabba="$HOME/.jabba/bin/jabba.exe"
     # Apparently exported variables are ignored in subseguent phases on Windows. Go through .bashrc
+    echo this was bashrc:
     cat ~/.bashrc
+    echo --------end of bashrc-----------
     echo 'export JAVA_HOME="$HOME/.jabba/jdk/$JDK"' >> ~/.bashrc
     echo 'export PATH="$JAVA_HOME/bin:$PATH"' >> ~/.bashrc
+    echo 'echo bashrc has been sourced' >> ~/.bashrc
+    echo this is now bashrc:
     cat ~/.bashrc
+    echo --------end of bashrc-----------
     source ~/.bashrc
 }
 
