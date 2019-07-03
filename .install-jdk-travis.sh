@@ -1,7 +1,4 @@
 #!/bin/bash
-$1
-java -Xmx32m -version
-
 linux () {
     unix_pre
     export JAVA_HOME="$HOME/.jabba/jdk/$JDK"
@@ -24,3 +21,6 @@ unix_pre () {
     fi
     unset _JAVA_OPTIONS
 }
+
+$1
+java -Xmx32m -version
