@@ -27,8 +27,11 @@ cache:
     - $HOME/.jabba/
 before_install: |-
   curl -sL https://github.com/shyiko/jabba/raw/master/install.sh | bash && . ~/.jabba/jabba.sh
-  jabba install "$JDK"
+  if ! jabba use $JDK; then
+    jabba install "$JDK"
+  fi
   unset _JAVA_OPTIONS
+  ls -ahl $HOME/.jabba/jdk/$JDK
   export JAVA_HOME="$HOME/.jabba/jdk/$JDK"
   export PATH="$JAVA_HOME/bin:$PATH"
   java -Xmx32m -version
