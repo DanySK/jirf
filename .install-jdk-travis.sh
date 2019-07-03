@@ -36,6 +36,8 @@ windows () {
     export PATH="$JAVA_HOME/bin:$PATH"
     echo "Java home is set to: $JAVA_HOME"
     echo "Path is set to: $PATH"
+    echo "export JAVA_HOME=\"${JAVA_HOME}\"" >> ~/.bash_profile
+    echo "export PATH=\"${PATH}\"" >> ~/.bash_profile
     # Apparently exported variables are ignored in subseguent phases on Windows. Go through .bashrc
 #     echo this was bashrc:
 #     cat ~/.bashrc
