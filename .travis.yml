@@ -1,13 +1,7 @@
-language: java
 os:
   - linux
   - osx
-jdk:
-  - openjdk8
-  - openjdk9
-  - openjdk10
-  - openjdk11
-  - openjdk12
+  - windows
 env:
   global:
     - secure: "B+bmocGqYSk0KOE5dNKtIGpHJw/U1idHWpSxT/xPGZ2EZBBe8l1KBDRkj160xXE2nmjyFHwgPLGrpAzRoHQ7hf7E0jzPJgMy4YHIaxjQarO3EFcIQgpZFirRngt/yJVqzfEVt9uL+GhThTwprId14eDrTg1eAz862QXCBh7ZlK23d+khjR2exEfq66EJi4nLfvJuI8krK/4UP97qs9N3NupcXfuRETk6yNvdSazGSKkeykipoIbSUaLIRpa0hoy/e4jmBvNxqO9gY1LSu1wc7b51G478CeGyTrtcUP9p3DhJPCL1Gp7FWr+13GtLTiGrSjqkhJaRU2CD11ulzBqd8FrtAqhxggzc7A4WKFtBi8FA1TObAkyz+416riiFfff+NLPFtB9Fx4Ky6vuthF/LLb+w/3X9kflraqX75KYw27UZbpJLzXzfZeI8eQRpdLOlLU+3qqHwwdnpf6fKX8wDlp4flL+sGz5692VEeCSA8BBuUNeWSFuOAmNhol1boCCnF2lpWBcjyMUJFgzMbpZQXLasbgmKsL35QV2N8JxRC1U1pocQfx+r/b09AyJasvnY9tFUr5CgoHafVLWR2AqxS+p3CEVWNa3yqG2ntSU9rhWUsQBk9qV+j7sWaAoqUsamAogAIujvIRY2+kkoxQLyQPOcog66ATDARH/24OFUDXU="
@@ -15,17 +9,11 @@ env:
     - secure: "icOCfQWB64+WMi6/Z/gMyjO53PDMyy0t3zLGQZbzoNofjHvyumwsCTlJVtuSe3KLv1FcmT68/D6QkcznlAx5VX8DB+KOGPMLc06C1oEd0skcLQ+nHzq14thac18MtxFgt67wVl2BN0lhazgByJpSzre6A7SmStBEaMXKfWB9uwvf58TCoDhx05PV4Jgj1VEyoO7jGNxzz1j5+C+IcfDrg0JEX0Ykzr1wXoGSKpQdANCmBuRO/EzfTudJie5x2/VDUyedM9dfT19lmN2XpEZEppZAXpyWg0tpd5WPSH8Ts5IgBfKtzQUL1djkBlr0e565QgfmWeiJD3YxeHRKem00jAOWC6IQrW/TDyke2bCicioHWIkMXnON71mkJXC/meMftryumJych8uXc97zdDw079r+3yXCla46ExO6WZiItrcIMTtM6ps06ZCeItEfpvnKkPQwEpj/zhkC4Kv8ULmtyL0dHBu6IuMQf0grRLwgBLi5yy7DQoeU29xmL+3fNiYa9R8ez00n5ENc53zO1guByHojpKuaICu46jj/zDmzoohmvd/Zpfpw4+MkfF5dOxl4mDaAAJ+qXCGozqg9c9YyewE6W2gwugd/OfsqjMu/WK71ZFL4/EH3QUHRQBaQdCm5mmWm65gcWCNHuHZyum3igUh0qJG5pTM9qiFls3P/1xA="
   matrix:
     - PUBLISH="false"
+    - JDK="1.8"
 matrix:
   include:
     - jdk: openjdk8
       env: PUBLISH="true"
-  exclude:
-    - jdk: openjdk8
-      env: PUBLISH="false"
-    - jdk: openjdk9
-      os: osx
-    - jdk: openjdk10
-      os: osx
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
@@ -33,7 +21,14 @@ cache:
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
-before_install: >-
+    - $HOME/.jabba/
+before_install: |-
+  curl -sL https://github.com/shyiko/jabba/raw/master/install.sh | bash && . ~/.jabba/jabba.sh
+  jabba install "$JDK"
+  unset _JAVA_OPTIONS
+  export JAVA_HOME="$HOME/.jabba/jdk/$JDK"
+  export PATH="$JAVA_HOME/bin:$PATH"
+  java -Xmx32m -version
   if [ $TRAVIS_OS_NAME = 'linux' ]; then
     sudo apt-get -qq update;
     sudo apt-get install -y graphviz;
