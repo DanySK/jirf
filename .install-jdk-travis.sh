@@ -28,7 +28,7 @@ windows () {
     export JAVA_HOME="$HOME/.jabba/jdk/$JDK"
 }
 
-$1
+$TRAVIS_OS_NAME
 install_jdk
 export PATH="$JAVA_HOME/bin:$PATH"
 java -Xmx32m -version

@@ -18,16 +18,18 @@ matrix:
     - os: linux
       env: JDK="adopt@1.8.212-04"
 before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
   - find $HOME/.gradle/caches/ -name "*.lock" -type f -delete
+  - find $HOME/.gradle/caches/ -name "cache.properties" -type f -delete
+  - rm -f $HOME/.gradle/caches/*/fileHashes/*.bin
 cache:
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
     - $HOME/.jabba/
 before_install: |-
-  bash .install-jdk-travis.sh $TRAVIS_OS_NAME
+  bash .install-jdk-travis.sh
   if [ $TRAVIS_OS_NAME = 'linux' ]; then
     sudo apt-get -qq update;
     sudo apt-get install -y graphviz;
