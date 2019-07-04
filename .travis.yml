@@ -1,4 +1,6 @@
 language: bash
+git:
+  depth: false
 os:
 #  - linux
 #  - osx
@@ -17,16 +19,6 @@ matrix:
   exclude:
     - os: linux
       env: JDK="adopt@1.8.212-04"
-before_cache:
-  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-  - find $HOME/.gradle/caches/ -name "buildSrc.jar" -type f -delete
-  - find $HOME/.gradle/caches/ -name "file-access.bin" -type f -delete
-  - find $HOME/.gradle/caches/ -name "user-id.txt" -type f -delete
-  - find $HOME/.gradle/caches/ -name "*.lock" -type f -delete
-  - find $HOME/.gradle/caches/ -name "cache.properties" -type f -delete
-  - rm -f $HOME/.gradle/caches/*/fileHashes/*.bin
-  - rm -fr $HOME/.gradle/caches/*/workerMain/
 cache:
   directories:
     - $HOME/.gradle/caches/
@@ -46,14 +38,22 @@ install: >-
     openssl aes-256-cbc -K $encrypted_ae2fe9b21dcc_key -iv $encrypted_ae2fe9b21dcc_iv -in prepare_environment.sh.enc -out prepare_environment.sh -d
     bash prepare_environment.sh
   fi
+before_script:
+  - "if [ -f ~/.windows_config ]; then source ~/.windows_config; fi"
 script:
-  - "if [ -f ~/./.windows_config ]; then source ~/./.windows_config; fi"
   - ./gradlew clean check --scan --parallel
+before_cache:
+  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+  - find $HOME/.gradle/caches/ -name "buildSrc.jar" -type f -delete
+  - find $HOME/.gradle/caches/ -name "file-access.bin" -type f -delete
+  - find $HOME/.gradle/caches/ -name "user-id.txt" -type f -delete
+  - find $HOME/.gradle/caches/ -name "*.lock" -type f -delete
+  - find $HOME/.gradle/caches/ -name "cache.properties" -type f -delete
+  - rm -f $HOME/.gradle/caches/*/fileHashes/*.bin
+  - rm -fr $HOME/.gradle/caches/*/workerMain/
 after_success: |-
   if $SHOULD_CONFIGURE && $PUBLISH; then
     ./gradlew publish --parallel
-    mkdir -p report
-    cp --parent */build/reports build/reports report -R
   fi
   ps -ef
-  killall -s 9 gpg-agent
