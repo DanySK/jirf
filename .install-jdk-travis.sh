@@ -37,6 +37,8 @@ windows () {
     # Apparently exported variables are ignored in subseguent phases on Windows. Write in config file
     echo "export JAVA_HOME=\"${JAVA_HOME}\"" >> ~/.windows_config
     echo "export PATH=\"${PATH}\"" >> ~/.windows_config
+    # Windows is unable to clean child processes, so no Gradle daemon allowed
+    echo 'export GRADLE_OPTS="-Dorg.gradle.daemon=false"' >> ~/.windows_config
 }
 
 echo "running ${TRAVIS_OS_NAME}-specific configuration"
