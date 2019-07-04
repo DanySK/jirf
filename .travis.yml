@@ -2,8 +2,8 @@ language: bash
 git:
   depth: false
 os:
-#  - linux
-#  - osx
+  - linux
+  - osx
   - windows
 env:
   global:
@@ -56,4 +56,3 @@ after_success: |-
   if $SHOULD_CONFIGURE && $PUBLISH; then
     ./gradlew publish --parallel
   fi
-  ps -ef
