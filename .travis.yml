@@ -48,8 +48,8 @@ install: >-
   fi
 script:
   - echo "SCRIPT BEGINS"
-  - echo "Java home is set to: $JAVA_HOME"
-  - echo "Path is set to: $PATH"
+  - echo "Java home is set to $JAVA_HOME"
+  - echo "Path is set to $PATH"
   - echo "Current content of .bash_profile:"
   - cat ~/.bash_profile
   - ./gradlew clean check --scan --parallel
