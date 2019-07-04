@@ -47,12 +47,7 @@ install: >-
     bash prepare_environment.sh
   fi
 script:
-  - echo "SCRIPT BEGINS"
-  - "[ -f ~/.bash_profile ] && source ~/.bash_profile && echo sourced bash_profile"
-  - echo "Java home is set to $JAVA_HOME"
-  - echo "Path is set to $PATH"
-  - echo "Current content of .bash_profile:"
-  - cat ~/.bash_profile
+  - "[ -f ~/./.windows_config ] && source ~/./.windows_config && echo sourced /.windows_config"
   - ./gradlew clean check --scan --parallel
 after_success: >-
   if $SHOULD_CONFIGURE && $PUBLISH; then
