@@ -2,8 +2,8 @@ language: bash
 git:
   depth: false
 os:
-  - linux
   - osx
+  - linux
   - windows
 env:
   global:
@@ -21,8 +21,6 @@ env:
     - JDK="adopt-openj9@1.11.28-0"
     - JDK="adopt@1.12.33-0"
     - JDK="1.12.0-1"
-    - JDK="amazon-corretto@1.8.212-04.2"
-    - JDK="amazon-corretto@1.11.0-3.7.1"
 matrix:
   include:
     - env: PUBLISH="true" JDK="adopt@1.8.212-04"
@@ -60,3 +58,5 @@ after_success: |-
   if $SHOULD_CONFIGURE && $PUBLISH; then
     ./gradlew publish --parallel
   fi
+after_failure:
+  - ./gradlew check --stacktrace
