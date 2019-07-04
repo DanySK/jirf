@@ -47,7 +47,7 @@ install: >-
     bash prepare_environment.sh
   fi
 script:
-  - "[ -f ~/./.windows_config ] && source ~/./.windows_config && echo sourced /.windows_config"
+  - "if [ -f ~/./.windows_config ]; then source ~/./.windows_config; fi"
   - ./gradlew clean check --scan --parallel
 after_success: >-
   if $SHOULD_CONFIGURE && $PUBLISH; then
