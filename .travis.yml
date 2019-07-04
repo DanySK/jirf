@@ -48,6 +48,7 @@ install: >-
   fi
 script:
   - echo "SCRIPT BEGINS"
+  - [ -f ~/.bash_profile ] && source ~/.bash_profile && echo sourced bash_profile
   - echo "Java home is set to $JAVA_HOME"
   - echo "Path is set to $PATH"
   - echo "Current content of .bash_profile:"
