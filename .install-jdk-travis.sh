@@ -1,5 +1,4 @@
 #!/bin/bash
-
 install_jdk () {
     if $jabba use $JDK; then
         echo $JDK was available and Jabba is using it
