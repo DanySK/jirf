@@ -3,8 +3,8 @@ git:
   depth: false
 os:
   - osx
-  - linux
-  - windows
+#  - linux
+#  - windows
 env:
   global:
     - secure: "B+bmocGqYSk0KOE5dNKtIGpHJw/U1idHWpSxT/xPGZ2EZBBe8l1KBDRkj160xXE2nmjyFHwgPLGrpAzRoHQ7hf7E0jzPJgMy4YHIaxjQarO3EFcIQgpZFirRngt/yJVqzfEVt9uL+GhThTwprId14eDrTg1eAz862QXCBh7ZlK23d+khjR2exEfq66EJi4nLfvJuI8krK/4UP97qs9N3NupcXfuRETk6yNvdSazGSKkeykipoIbSUaLIRpa0hoy/e4jmBvNxqO9gY1LSu1wc7b51G478CeGyTrtcUP9p3DhJPCL1Gp7FWr+13GtLTiGrSjqkhJaRU2CD11ulzBqd8FrtAqhxggzc7A4WKFtBi8FA1TObAkyz+416riiFfff+NLPFtB9Fx4Ky6vuthF/LLb+w/3X9kflraqX75KYw27UZbpJLzXzfZeI8eQRpdLOlLU+3qqHwwdnpf6fKX8wDlp4flL+sGz5692VEeCSA8BBuUNeWSFuOAmNhol1boCCnF2lpWBcjyMUJFgzMbpZQXLasbgmKsL35QV2N8JxRC1U1pocQfx+r/b09AyJasvnY9tFUr5CgoHafVLWR2AqxS+p3CEVWNa3yqG2ntSU9rhWUsQBk9qV+j7sWaAoqUsamAogAIujvIRY2+kkoxQLyQPOcog66ATDARH/24OFUDXU="
@@ -13,14 +13,14 @@ env:
     - GRAVIS="https://raw.githubusercontent.com/DanySK/Gravis-CI/master/"
     - PUBLISH="false"
   matrix:
-    - JDK="adopt@1.8.212-04"
+    #- JDK="adopt@1.8.212-04"
     - JDK="adopt-openj9@1.8.212-04"
-    - JDK="adopt@1.9.181-0"
-    - JDK="adopt@1.10.0-2"
-    - JDK="adopt@1.11.28-0"
-    - JDK="adopt-openj9@1.11.28-0"
-    - JDK="adopt@1.12.33-0"
-    - JDK="1.12.0-1"
+    #- JDK="adopt@1.9.181-0"
+    #- JDK="adopt@1.10.0-2"
+    #- JDK="adopt@1.11.28-0"
+    #- JDK="adopt-openj9@1.11.28-0"
+    #- JDK="adopt@1.12.33-0"
+    #- JDK="1.12.0-1"
 matrix:
   include:
     - os: linux
@@ -54,6 +54,9 @@ install: >-
     bash prepare_environment.sh
   fi
 script:
+  - echo Java Home set to $JAVA_HOME
+  - echo Path set to $PATH
+  - which java
   - ./gradlew clean check --scan --parallel
 before_cache:
   - curl "${GRAVIS}.clean_gradle_cache.sh" --output .clean_gradle_cache.sh
