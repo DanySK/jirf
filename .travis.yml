@@ -3,7 +3,7 @@ git:
   depth: false
 os:
   - osx
-#  - linux
+  - linux
 #  - windows
 env:
   global:
