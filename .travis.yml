@@ -40,7 +40,7 @@ cache:
     - $HOME/.jabba/
 before_install: |-
   curl "${GRAVIS}.install-jdk-travis.sh" --output .install-jdk-travis.sh
-  bash .install-jdk-travis.sh
+  bash .install-jdk-travis.sh && source ~/.jdk_config
   if [ $TRAVIS_OS_NAME = 'linux' ]; then
     sudo apt-get -qq update;
     sudo apt-get install -y graphviz;
@@ -53,8 +53,6 @@ install: >-
     openssl aes-256-cbc -K $encrypted_ae2fe9b21dcc_key -iv $encrypted_ae2fe9b21dcc_iv -in prepare_environment.sh.enc -out prepare_environment.sh -d
     bash prepare_environment.sh
   fi
-before_script:
-  - "if [ -f ~/.windows_config ]; then source ~/.windows_config; fi"
 script:
   - ./gradlew clean check --scan --parallel
 before_cache:
