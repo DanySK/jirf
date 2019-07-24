@@ -43,16 +43,17 @@ jobs:
         - *reference-jdk
       script: |-
         cd "$TRAVIS_BUILD_DIR"/protelis
-        ./gradlew clean check --scan --parallel
+        ./gradlew clean check
     - stage: deploy
       name: "Preparation of reports and deployment"
       os: linux
       env:
         - PUBLISH="true"
         - *reference-jdk
-      script: |-
-        cd "$TRAVIS_BUILD_DIR"/protelis
-        ./gradlew publish -x test --scan --parallel
+      script: true
+      after_success:
+        - cd "$TRAVIS_BUILD_DIR"/protelis
+        - ./gradlew publish -x test
 before_install:
   - curl "${GRAVIS}.disable-windows-defender.sh" --output .disable-windows-defender.sh
   - source .disable-windows-defender.sh
@@ -75,7 +76,7 @@ install: >-
     bash prepare_environment.sh
   fi
 script:
-  - ./gradlew test --scan --parallel
+  - ./gradlew test
 before_cache:
   - curl "${GRAVIS}.clean_gradle_cache.sh" --output .clean_gradle_cache.sh
   - bash .clean_gradle_cache.sh
