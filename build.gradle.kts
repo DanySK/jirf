@@ -63,14 +63,12 @@ checkstyle {
     maxWarnings = 0
 }
 
-group = "org.danilopianini" // This must be configured for the generated pom.xml to work correctly
-/*
- * The plugin comes with defaults that are useful to myself. You should configure it to behave as you please:
- */
+group = "org.danilopianini"
 publishOnCentral {
-    projectDescription.set("An advanced factory supporting implicit type conversions") // Defaults to "No description provided"
-    projectLongName.set("Java Implicit Reflective Factory") // Defaults to the project name
+    projectDescription.set("An advanced factory supporting implicit type conversions")"
+    projectLongName.set("Java Implicit Reflective Factory")
 }
+
 publishing {
     publications {
         withType<MavenPublication> {
@@ -84,5 +82,13 @@ publishing {
                 }
             }
         }
+    }
+}
+
+if (System.getenv("CI") == true.toString()) {
+    signing {
+        val signingKey: String? by project
+        val signingPassword: String? by project
+        useInMemoryPgpKeys(signingKey, signingPassword)
     }
 }
