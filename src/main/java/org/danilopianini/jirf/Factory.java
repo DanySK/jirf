@@ -26,7 +26,7 @@ public interface Factory {
      *             provided parameters and the configured singletons and
      *             implicit conversions
      */
-    <E> E build(Class<E> clazz, List<?> args) throws IllegalArgumentException;
+    <E> E build(Class<E> clazz, List<?> args);
 
     /**
      * @param clazz
@@ -45,7 +45,7 @@ public interface Factory {
      *             provided parameters and the configured singletons and
      *             implicit conversions
      */
-    <E> E build(Class<E> clazz, Object... parameters) throws IllegalArgumentException;
+    <E> E build(Class<E> clazz, Object... parameters);
 
     /**
      * Applies the available implicit conversions and tries to convert the
@@ -82,7 +82,7 @@ public interface Factory {
      *             if for any reason the class can't get converted with the
      *             configured implicit conversions
      */
-    <I, O> O convertOrFail(Class<O> clazz, I target) throws IllegalArgumentException;
+    <I, O> O convertOrFail(Class<O> clazz, I target);
 
     /**
      * Removes a registered singleton.
