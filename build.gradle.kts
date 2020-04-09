@@ -22,11 +22,11 @@ gitSemVer {
 }
 
 dependencies {
-    implementation(Libs.guava)
-    implementation(Libs.commons_lang3)
-    implementation(Libs.boilerplate)
-    implementation(Libs.jgrapht_core)
-    testImplementation(Libs.junit)
+    implementation("com.google.guava:guava:_")
+    implementation("org.apache.commons:commons-lang3:_")
+    implementation("org.danilopianini:boilerplate:_")
+    implementation("org.jgrapht:jgrapht-core:_")
+    testImplementation("junit:junit:_")
 }
 
 tasks.withType<Test> {
