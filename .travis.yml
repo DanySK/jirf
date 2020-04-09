@@ -47,8 +47,6 @@ jobs:
       os: linux
       env:
         - *reference-jdk
-      script:
-        - ./gradlew clean check
     - stage: deploy
       name: "Preparation of reports and deployment"
       os: linux
@@ -71,7 +69,7 @@ before_install:
   - source $GRAVIS/install-jdk
 
 script:
-  - travis_retry ./gradlew check
+  - travis_retry ./gradlew clean check
 
 before_cache:
   - $GRAVIS/clean-gradle-cache
