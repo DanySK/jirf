@@ -1,17 +1,16 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 
 plugins {
-    buildSrcVersions
-    id("org.danilopianini.git-sensitive-semantic-versioning") version Versions.org_danilopianini_git_sensitive_semantic_versioning_gradle_plugin
+    id("org.danilopianini.git-sensitive-semantic-versioning")
     `java-library`
     jacoco
-//    id("com.github.spotbugs") version Versions.com_github_spotbugs_gradle_plugin
+    id("com.github.spotbugs")
     pmd
     checkstyle
-    id("org.jlleitschuh.gradle.ktlint") version Versions.org_jlleitschuh_gradle_ktlint_gradle_plugin
+    id("org.jlleitschuh.gradle.ktlint")
     signing
     `maven-publish`
-    id("org.danilopianini.publish-on-central") version Versions.org_danilopianini_publish_on_central_gradle_plugin
+    id("org.danilopianini.publish-on-central")
 }
 
 repositories {
@@ -38,20 +37,22 @@ tasks.withType<Test> {
     }
 }
 
-//spotbugs {
-//    effort = "max"
-//    reportLevel = "low"
-//    val excludeFile = File("${project.rootProject.projectDir}/config/spotbugs/excludes.xml")
-//    if (excludeFile.exists()) {
-//        excludeFilterConfig = project.resources.text.fromFile(excludeFile)
-//    }
-//}
-//tasks.withType<SpotBugsTask> {
-//    reports {
-//        xml.setEnabled(false)
-//        html.setEnabled(true)
-//    }
-//}
+spotbugs {
+    setEffort("max")
+    setReportLevel("low")
+    showProgress.set(true)
+    val excludeFile = File("${project.rootProject.projectDir}/config/spotbugs/excludes.xml")
+    if (excludeFile.exists()) {
+        excludeFilter.set(excludeFile)
+    }
+}
+
+tasks.withType<com.github.spotbugs.snom.SpotBugsTask> {
+    reports {
+        create("html") { enabled = true }
+    }
+}
+
 
 pmd {
     ruleSets = listOf()
