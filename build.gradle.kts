@@ -1,4 +1,3 @@
-import com.github.spotbugs.SpotBugsTask
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 
 plugins {
@@ -6,7 +5,7 @@ plugins {
     id("org.danilopianini.git-sensitive-semantic-versioning") version Versions.org_danilopianini_git_sensitive_semantic_versioning_gradle_plugin
     `java-library`
     jacoco
-    id("com.github.spotbugs") version Versions.com_github_spotbugs_gradle_plugin
+//    id("com.github.spotbugs") version Versions.com_github_spotbugs_gradle_plugin
     pmd
     checkstyle
     id("org.jlleitschuh.gradle.ktlint") version Versions.org_jlleitschuh_gradle_ktlint_gradle_plugin
@@ -39,20 +38,20 @@ tasks.withType<Test> {
     }
 }
 
-spotbugs {
-    effort = "max"
-    reportLevel = "low"
-    val excludeFile = File("${project.rootProject.projectDir}/config/spotbugs/excludes.xml")
-    if (excludeFile.exists()) {
-        excludeFilterConfig = project.resources.text.fromFile(excludeFile)
-    }
-}
-tasks.withType<SpotBugsTask> {
-    reports {
-        xml.setEnabled(false)
-        html.setEnabled(true)
-    }
-}
+//spotbugs {
+//    effort = "max"
+//    reportLevel = "low"
+//    val excludeFile = File("${project.rootProject.projectDir}/config/spotbugs/excludes.xml")
+//    if (excludeFile.exists()) {
+//        excludeFilterConfig = project.resources.text.fromFile(excludeFile)
+//    }
+//}
+//tasks.withType<SpotBugsTask> {
+//    reports {
+//        xml.setEnabled(false)
+//        html.setEnabled(true)
+//    }
+//}
 
 pmd {
     ruleSets = listOf()
