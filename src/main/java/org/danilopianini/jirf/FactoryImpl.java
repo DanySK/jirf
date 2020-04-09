@@ -179,7 +179,10 @@ final class FactoryImpl implements Factory {
             final Class<D> target,
             final Function<? super S, ? extends D> implicit) {
         implicits.removeEdge(source, target);
-        Objects.requireNonNull(implicits.addEdge(source, target, new FunctionEdge(source, target, implicit)));
+        if (!implicits.addEdge(source, target, new FunctionEdge(source, target, implicit))) {
+            throw new IllegalStateException("edge from " + source + " to " + target + " was not added."
+                    + "This is likely a bug in jirf.");
+        }
     }
 
     @SuppressWarnings(UNCHECKED)
@@ -201,6 +204,7 @@ final class FactoryImpl implements Factory {
         }
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public <E> void registerSingleton(
             final Class<? super E> lowerBound,
