@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 final class FactoryImpl implements Factory {
 
     private final Map<Class<?>, Object> singletons = new LinkedHashMap<>();
-    private final Graph<Class<?>, FunctionEdge> implicits = new DefaultDirectedGraph<>(null);
+    private final Graph<Class<?>, FunctionEdge> implicits = new DefaultDirectedGraph<>(null, null, false);
     private static final String UNCHECKED = "unchecked";
 
     @SuppressWarnings(UNCHECKED)
