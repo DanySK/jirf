@@ -1,10 +1,15 @@
-import de.fayard.dependencies.bootstrapRefreshVersionsAndDependencies
-
+import de.fayard.refreshVersions.bootstrapRefreshVersions
+import org.danilopianini.VersionAliases.justAdditionalAliases
 buildscript {
-    repositories { gradlePluginPortal() }
-    dependencies.classpath("de.fayard:dependencies:+")
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath("de.fayard.refreshVersions:refreshVersions:0.9.7")
+        classpath("org.danilopianini:refreshversions-aliases:+")
+    }
 }
-
-bootstrapRefreshVersionsAndDependencies()
+bootstrapRefreshVersions(justAdditionalAliases)
 
 rootProject.name = "jirf"

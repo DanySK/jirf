@@ -64,8 +64,8 @@ checkstyle {
 
 group = "org.danilopianini"
 publishOnCentral {
-    projectDescription.set("An advanced factory supporting implicit type conversions")
-    projectLongName.set("Java Implicit Reflective Factory")
+    projectDescription = "An advanced factory supporting implicit type conversions"
+    projectLongName = "Java Implicit Reflective Factory"
 }
 
 publishing {
