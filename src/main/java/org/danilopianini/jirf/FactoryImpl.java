@@ -1,6 +1,11 @@
 package org.danilopianini.jirf;
 
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
 import org.apache.commons.lang3.ClassUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
@@ -25,45 +30,70 @@ final class FactoryImpl implements Factory {
     private final Map<Class<?>, Object> singletons = new LinkedHashMap<>();
     private final Graph<Class<?>, FunctionEdge> implicits = new DefaultDirectedGraph<>(null, null, false);
     private static final String UNCHECKED = "unchecked";
+    /*
+     * The returned Pair is actually used somewhat like a functional Either
+     */
+    private final LoadingCache<Pair<Class<?>, List<Class<?>>>, List<Pair<Constructor<?>, InstancingImpossibleException>>> loader =
+        CacheBuilder.newBuilder()
+            .build(new CacheLoader<>() {
+                @SuppressWarnings("unchecked")
+                @Override
+                public List<Pair<Constructor<?>, InstancingImpossibleException>> load(final Pair<Class<?>, List<Class<?>>> key) {
+                    final Constructor<Object>[] constructors = (Constructor<Object>[]) key.getKey().getConstructors();
+                    final List<Class<?>> argumentTypes = key.getValue();
+                    return Arrays.stream(constructors)
+                            .map(c -> new ConstructorBenchmark<>(c, argumentTypes))
+                            .sorted()
+                            .map(it ->
+                                new ImmutablePair<Constructor<?>, InstancingImpossibleException>(
+                                    it.constructor,
+                                    it.score >= 0 ? null : new InstancingImpossibleException(
+                                        it.constructor,
+                                        "discarded because incompatible with provided parameters " + argumentTypes.stream()
+                                            .map(Class::getSimpleName)
+                                            .collect(Collectors.toList())
+                                    )
+                                )
+                            )
+                            .collect(Collectors.toList());
+                }
+            });
 
     @SuppressWarnings(UNCHECKED)
     @Override
-    public <E> E build(final Class<E> clazz, final List<?> args) {
+    public <E> CreationResult<E> build(final Class<E> clazz, final List<?> args) {
         registerHierarchy(clazz);
-        return getFromStaticSources(clazz)
-            .orElseGet(() -> {
-                final Constructor<E>[] constructors = (Constructor<E>[]) clazz.getConstructors();
-                final List<Throwable> exceptions = new LinkedList<>();
-                return Arrays.stream(constructors)
-                        .map(c -> new ConstructorBenchmark<>(c, args))
-                        .filter(cb -> cb.score >= 0)
-                        .sorted()
-                        .map(cb -> createBestEffort(cb.constructor, args))
-                        .filter(e -> {
-                            if (e instanceof Throwable) {
-                                exceptions.add((Throwable) e);
-                                return false;
-                            }
-                            return true;
-                        })
-                        .map(e -> (E) e)
-                        .findFirst()
-                        .orElseThrow(() -> {
-                            final IllegalArgumentException ex = new IllegalArgumentException("Cannot create "
-                                + clazz.getName()
-                                + " with arguments ["
-                                + args.stream()
-                                    .map(o -> o == null ? "null" : o.toString() + ':' + o.getClass().getSimpleName())
-                                    .collect(Collectors.joining(", "))
-                                + ']');
-                            exceptions.forEach(ex::addSuppressed);
-                            return ex;
-                        });
-            });
+        final var resultBuilder = new ImmutableCreationResult.Builder<E>();
+        final var fromStatic = getFromStaticSources(clazz);
+        if (fromStatic.isPresent()) {
+            resultBuilder.withResult(fromStatic.get());
+            return resultBuilder.build();
+        }
+        final List<Class<?>> argumentTypes = args.stream()
+            .map(it -> it == null ? null : it.getClass())
+            .collect(Collectors.toList());
+        final List<Pair<Constructor<?>, InstancingImpossibleException>> sortedConstructors =
+            loader.getUnchecked(new ImmutablePair<>(clazz, argumentTypes));
+        for (final var maybeException: sortedConstructors) {
+            final var constructor = (Constructor<E>) maybeException.getKey();
+            final var exception = maybeException.getValue();
+            if (exception == null) {
+                final var result = createBestEffort(constructor, args);
+                if (result instanceof InstancingImpossibleException) {
+                    resultBuilder.withFailure(constructor, (InstancingImpossibleException) result);
+                } else {
+                    resultBuilder.withResult((E) result);
+                    return resultBuilder.build();
+                }
+            } else {
+                resultBuilder.withFailure(constructor, exception);
+            }
+        }
+        return resultBuilder.build();
     }
 
     @Override
-    public <E> E build(final Class<E> clazz, final Object... parameters) {
+    public <E> CreationResult<E> build(final Class<E> clazz, final Object... parameters) {
         return build(clazz, Arrays.asList(parameters));
     }
 
@@ -71,13 +101,13 @@ final class FactoryImpl implements Factory {
     @Override
     public <I, O> Optional<O> convert(final Class<O> destination, final I source) {
         return findConversionChain(Objects.requireNonNull(source.getClass()), Objects.requireNonNull(destination))
-            .map(chain -> {
-                Object in = source;
-                for (final FunctionEdge implicit : chain.getEdgeList()) {
-                    in = ((Function<Object, ?>) implicit.getFunction()).apply(in);
-                }
-                return (O) in;
-            });
+                .map(chain -> {
+                    Object in = source;
+                    for (final FunctionEdge implicit : chain.getEdgeList()) {
+                        in = ((Function<Object, ?>) implicit.getFunction()).apply(in);
+                    }
+                    return (O) in;
+                });
     }
 
     @SuppressWarnings(UNCHECKED)
@@ -153,8 +183,8 @@ final class FactoryImpl implements Factory {
             }
             return new InstancingImpossibleException(constructor,
                     "Couldn't convert " + param
-                    + " from " + param.getClass().getName()
-                    + " to " + expected.getName());
+                            + " from " + param.getClass().getName()
+                            + " to " + expected.getName());
         }
     }
 
@@ -254,11 +284,31 @@ final class FactoryImpl implements Factory {
         }
     }
 
+    @Override
+    public <I, O> O convertOrFail(final Class<O> clazz, final I target) {
+        return this.convert(clazz, target)
+                .orElseThrow(() -> new IllegalArgumentException("Unable to convert " + target + " to " + clazz));
+    }
+
+    @Override
+    public <E> boolean deregisterSingleton(final E object) {
+        final Iterator<Object> regSingletons = singletons.values().iterator();
+        boolean found = false;
+        while (regSingletons.hasNext()) {
+            final Object singleton = regSingletons.next();
+            if (singleton.equals(object)) {
+                regSingletons.remove();
+                found = true;
+            }
+        }
+        return found;
+    }
+
     private final class ConstructorBenchmark<T> implements Comparable<ConstructorBenchmark<T>> {
         private final Constructor<T> constructor;
         private final int score;
 
-        ConstructorBenchmark(final Constructor<T> constructor, final List<?> args) {
+        ConstructorBenchmark(final Constructor<T> constructor, final List<Class<?>> args) {
             this.constructor = constructor;
             /*
              * Filter out constructor arguments that will be assigned to singletons
@@ -276,24 +326,23 @@ final class FactoryImpl implements Factory {
                     : Integer.compare(score, o.score);
         }
 
-        private int computeScore(final Class<?>[] filteredParams, final List<?> args) {
-            final int argsSize = args.size();
+        private int computeScore(final Class<?>[] filteredParams, final List<Class<?>> argumentTypes) {
+            final int argsSize = argumentTypes.size();
             final int numDiff = argsSize - filteredParams.length; // Passed - expected
             if (numDiff == 0 || numDiff == -1 && constructor.isVarArgs()) { // Consider empty varargs
                 int tempScore = 0;
                 for (int i = 0; i < argsSize; i++) {
-                    final Object param = args.get(i);
+                    final Class<?> argumentType = argumentTypes.get(i);
                     final Class<?> expected = filteredParams[i];
-                    if (param == null) {
+                    if (argumentType == null) {
                         if (expected.isPrimitive()) {
                             return -1;
                         }
                     } else {
-                        final Class<?> actual = param.getClass();
-                        if (!expected.isAssignableFrom(actual)) {
-                            tempScore += findConversionChain(actual, expected)
-                                .map(GraphPath::getLength)
-                                .orElse(implicits.edgeSet().size());
+                        if (!expected.isAssignableFrom(argumentType)) {
+                            tempScore += findConversionChain(argumentType, expected)
+                                    .map(GraphPath::getLength)
+                                    .orElse(implicits.edgeSet().size());
                         }
                     }
                 }
@@ -319,26 +368,6 @@ final class FactoryImpl implements Factory {
         public String toString() {
             return constructor + "->" + score;
         }
-    }
-
-    @Override
-    public <I, O> O convertOrFail(final Class<O> clazz, final I target) {
-        return this.convert(clazz, target)
-                .orElseThrow(() -> new IllegalArgumentException("Unable to convert " + target + " to " + clazz));
-    }
-
-    @Override
-    public <E> boolean deregisterSingleton(final E object) {
-        final Iterator<Object> regSingletons = singletons.values().iterator();
-        boolean found = false;
-        while (regSingletons.hasNext()) {
-            final Object singleton = regSingletons.next();
-            if (singleton.equals(object)) {
-                regSingletons.remove();
-                found = true;
-            }
-        }
-        return found;
     }
 
 }

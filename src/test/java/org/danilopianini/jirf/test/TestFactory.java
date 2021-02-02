@@ -1,13 +1,14 @@
 package org.danilopianini.jirf.test;
 
-import java.math.BigInteger;
-
+import com.google.common.collect.ImmutableList;
 import org.danilopianini.jirf.Factory;
 import org.danilopianini.jirf.FactoryBuilder;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.google.common.collect.ImmutableList;
+import java.math.BigInteger;
+
+import static org.junit.Assert.assertNotNull;
 
 /**
  *
@@ -22,7 +23,7 @@ public final class TestFactory {
         final Factory f = new FactoryBuilder()
                 .withWideningConversions()
                 .build();
-        Assert.assertNotNull(f.build(MyObj.class, 1, 2, (byte) 3));
+        assertNotNull(f.build(MyObj.class, 1, 2, (byte) 3).getCreatedObjectOrThrowException());
     }
 
     /**
@@ -33,7 +34,7 @@ public final class TestFactory {
         final Factory f = new FactoryBuilder()
                 .withNarrowingConversions()
                 .build();
-        Assert.assertNotNull(f.build(MyObj.class, 1, 2, 3.0));
+        assertNotNull(f.build(MyObj.class, 1, 2, 3.0).getCreatedObjectOrThrowException());
     }
 
     /**
@@ -45,7 +46,7 @@ public final class TestFactory {
                 .withAutoBoxing()
                 .withWideningConversions()
                 .build();
-        Assert.assertNotNull(f.build(MyObj.class, ""));
+        assertNotNull(f.build(MyObj.class, "").getCreatedObjectOrThrowException());
     }
 
     /**
@@ -57,7 +58,7 @@ public final class TestFactory {
                 .withAutoBoxing()
                 .withWideningConversions()
                 .build();
-        Assert.assertNotNull(f.build(MyObj.class, "", 1));
+        assertNotNull(f.build(MyObj.class, "", 1).getCreatedObjectOrThrowException());
     }
 
     /**
@@ -69,7 +70,7 @@ public final class TestFactory {
                 .withAutoBoxing()
                 .withWideningConversions()
                 .build();
-        Assert.assertNotNull(f.build(MyObj.class, "", 1, 2, 3, 4));
+        assertNotNull(f.build(MyObj.class, "", 1, 2, 3, 4).getCreatedObjectOrThrowException());
     }
 
     /**
@@ -82,7 +83,9 @@ public final class TestFactory {
                 .withWideningConversions()
                 .withArrayListConversions(double[].class)
                 .build();
-        Assert.assertNotNull(f.build(MyObj.class, "", ImmutableList.of(1, 2, 3, 4)));
+        assertNotNull(
+            f.build(MyObj.class, "", ImmutableList.of(1, 2, 3, 4)).getCreatedObjectOrThrowException()
+        );
     }
 
     /**
@@ -94,7 +97,7 @@ public final class TestFactory {
                 .withAutoBoxing()
                 .build();
         f.registerImplicit(CharSequence.class, double.class, s -> Double.parseDouble(s.toString()));
-        Assert.assertNotNull(f.build(MyObj.class, "1", "2", (byte) 3));
+        assertNotNull(f.build(MyObj.class, "1", "2", (byte) 3).getCreatedObjectOrThrowException());
     }
 
     /**
@@ -106,23 +109,18 @@ public final class TestFactory {
                 .build();
         final Object o = new Object();
         f.registerSingleton(o);
-        Assert.assertSame(o, f.build(Object.class));
+        Assert.assertSame(o, f.build(Object.class).getCreatedObjectOrThrowException());
         final BigInteger s = new BigInteger("25");
         f.registerSingleton(Number.class, Object.class, s);
-        Assert.assertSame(s, f.build(Number.class));
-        Assert.assertSame(s, f.build(Object.class));
-        try {
-            Assert.assertNotEquals(s, f.build(BigInteger.class));
-            Assert.fail();
-        } catch (IllegalArgumentException e) {
-            Assert.assertNotNull(e.getMessage());
-        }
-        try {
-            Assert.assertNotEquals(s, f.build(BigInteger.class, "ciao"));
-            Assert.fail();
-        } catch (IllegalArgumentException e) {
-            Assert.assertNotNull(e.getMessage());
-        }
+        Assert.assertSame(s, f.build(Number.class).getCreatedObjectOrThrowException());
+        Assert.assertSame(s, f.build(Object.class).getCreatedObjectOrThrowException());
+        final var bigInteger = f.build(BigInteger.class);
+        Assert.assertTrue(bigInteger.getCreatedObject().isEmpty());
+        assertNotNull(bigInteger.getExceptions());
+        Assert.assertFalse(bigInteger.getExceptions().isEmpty());
+        final var bigInteger2 = f.build(BigInteger.class, "ciao");
+        Assert.assertTrue(bigInteger2.getCreatedObject().isEmpty());
+        Assert.assertFalse(bigInteger2.getExceptions().isEmpty());
     }
 
     // CHECKSTYLE: EmptyStatement OFF

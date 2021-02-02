@@ -20,15 +20,13 @@ public interface Factory {
      *            conversion graph is used.
      * @param <E>
      *            the Object type
-     * @return the instance
-     * @throws IllegalArgumentException
-     *             if for any reason the class can't get instanced with the
-     *             provided parameters and the configured singletons and
-     *             implicit conversions
+     * @return the result of the build attempt.
      */
-    <E> E build(Class<E> clazz, List<?> args);
+    <E> CreationResult<E> build(Class<E> clazz, List<?> args);
 
     /**
+     * @param <E>
+     *            the Object type
      * @param clazz
      *            the {@link Class} of which an instance should get built
      * @param parameters
@@ -37,15 +35,9 @@ public interface Factory {
      *            implicit conversions are automatically applied, in case
      *            multiple of them are available, the shortest path on the
      *            conversion graph is used.
-     * @param <E>
-     *            the Object type
-     * @return the instance
-     * @throws IllegalArgumentException
-     *             if for any reason the class can't get instanced with the
-     *             provided parameters and the configured singletons and
-     *             implicit conversions
+     * @return the result of the build attempt.
      */
-    <E> E build(Class<E> clazz, Object... parameters);
+    <E> CreationResult<E> build(Class<E> clazz, Object... parameters);
 
     /**
      * Applies the available implicit conversions and tries to convert the
