@@ -1,3 +1,4 @@
+import org.danilopianini.gradle.mavencentral.mavenCentral
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 
 plugins {
@@ -66,6 +67,14 @@ group = "org.danilopianini"
 publishOnCentral {
     projectDescription = "An advanced factory supporting implicit type conversions"
     projectLongName = "Java Implicit Reflective Factory"
+    repository("https://maven.pkg.github.com/alchemistsimulator/alchemist") {
+        user = "DanySK"
+        password = System.getenv("GITHUB_TOKEN")
+    }
+    repository("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/", "CentralS01") {
+        user = mavenCentral().user()
+        password = mavenCentral().password()
+    }
 }
 
 publishing {
