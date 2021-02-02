@@ -67,7 +67,7 @@ group = "org.danilopianini"
 publishOnCentral {
     projectDescription = "An advanced factory supporting implicit type conversions"
     projectLongName = "Java Implicit Reflective Factory"
-    repository("https://maven.pkg.github.com/alchemistsimulator/alchemist") {
+    repository("https://maven.pkg.github.com/danysk/jirf") {
         user = "DanySK"
         password = System.getenv("GITHUB_TOKEN")
     }
