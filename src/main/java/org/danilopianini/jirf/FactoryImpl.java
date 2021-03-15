@@ -214,6 +214,7 @@ final class FactoryImpl implements Factory {
             final Class<S> source,
             final Class<D> target,
             final Function<? super S, ? extends D> implicit) {
+        loader.invalidateAll();
         implicits.removeEdge(source, target);
         if (!implicits.addEdge(source, target, new FunctionEdge(source, target, implicit))) {
             throw new IllegalStateException("edge from " + source + " to " + target + " was not added."
@@ -269,22 +270,28 @@ final class FactoryImpl implements Factory {
         }
     }
 
-    private static <E, O> void register(
+    private <E, O> void register(
             final Map<Class<?>, O> map,
             final Class<? super E> lowerbound,
             final Class<? super E> upperbound,
             final Class<? super E> clazz,
-            final O object) {
+            final O object
+    ) {
         checkSuperclass(Objects.requireNonNull(clazz), Objects.requireNonNull(lowerbound));
         checkSuperclass(lowerbound, Objects.requireNonNull(upperbound));
         for (Class<? super E> c = lowerbound; c != null && upperbound.isAssignableFrom(c); c = c.getSuperclass()) {
-            map.put(c, Objects.requireNonNull(object));
+            if (map.put(c, Objects.requireNonNull(object)) == null) {
+                loader.invalidateAll();
+            }
         }
         if (upperbound.isInterface()) {
-            final boolean li = lowerbound.isInterface();
-            for (final Class<?> i : ClassUtils.getAllInterfaces(clazz)) {
-                if (upperbound.isAssignableFrom(i) && (!li || i.isAssignableFrom(lowerbound))) {
-                    map.put(i, object);
+            final boolean lowerboundIsInterface = lowerbound.isInterface();
+            for (final Class<?> type : ClassUtils.getAllInterfaces(clazz)) {
+                if (upperbound.isAssignableFrom(type)
+                        && (!lowerboundIsInterface || type.isAssignableFrom(lowerbound))
+                        && map.put(type, object) == null
+                ) {
+                    loader.invalidateAll();
                 }
             }
         }
@@ -304,6 +311,7 @@ final class FactoryImpl implements Factory {
             final Object singleton = regSingletons.next();
             if (singleton.equals(object)) {
                 regSingletons.remove();
+                loader.invalidateAll();
                 found = true;
             }
         }
