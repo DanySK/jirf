@@ -7,8 +7,14 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.math.BigInteger;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Objects;
+import java.util.TimeZone;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  *
@@ -115,12 +121,25 @@ public final class TestFactory {
         Assert.assertSame(s, f.build(Number.class).getCreatedObjectOrThrowException());
         Assert.assertSame(s, f.build(Object.class).getCreatedObjectOrThrowException());
         final var bigInteger = f.build(BigInteger.class);
-        Assert.assertTrue(bigInteger.getCreatedObject().isEmpty());
+        assertTrue(bigInteger.getCreatedObject().isEmpty());
         assertNotNull(bigInteger.getExceptions());
         Assert.assertFalse(bigInteger.getExceptions().isEmpty());
         final var bigInteger2 = f.build(BigInteger.class, "ciao");
-        Assert.assertTrue(bigInteger2.getCreatedObject().isEmpty());
+        assertTrue(bigInteger2.getCreatedObject().isEmpty());
         Assert.assertFalse(bigInteger2.getExceptions().isEmpty());
+    }
+
+    @Test
+    public void testVarArgsWithSingletons() {
+        final Factory f = new FactoryBuilder()
+            .withNarrowingConversions()
+            .withArrayBooleanIntConversions()
+            .withArrayListConversions(String[].class, Number[].class)
+            .withArrayNarrowingConversions()
+            .withAutomaticToString().build();
+        f.registerSingleton(Calendar.class, GregorianCalendar.getInstance());
+        f.registerSingleton(TimeZone.class, TimeZone.getDefault());
+        assertTrue(f.build(ReproduceGPSTrace.class, "gpsTrace", true, "AlignToSimulationTime").getCreatedObject().isPresent());
     }
 
     // CHECKSTYLE: EmptyStatement OFF
@@ -131,6 +150,36 @@ public final class TestFactory {
         public MyObj(final double a, final Double b, final byte c) { } // NOPMD
         public MyObj(final String a, final double... b) { // NOPMD
             for (int i = 0; i < b.length; i++); // NOPMD
+        }
+    }
+    public static final class ReproduceGPSTrace {
+        public ReproduceGPSTrace(
+            final Calendar calendar,
+            final TimeZone timezone,
+            final String path,
+            final boolean cycle,
+            final String normalizer,
+            final Object... normalizerArgs
+        ) {
+            this(calendar, timezone, 0, path, cycle, normalizer, normalizerArgs);
+        }
+
+        public ReproduceGPSTrace(
+            final Calendar calendar,
+            final TimeZone timezone,
+            final double speed,
+            final String path,
+            final boolean cycle,
+            final String normalizer,
+            final Object... normalizerArgs
+        ) {
+            Objects.requireNonNull(calendar);
+            Objects.requireNonNull(timezone);
+            assertEquals(0, speed, 0d);
+            Objects.requireNonNull(path);
+            assertTrue(cycle);
+            Objects.requireNonNull(normalizer);
+            Objects.requireNonNull(normalizerArgs);
         }
     }
 
