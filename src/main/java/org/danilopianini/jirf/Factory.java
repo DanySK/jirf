@@ -1,6 +1,7 @@
 package org.danilopianini.jirf;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -86,6 +87,11 @@ public interface Factory {
      * @return true if the {@link Object} was successfully de-registered
      */
     <E> boolean deregisterSingleton(E object);
+
+    /**
+     * @return the map of registered singleton objects
+     */
+    Map<Class<?>, Object> getSingletonObjects();
 
     /**
      * Registers an implicit conversion function. All the superclasses and

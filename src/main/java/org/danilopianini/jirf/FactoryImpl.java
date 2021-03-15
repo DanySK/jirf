@@ -14,6 +14,7 @@ import org.jgrapht.graph.DefaultDirectedGraph;
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Deque;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -192,6 +193,11 @@ final class FactoryImpl implements Factory {
         registerHierarchy(source);
         registerHierarchy(destination);
         return Optional.ofNullable(DijkstraShortestPath.findPathBetween(implicits, source, destination));
+    }
+
+    @Override
+    public Map<Class<?>, Object> getSingletonObjects() {
+        return Collections.unmodifiableMap(singletons);
     }
 
     @Override
