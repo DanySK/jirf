@@ -19,6 +19,7 @@ repositories {
 }
 
 dependencies {
+    compileOnly("com.github.spotbugs:spotbugs-annotations:_")
     implementation("com.google.guava:guava:_")
     implementation("org.apache.commons:commons-lang3:_")
     implementation("org.danilopianini:boilerplate:_")
