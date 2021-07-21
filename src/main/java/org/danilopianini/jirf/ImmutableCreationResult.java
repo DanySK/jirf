@@ -1,13 +1,13 @@
 package org.danilopianini.jirf;
 
 import com.google.common.collect.ImmutableMap;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.lang.reflect.Constructor;
-import java.util.Map;
 import java.util.Optional;
 
 public final class ImmutableCreationResult<T> implements CreationResult<T> {
@@ -62,7 +62,8 @@ public final class ImmutableCreationResult<T> implements CreationResult<T> {
     }
 
     @Override
-    public Map<Constructor<T>, InstancingImpossibleException> getExceptions() {
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "the field is immutable")
+    public ImmutableMap<Constructor<T>, InstancingImpossibleException> getExceptions() {
         return exceptions;
     }
 
