@@ -18,10 +18,6 @@ repositories {
     mavenCentral()
 }
 
-gitSemVer {
-    version = computeGitSemVer()
-}
-
 dependencies {
     implementation("com.google.guava:guava:_")
     implementation("org.apache.commons:commons-lang3:_")
