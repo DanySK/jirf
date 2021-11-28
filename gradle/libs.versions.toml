@@ -1,6 +1,7 @@
 [versions]
 
 [libraries]
+guava = "com.google.guava:guava:31.0-jre"
 spotbugs-annotations = "com.github.spotbugs:spotbugs-annotations:4.4.1"
 
 [plugins]
