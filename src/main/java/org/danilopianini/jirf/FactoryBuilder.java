@@ -198,8 +198,16 @@ public class FactoryBuilder {
         withArrayBoxing();
         factory.registerImplicit(boolean[].class, int[].class, PrimitiveArrays::toIntArray);
         factory.registerImplicit(int[].class, boolean[].class, PrimitiveArrays::toBooleanArray);
-        factory.registerImplicit(Boolean[].class, Integer[].class, ba -> Arrays.stream(ba).map(BOOL_TO_INT).toArray(Integer[]::new));
-        factory.registerImplicit(Integer[].class, Boolean[].class, ba -> Arrays.stream(ba).map(INT_TO_BOOL).toArray(Boolean[]::new));
+        factory.registerImplicit(
+            Boolean[].class,
+            Integer[].class,
+            ba -> Arrays.stream(ba).map(BOOL_TO_INT).toArray(Integer[]::new)
+        );
+        factory.registerImplicit(
+            Integer[].class,
+            Boolean[].class,
+            ba -> Arrays.stream(ba).map(INT_TO_BOOL).toArray(Boolean[]::new)
+        );
         return this;
     }
 

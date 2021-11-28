@@ -189,7 +189,10 @@ final class FactoryImpl implements Factory {
         }
     }
 
-    private <S, D> Optional<GraphPath<Class<?>, FunctionEdge>> findConversionChain(final Class<S> source, final Class<D> destination) {
+    private <S, D> Optional<GraphPath<Class<?>, FunctionEdge>> findConversionChain(
+        final Class<S> source,
+        final Class<D> destination
+    ) {
         registerHierarchy(source);
         registerHierarchy(destination);
         return Optional.ofNullable(DijkstraShortestPath.findPathBetween(implicits, source, destination));
