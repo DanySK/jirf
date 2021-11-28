@@ -65,8 +65,8 @@ public class FactoryBuilder {
         Primitives.allPrimitiveTypes().stream()
         .filter(t -> !void.class.equals(t))
         .forEach(p -> {
-            factory.<S, S>registerImplicit((Class<S>) p, (Class<S>) Primitives.wrap(p), Function.identity());
-            factory.<S, S>registerImplicit((Class<S>) Primitives.wrap(p), (Class<S>) p, Function.identity());
+            factory.registerImplicit((Class<S>) p, (Class<S>) Primitives.wrap(p), Function.identity());
+            factory.registerImplicit((Class<S>) Primitives.wrap(p), (Class<S>) p, Function.identity());
         });
         return this;
     }
