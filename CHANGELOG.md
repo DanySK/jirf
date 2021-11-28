@@ -1,3 +1,10 @@
+## [0.4.4](https://github.com/DanySK/jirf/compare/0.4.3...0.4.4) (2021-11-28)
+
+
+### Bug Fixes
+
+* **release:** release on github packages too ([f89d1e4](https://github.com/DanySK/jirf/commit/f89d1e40b8b775a800d0075b685cccf594b458c5))
+
 ## [0.4.3](https://github.com/DanySK/jirf/compare/0.4.2...0.4.3) (2021-11-28)
 
 
