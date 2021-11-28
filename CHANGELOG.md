@@ -1,3 +1,10 @@
+## [0.4.5](https://github.com/DanySK/jirf/compare/0.4.4...0.4.5) (2021-11-28)
+
+
+### Bug Fixes
+
+* **deps:** update dependency com.google.guava:guava to v31.0.1-jre ([c145992](https://github.com/DanySK/jirf/commit/c1459924b1cb918a8829327478b2720f8df3b082))
+
 ## [0.4.4](https://github.com/DanySK/jirf/compare/0.4.3...0.4.4) (2021-11-28)
 
 
