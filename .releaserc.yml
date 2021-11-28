@@ -9,6 +9,6 @@ plugins:
         git tag -a -f ${nextRelease.version} ${nextRelease.version} -F CHANGELOG.md
         git push --force origin ${nextRelease.version}
         ./gradlew releaseJava
-        ./gradlew publishKotlinMavenPublicationToGithubRepository || true
+        ./gradlew publishJavaMavenPublicationToGithubRepository || true
   - "@semantic-release/github"
   - "@semantic-release/git"
