@@ -76,7 +76,7 @@ public final class ImmutableCreationResult<T> implements CreationResult<T>, Seri
     }
 
     /**
-     * Builder for an {@link ImmutableCreationResult}
+     * Builder for an {@link ImmutableCreationResult}.
      *
      * @param <T> the created object type
      */
