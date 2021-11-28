@@ -86,6 +86,11 @@ public final class ImmutableCreationResult<T> implements CreationResult<T>, Seri
         private final ImmutableMap.Builder<Constructor<T>, InstancingImpossibleException> mapBuilder = new ImmutableMap.Builder<>();
         private T result;
 
+        /**
+         * @param constructor the constructor that failed
+         * @param error the exception that the failure produced
+         * @return this buider for method chaining
+         */
         public Builder<T> withFailure(
             @Nonnull final Constructor<T> constructor,
             @Nonnull final InstancingImpossibleException error
@@ -95,6 +100,10 @@ public final class ImmutableCreationResult<T> implements CreationResult<T>, Seri
             return this;
         }
 
+        /**
+         * @param result the created object
+         * @return this buider for method chaining
+         */
         public Builder<T> withResult(@Nonnull final T result) {
             if (this.result != null) {
                 throw new IllegalStateException("The result of this build has already been set.");
@@ -110,6 +119,9 @@ public final class ImmutableCreationResult<T> implements CreationResult<T>, Seri
             }
         }
 
+        /**
+         * @return the {@link CreationResult} built with the provided information
+         */
         public ImmutableCreationResult<T> build() {
             isBuilt = true;
             return new ImmutableCreationResult<>(this.result, this.mapBuilder.build());
