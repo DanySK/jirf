@@ -35,7 +35,6 @@ tasks.withType<Test> {
     }
 }
 
-
 group = "org.danilopianini"
 publishOnCentral {
     projectDescription.set("An advanced factory supporting implicit type conversions")
