@@ -23,7 +23,7 @@ dependencies {
     implementation(libs.guava)
     implementation(libs.commons.lang3)
     implementation("org.danilopianini:boilerplate:_")
-    implementation("org.jgrapht:jgrapht-core:_")
+    implementation(libs.jgrapht.core)
     testImplementation(libs.junit4)
 }
 
