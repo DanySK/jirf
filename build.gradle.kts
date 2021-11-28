@@ -24,7 +24,7 @@ dependencies {
     implementation("org.apache.commons:commons-lang3:_")
     implementation("org.danilopianini:boilerplate:_")
     implementation("org.jgrapht:jgrapht-core:_")
-    testImplementation("junit:junit:_")
+    testImplementation(libs.junit4)
 }
 
 tasks.withType<Test> {
