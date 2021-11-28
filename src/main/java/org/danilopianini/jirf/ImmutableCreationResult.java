@@ -15,7 +15,7 @@ import java.util.Optional;
  * Immutable implementation of {@link CreationResult}
  * (of course, if T is mutable, the object state can be indirectly mutated).
  *
- * @param <T> the creation result
+ * @param <T> the created object type
  */
 public final class ImmutableCreationResult<T> implements CreationResult<T>, Serializable {
 
@@ -75,6 +75,11 @@ public final class ImmutableCreationResult<T> implements CreationResult<T>, Seri
         return exceptions;
     }
 
+    /**
+     * Builder for an {@link ImmutableCreationResult}
+     *
+     * @param <T> the created object type
+     */
     public static final class Builder<T> {
 
         private boolean isBuilt;
