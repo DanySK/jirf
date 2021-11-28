@@ -1,5 +1,5 @@
 #!/bin/bash
 set -e
-./gradlew publishAllPublicationsToCentralS01Repository
+./gradlew closeJava
 # Publish on GitHub. Fails due to overwritings, so it's ok to give up
 ./gradlew publishAllPublicationsToGithubRepository --continue || true
