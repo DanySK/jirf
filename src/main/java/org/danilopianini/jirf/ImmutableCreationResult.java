@@ -7,30 +7,37 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import java.util.Optional;
 
-public final class ImmutableCreationResult<T> implements CreationResult<T> {
+/**
+ * Immutable implementation of {@link CreationResult}
+ * (of course, if T is mutable, the object state can be indirectly mutated).
+ *
+ * @param <T> the creation result
+ */
+public final class ImmutableCreationResult<T> implements CreationResult<T>, Serializable {
 
-    private final Optional<T> result;
+    private final T result;
     private final ImmutableMap<Constructor<T>, InstancingImpossibleException> exceptions;
 
     private ImmutableCreationResult(
         @Nullable final T result,
         @Nonnull final ImmutableMap<Constructor<T>, InstancingImpossibleException> exceptions
     ) {
-        this.result = Optional.ofNullable(result);
+        this.result = result;
         this.exceptions = exceptions;
     }
 
     @Override
     public Optional<T> getCreatedObject() {
-        return result;
+        return Optional.ofNullable(result);
     }
 
     @Override
     public T getCreatedObjectOrThrowException() {
-        return result.orElseThrow(() -> {
+        return getCreatedObject().orElseThrow(() -> {
             final var exception = new RuntimeException();
             for (final var entry: exceptions.values()) {
                 exception.addSuppressed(entry);
@@ -41,6 +48,7 @@ public final class ImmutableCreationResult<T> implements CreationResult<T> {
 
     @Override
     public String toString() {
+        final var result = getCreatedObject();
         return "Result{" + (result.isPresent() ? result.get() : exceptions) + '}';
     }
 
