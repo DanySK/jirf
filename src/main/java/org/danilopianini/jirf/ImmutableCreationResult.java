@@ -19,6 +19,8 @@ import java.util.Optional;
  */
 public final class ImmutableCreationResult<T> implements CreationResult<T>, Serializable {
 
+    private static final long serialVersionUID = 0L;
+
     private final T result;
     private final ImmutableMap<Constructor<T>, InstancingImpossibleException> exceptions;
 
