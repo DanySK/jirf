@@ -4,6 +4,17 @@ import java.lang.reflect.Constructor;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * The result of the object creation process.
+ * In case of success, an {@link Optional} gets populated with the created object,
+ * the result is {@link Optional#empty()} instead.
+ *
+ * Since multiple constructors could have been tried before achieving success or having to fail,
+ * a {@link Map} mapping all the constructors to the error experienced on invocation is returned
+ * by getExceptions.
+ *
+ * @param <T> the created object type
+ */
 public interface CreationResult<T> {
 
     /**
