@@ -19,7 +19,7 @@ import static org.junit.Assert.assertTrue;
 /**
  *
  */
-public final class TestFactory {
+final class TestFactory {
 
     /**
      * 
@@ -146,14 +146,14 @@ public final class TestFactory {
     // CHECKSTYLE: NeedBraces OFF
     // CHECKSTYLE: JavadocType OFF
     // CHECKSTYLE: JavadocMethod OFF
-    public static final class MyObj {
-        public MyObj(final double a, final Double b, final byte c) { } // NOPMD
-        public MyObj(final String a, final double... b) { // NOPMD
+    static final class MyObj {
+        MyObj(final double a, final Double b, final byte c) { } // NOPMD
+        MyObj(final String a, final double... b) { // NOPMD
             for (int i = 0; i < b.length; i++); // NOPMD
         }
     }
-    public static final class ReproduceGPSTrace {
-        public ReproduceGPSTrace(
+    static final class ReproduceGPSTrace {
+        ReproduceGPSTrace(
             final Calendar calendar,
             final TimeZone timezone,
             final String path,
@@ -164,7 +164,7 @@ public final class TestFactory {
             this(calendar, timezone, 0, path, cycle, normalizer, normalizerArgs);
         }
 
-        public ReproduceGPSTrace(
+        ReproduceGPSTrace(
             final Calendar calendar,
             final TimeZone timezone,
             final double speed,
