@@ -7,7 +7,6 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import java.util.Optional;
 
@@ -17,9 +16,7 @@ import java.util.Optional;
  *
  * @param <T> the created object type
  */
-public final class ImmutableCreationResult<T> implements CreationResult<T>, Serializable {
-
-    private static final long serialVersionUID = 0L;
+public final class ImmutableCreationResult<T> implements CreationResult<T> {
 
     private final T result;
     private final ImmutableMap<Constructor<T>, InstancingImpossibleException> exceptions;
