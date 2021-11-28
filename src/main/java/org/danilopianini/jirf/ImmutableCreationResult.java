@@ -83,7 +83,8 @@ public final class ImmutableCreationResult<T> implements CreationResult<T>, Seri
     public static final class Builder<T> {
 
         private boolean isBuilt;
-        private final ImmutableMap.Builder<Constructor<T>, InstancingImpossibleException> mapBuilder = new ImmutableMap.Builder<>();
+        private final ImmutableMap.Builder<Constructor<T>, InstancingImpossibleException> mapBuilder =
+            new ImmutableMap.Builder<>();
         private T result;
 
         /**
