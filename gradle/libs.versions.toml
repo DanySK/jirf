@@ -1,6 +1,7 @@
 [versions]
 
 [libraries]
+commons-lang3 = "org.apache.commons:commons-lang3:3.12.0"
 guava = "com.google.guava:guava:31.0-jre"
 junit4 = "junit:junit:4.13.2"
 spotbugs-annotations = "com.github.spotbugs:spotbugs-annotations:4.4.1"

@@ -21,7 +21,7 @@ multiJvm {
 dependencies {
     compileOnly(libs.spotbugs.annotations)
     implementation(libs.guava)
-    implementation("org.apache.commons:commons-lang3:_")
+    implementation(libs.commons.lang3)
     implementation("org.danilopianini:boilerplate:_")
     implementation("org.jgrapht:jgrapht-core:_")
     testImplementation(libs.junit4)
