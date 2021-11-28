@@ -112,7 +112,7 @@ public final class ImmutableCreationResult<T> implements CreationResult<T>, Seri
 
         public ImmutableCreationResult<T> build() {
             isBuilt = true;
-            return new ImmutableCreationResult<T>(this.result, this.mapBuilder.build());
+            return new ImmutableCreationResult<>(this.result, this.mapBuilder.build());
         }
     }
 }
