@@ -8,13 +8,19 @@ plugins {
     pmd
     checkstyle
     id("org.jlleitschuh.gradle.ktlint")
-    signing
-    `maven-publish`
-    id("org.danilopianini.publish-on-central")
+//    alias(libs.plugins.java.qa)
+//    alias(libs.plugins.kotlin.qa)
+    alias(libs.plugins.publishOnCentral)
+    alias(libs.plugins.multiJvmTesting)
+    alias(libs.plugins.taskTree)
 }
 
 repositories {
     mavenCentral()
+}
+
+multiJvm {
+    jvmVersionForCompilation.set(11)
 }
 
 dependencies {
@@ -53,6 +59,7 @@ tasks.withType<com.github.spotbugs.snom.SpotBugsTask> {
 pmd {
     ruleSets = listOf()
     ruleSetConfig = resources.text.fromFile("${project.rootProject.projectDir}/config/pmd/pmd.xml")
+    maxFailures.set(2)
 }
 checkstyle {
     maxErrors = 0
