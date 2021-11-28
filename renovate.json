@@ -2,5 +2,17 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "local>DanySK/renovate-config"
+  ],
+  "packageRules": [
+    {
+      "description": "Trigger a patch update on some dependencies",
+      "matchPackageNames": [
+        "com.google.guava:guava",
+        "org.danilopianini:boilerplate",
+        "org.apache.commons:commons-lang3",
+        "org.jgrapht:jgrapht-core"
+      ],
+      "semanticCommitType": "fix"
+    }
   ]
 }
