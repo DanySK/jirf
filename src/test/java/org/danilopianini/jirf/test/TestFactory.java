@@ -19,7 +19,7 @@ import static org.junit.Assert.assertTrue;
 /**
  *
  */
-final class TestFactory {
+public final class TestFactory {
 
     /**
      * 
@@ -129,6 +129,9 @@ final class TestFactory {
         Assert.assertFalse(bigInteger2.getExceptions().isEmpty());
     }
 
+    /**
+     *
+     */
     @Test
     public void testVarArgsWithSingletons() {
         final Factory f = new FactoryBuilder()
@@ -146,14 +149,14 @@ final class TestFactory {
     // CHECKSTYLE: NeedBraces OFF
     // CHECKSTYLE: JavadocType OFF
     // CHECKSTYLE: JavadocMethod OFF
-    static final class MyObj {
-        MyObj(final double a, final Double b, final byte c) { } // NOPMD
-        MyObj(final String a, final double... b) { // NOPMD
+    public static final class MyObj {
+        public MyObj(final double a, final Double b, final byte c) { } // NOPMD
+        public MyObj(final String a, final double... b) { // NOPMD
             for (int i = 0; i < b.length; i++); // NOPMD
         }
     }
-    static final class ReproduceGPSTrace {
-        ReproduceGPSTrace(
+    public static final class ReproduceGPSTrace {
+        public ReproduceGPSTrace(
             final Calendar calendar,
             final TimeZone timezone,
             final String path,
@@ -164,7 +167,7 @@ final class TestFactory {
             this(calendar, timezone, 0, path, cycle, normalizer, normalizerArgs);
         }
 
-        ReproduceGPSTrace(
+        public ReproduceGPSTrace(
             final Calendar calendar,
             final TimeZone timezone,
             final double speed,
