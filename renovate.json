@@ -12,7 +12,7 @@
         "org.apache.commons:commons-lang3",
         "org.jgrapht:jgrapht-core"
       ],
-      "semanticCommitType": "fix"
+      "semanticCommitScope": "core-deps"
     }
   ]
 }
