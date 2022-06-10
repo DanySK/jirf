@@ -3,6 +3,7 @@ package org.danilopianini.jirf;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -31,6 +32,7 @@ final class FactoryImpl implements Factory {
     private final Map<Class<?>, Object> singletons = new LinkedHashMap<>();
     private final Graph<Class<?>, FunctionEdge> implicits = new DefaultDirectedGraph<>(null, null, false);
     private static final String UNCHECKED = "unchecked";
+
     /*
      * The returned Pair is actually used somewhat like a functional Either
      */
@@ -38,6 +40,10 @@ final class FactoryImpl implements Factory {
         CacheBuilder.newBuilder()
             .build(new CacheLoader<>() {
                 @SuppressWarnings("unchecked")
+                @SuppressFBWarnings(
+                    value = "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
+                    justification = "False positive, there's no throws clause"
+                )
                 @Override
                 public List<Pair<Constructor<?>, InstancingImpossibleException>> load(final Pair<Class<?>, List<Class<?>>> key) {
                     final Constructor<Object>[] constructors = (Constructor<Object>[]) key.getKey().getConstructors();
