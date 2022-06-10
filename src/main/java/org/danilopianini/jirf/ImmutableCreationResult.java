@@ -8,6 +8,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.lang.reflect.Constructor;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 /**
@@ -37,7 +38,7 @@ public final class ImmutableCreationResult<T> implements CreationResult<T> {
     @Override
     public T getCreatedObjectOrThrowException() {
         return getCreatedObject().orElseThrow(() -> {
-            final var exception = new RuntimeException();
+            final var exception = new NoSuchElementException();
             for (final var entry: exceptions.values()) {
                 exception.addSuppressed(entry);
             }
