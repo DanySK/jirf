@@ -12,6 +12,7 @@ import org.jgrapht.GraphPath;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 import org.jgrapht.graph.DefaultDirectedGraph;
 
+import javax.annotation.Nonnull;
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.util.Arrays;
@@ -44,8 +45,11 @@ final class FactoryImpl implements Factory {
                     value = "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
                     justification = "False positive, there's no throws clause"
                 )
+                @Nonnull
                 @Override
-                public List<Pair<Constructor<?>, InstancingImpossibleException>> load(final Pair<Class<?>, List<Class<?>>> key) {
+                public List<Pair<Constructor<?>, InstancingImpossibleException>> load(
+                    @Nonnull final Pair<Class<?>, List<Class<?>>> key
+                ) {
                     final Constructor<Object>[] constructors = (Constructor<Object>[]) key.getKey().getConstructors();
                     final List<Class<?>> argumentTypes = key.getValue();
                     return Arrays.stream(constructors)
