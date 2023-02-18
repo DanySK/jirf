@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.concurrent.Semaphore;
 import java.util.function.Function;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.apache.commons.lang3.ArrayUtils;
 import org.danilopianini.util.PrimitiveArrays;
 
@@ -245,6 +246,7 @@ public class FactoryBuilder {
     /**
      * @return the configured factory. Must be called exactly once.
      */
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "This method must return the built object")
     public Factory build() {
         checkConsumed();
         return factory;
