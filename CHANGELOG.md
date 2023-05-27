@@ -1,3 +1,25 @@
+## [0.4.9](https://github.com/DanySK/jirf/compare/0.4.8...0.4.9) (2023-05-27)
+
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.5 ([777b52c](https://github.com/DanySK/jirf/commit/777b52c861889d06b10f4c4c1ae78c61076597eb))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.6 ([d38dd2d](https://github.com/DanySK/jirf/commit/d38dd2d9d367a9b18196b9c3580ae0c5aa8d85fa))
+
+
+### Dependency updates
+
+* **core-deps:** update dependency com.google.guava:guava to v32 ([d1be8a9](https://github.com/DanySK/jirf/commit/d1be8a9bea65e51883f0ee9f1acac542ab5776e1))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.26 ([faa1962](https://github.com/DanySK/jirf/commit/faa1962e17b0f1d51a3c4f891df5e36c0c6b4636))
+* **deps:** update plugin com.gradle.enterprise to v3.13.1 ([6546633](https://github.com/DanySK/jirf/commit/654663350e10404c4d19b4b66ff4a1eedc472de9))
+* **deps:** update plugin com.gradle.enterprise to v3.13.2 ([c27220c](https://github.com/DanySK/jirf/commit/c27220c3c791fc0936608650b913bf0991ade701))
+* **deps:** update plugin com.gradle.enterprise to v3.13.3 ([595c477](https://github.com/DanySK/jirf/commit/595c47702e16f68338d166deb2259a2113b26d15))
+* **deps:** update plugin java-qa to v1.9.0 ([7dc5b0d](https://github.com/DanySK/jirf/commit/7dc5b0d6aded81fd49bc83a4a0453fccfecccb11))
+* **deps:** update plugin kotlin-qa to v0.41.0 ([560d9e2](https://github.com/DanySK/jirf/commit/560d9e234e01acc0b348e7669dc16158241396f3))
+* **deps:** update plugin kotlin-qa to v0.42.0 ([b6f2733](https://github.com/DanySK/jirf/commit/b6f273399812cf55e5bde308fde48f814d25d4fc))
+* **deps:** update plugin multijvmtesting to v0.5.0 ([e3fdc64](https://github.com/DanySK/jirf/commit/e3fdc647e5471d02b62c3b0ea1440c9b5cc4212d))
+* **deps:** update plugin multijvmtesting to v0.5.1 ([fa8d4b0](https://github.com/DanySK/jirf/commit/fa8d4b0dd95c6ac685d37d8758422ae711a63e63))
+
 ## [0.4.8](https://github.com/DanySK/jirf/compare/0.4.7...0.4.8) (2023-05-02)
 
 
