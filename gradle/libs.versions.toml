@@ -3,7 +3,7 @@
 [libraries]
 boilerplate = "org.danilopianini:boilerplate:0.2.2"
 commons-lang3 = "org.apache.commons:commons-lang3:3.12.0"
-guava = "com.google.guava:guava:32.0.0-jre"
+guava = "com.google.guava:guava:32.0.1-jre"
 jgrapht-core = "org.jgrapht:jgrapht-core:1.5.2"
 junit4 = "junit:junit:4.13.2"
 spotbugs-annotations = "com.github.spotbugs:spotbugs-annotations:4.7.3"
