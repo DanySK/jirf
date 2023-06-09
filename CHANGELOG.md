@@ -1,3 +1,22 @@
+## [0.4.10](https://github.com/DanySK/jirf/compare/0.4.9...0.4.10) (2023-06-09)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency com.google.guava:guava to v32.0.1-jre ([0f3dd32](https://github.com/DanySK/jirf/commit/0f3dd32473d0ae0631b8540af8bf16fbe1e401e4))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.27 ([c5a99bc](https://github.com/DanySK/jirf/commit/c5a99bcaed910b70231301f60667d3c166bcda33))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.28 ([0ad34fa](https://github.com/DanySK/jirf/commit/0ad34faaafba1f802bd04473ddaf0099b4e0ab4a))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.29 ([313f268](https://github.com/DanySK/jirf/commit/313f2684a452d508d4aa9beb3fcf7bd721464e58))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.30 ([2678830](https://github.com/DanySK/jirf/commit/267883023741af04d49623ab8ce65ff75d83150a))
+* **deps:** update plugin gitsemver to v1.1.10 ([0914f60](https://github.com/DanySK/jirf/commit/0914f6053f072c7e5f74595f75ff7bcb186b6aca))
+* **deps:** update plugin java-qa to v1.10.0 ([ed64e43](https://github.com/DanySK/jirf/commit/ed64e4316bfec64a1f12d28c54de90a41a79fa12))
+* **deps:** update plugin kotlin-qa to v0.42.1 ([c146ffc](https://github.com/DanySK/jirf/commit/c146ffcf53b37b79562413f718ba5ff35e7fc9be))
+* **deps:** update plugin kotlin-qa to v0.43.0 ([9d24bb6](https://github.com/DanySK/jirf/commit/9d24bb6b6b3ee02e7cc0806968b844d6f1cc0855))
+* **deps:** update plugin kotlin-qa to v0.44.0 ([1fd72f9](https://github.com/DanySK/jirf/commit/1fd72f96fcefc598d8ca9a92309546e718c47ae9))
+* **deps:** update plugin multijvmtesting to v0.5.2 ([16bd3f7](https://github.com/DanySK/jirf/commit/16bd3f7c956a97ddd15c7cf0d1f2375e5ace3ec1))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.8 ([32403b5](https://github.com/DanySK/jirf/commit/32403b57019f7378452d8443b5d154a31efac5b4))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.9 ([441209f](https://github.com/DanySK/jirf/commit/441209f37282aae656b57b7da7880c2dc093d8ca))
+
 ## [0.4.9](https://github.com/DanySK/jirf/compare/0.4.8...0.4.9) (2023-05-27)
 
 
