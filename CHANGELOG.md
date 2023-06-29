@@ -1,3 +1,26 @@
+## [0.4.11](https://github.com/DanySK/jirf/compare/0.4.10...0.4.11) (2023-06-29)
+
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v3.5.3 ([b6efc85](https://github.com/DanySK/jirf/commit/b6efc85b5efc6038674f45a7d5d2e7bb904451b8))
+* **deps:** update danysk/action-checkout action to v0.2.10 ([b930edd](https://github.com/DanySK/jirf/commit/b930edd5ac5c68b4b6dabf6c9e652c3f20ba68d8))
+
+
+### Dependency updates
+
+* **core-deps:** update dependency com.google.guava:guava to v32.1.0-jre ([7a7292e](https://github.com/DanySK/jirf/commit/7a7292e91b8a59489070fc41fdc2aa127dc57222))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.32 ([3186e3d](https://github.com/DanySK/jirf/commit/3186e3d3c74e821e219df192c19a12c126725cd0))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.35 ([a463bbf](https://github.com/DanySK/jirf/commit/a463bbf60f552e0642b4260247e8bd72d2a58e7d))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.36 ([5c67789](https://github.com/DanySK/jirf/commit/5c677896f581d4cfbc5a944ff16d1442f41776c1))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.37 ([0ecb616](https://github.com/DanySK/jirf/commit/0ecb616bb5e45006e9088c263084969d5a1e8c1f))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.38 ([7e1502e](https://github.com/DanySK/jirf/commit/7e1502eb6e294d1776c9e9738b7115d3085c6eb6))
+* **deps:** update plugin com.gradle.enterprise to v3.13.4 ([e6da24e](https://github.com/DanySK/jirf/commit/e6da24e71692db143239b12c8d82c58d96972feb))
+* **deps:** update plugin java-qa to v1.11.0 ([021fe0f](https://github.com/DanySK/jirf/commit/021fe0f7b48bcea438843bfc5936816d1662c27a))
+* **deps:** update plugin kotlin-qa to v0.45.0 ([9252a1e](https://github.com/DanySK/jirf/commit/9252a1eee99af5b141ebb5a21c42a8b00f41f52f))
+* **deps:** update plugin kotlin-qa to v0.46.0 ([601ce98](https://github.com/DanySK/jirf/commit/601ce9883c085440b64b909e7523c239c97e2a93))
+* **deps:** update plugin publishoncentral to v5.0.7 ([be4357f](https://github.com/DanySK/jirf/commit/be4357f8aa3b6a9b58d46f17ac1e63850c2cebe6))
+
 ## [0.4.10](https://github.com/DanySK/jirf/compare/0.4.9...0.4.10) (2023-06-09)
 
 
