@@ -1,3 +1,10 @@
+## [0.4.12](https://github.com/DanySK/jirf/compare/0.4.11...0.4.12) (2023-06-30)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency com.google.guava:guava to v32.1.1-jre ([c52834e](https://github.com/DanySK/jirf/commit/c52834edf7c42a08a23a8f07b8d1fbc61d35acdc))
+
 ## [0.4.11](https://github.com/DanySK/jirf/compare/0.4.10...0.4.11) (2023-06-29)
 
 
