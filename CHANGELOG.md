@@ -1,3 +1,12 @@
+## [0.4.14](https://github.com/DanySK/jirf/compare/0.4.13...0.4.14) (2023-07-31)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency com.google.guava:guava to v32.1.2-jre ([dde5a13](https://github.com/DanySK/jirf/commit/dde5a130f2fff2151a583d5d3026c2b64488b850))
+* **deps:** update plugin java-qa to v1.12.0 ([968531a](https://github.com/DanySK/jirf/commit/968531a8a986c0938de34f1bfbe7db41daf0f51e))
+* **deps:** update plugin kotlin-qa to v0.48.0 ([cae3468](https://github.com/DanySK/jirf/commit/cae3468c067338c500978274ca8446d50a37e0c4))
+
 ## [0.4.13](https://github.com/DanySK/jirf/compare/0.4.12...0.4.13) (2023-07-28)
 
 
