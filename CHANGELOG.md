@@ -1,3 +1,62 @@
+## [0.4.15](https://github.com/DanySK/jirf/compare/0.4.14...0.4.15) (2023-10-11)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency com.google.guava:guava to v32.1.3-jre ([154a400](https://github.com/DanySK/jirf/commit/154a400c98a971fdc55a58e10e14caaeac048986))
+* **deps:** update dependency gradle to v8.3 ([65c59d3](https://github.com/DanySK/jirf/commit/65c59d3ed8de22a0d4112f04bdb80c2c84390901))
+* **deps:** update dependency gradle to v8.4 ([53df8ae](https://github.com/DanySK/jirf/commit/53df8ae50de668b52d39906139d9c4c8a8ed1edd))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.44 ([6805769](https://github.com/DanySK/jirf/commit/6805769a7b99a05e3cc74ea2514b25c7d7647267))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.45 ([443d9d4](https://github.com/DanySK/jirf/commit/443d9d47ef45e13fb33b33ada920e36d2c88d786))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.46 ([be4f153](https://github.com/DanySK/jirf/commit/be4f153c2008c5fb0b1dd119653c3054f908f148))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.47 ([1ab9a66](https://github.com/DanySK/jirf/commit/1ab9a6682cf6d2bb58303f913c19d1610ccd8a39))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.48 ([4657899](https://github.com/DanySK/jirf/commit/4657899cc874c01994511b261b0be6aa91f4d580))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.49 ([b89d9f5](https://github.com/DanySK/jirf/commit/b89d9f57cfe5c2ac8cf790f87a68e998726c1527))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.50 ([a8675b1](https://github.com/DanySK/jirf/commit/a8675b12c238b23280b988cf5dd52bb5504fb5d5))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.51 ([a66970c](https://github.com/DanySK/jirf/commit/a66970c69128f6007d60221cf49942e8b751c181))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.52 ([dd3fb2d](https://github.com/DanySK/jirf/commit/dd3fb2deaea271890849e6b05bd0f8e6681dd9fa))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.53 ([b682e69](https://github.com/DanySK/jirf/commit/b682e692f38a4190786f6040d66c4eb8e2f09173))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.54 ([e610895](https://github.com/DanySK/jirf/commit/e61089541761cc70f7785ceec1b76df51dc1515b))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.55 ([91ccfe7](https://github.com/DanySK/jirf/commit/91ccfe7fd728380fe11e2dde662005b183f484e4))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.65 ([92b351a](https://github.com/DanySK/jirf/commit/92b351a194c1a6589342d29f7abb4158de5dad67))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.66 ([4b96465](https://github.com/DanySK/jirf/commit/4b96465204ca7afe1a515a84d8720f3b425b6a01))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.67 ([e45c18c](https://github.com/DanySK/jirf/commit/e45c18cf9886fcd3ecea8bee130a3b9da11b3695))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.68 ([9f93870](https://github.com/DanySK/jirf/commit/9f93870bc7b5e0c9c73120651097d31e98004291))
+* **deps:** update node.js to 18.18 ([b6716b0](https://github.com/DanySK/jirf/commit/b6716b0c5ee4b8219d960f6ac93c4d5cfcd526b6))
+* **deps:** update plugin com.gradle.enterprise to v3.15 ([875ff19](https://github.com/DanySK/jirf/commit/875ff19d5bbb252949e52bb9e150f202a12f3032))
+* **deps:** update plugin com.gradle.enterprise to v3.15.1 ([fe49c60](https://github.com/DanySK/jirf/commit/fe49c6003a47199d13445f31560be1e7e10ea16d))
+* **deps:** update plugin java-qa to v1.13.0 ([75f7ec0](https://github.com/DanySK/jirf/commit/75f7ec0df8ad67cee6e296945af3190784daeb5d))
+* **deps:** update plugin java-qa to v1.14.0 ([55b395c](https://github.com/DanySK/jirf/commit/55b395cd80ac52f29697f7e453905f6bea33e5b2))
+* **deps:** update plugin java-qa to v1.15.0 ([12428b8](https://github.com/DanySK/jirf/commit/12428b8971ea68143a82b5fe24796db2a1454a9a))
+* **deps:** update plugin java-qa to v1.16.0 ([0c5e326](https://github.com/DanySK/jirf/commit/0c5e326626d1b25028afa2d0946d909d0fd4786f))
+* **deps:** update plugin java-qa to v1.17.0 ([d3f988a](https://github.com/DanySK/jirf/commit/d3f988a1afd28a4db21861168a838e87fd6d8655))
+* **deps:** update plugin java-qa to v1.18.0 ([db61f80](https://github.com/DanySK/jirf/commit/db61f808ab39ae4be3dff39a86367ca7f0fee8c7))
+* **deps:** update plugin java-qa to v1.19.0 ([35fb6f4](https://github.com/DanySK/jirf/commit/35fb6f403c81a1d71f01488b6a72a03c2446add5))
+* **deps:** update plugin kotlin-qa to v0.49.0 ([fccc7fa](https://github.com/DanySK/jirf/commit/fccc7fa9df3676a3d5f85713b4cd070b31d05b0c))
+* **deps:** update plugin kotlin-qa to v0.49.1 ([da8fe57](https://github.com/DanySK/jirf/commit/da8fe57a1e0e511601d71f5d57f55e13cefa7a0a))
+* **deps:** update plugin kotlin-qa to v0.50.0 ([16e3bbe](https://github.com/DanySK/jirf/commit/16e3bbe4e2ee80a2e38575ff62e40a4a67b70d6f))
+* **deps:** update plugin kotlin-qa to v0.51.0 ([db40adf](https://github.com/DanySK/jirf/commit/db40adfd2747c9773d80ab05d4ee1586f7e8bcb1))
+* **deps:** update plugin multijvmtesting to v0.5.5 ([7ec70ec](https://github.com/DanySK/jirf/commit/7ec70ec3499904c34bd6e2b0299c1b48cfa9e741))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.10 ([9d75216](https://github.com/DanySK/jirf/commit/9d7521672a217da5c4d0df679eea6cf9fa6cf4d5))
+* **deps:** update plugin org.gradle.toolchains.foojay-resolver-convention to v0.7.0 ([1f68099](https://github.com/DanySK/jirf/commit/1f68099f8c9c5d8b7e729f3f361ac06596b4b4d4))
+* **deps:** update plugin publishoncentral to v5.0.11 ([45a19ca](https://github.com/DanySK/jirf/commit/45a19ca33d194cf8c919ef13dd14177a3364543f))
+* **deps:** update plugin publishoncentral to v5.0.12 ([82d5f92](https://github.com/DanySK/jirf/commit/82d5f92ea6ed4efc82303d9bff9a0e76dca34d40))
+* **deps:** update plugin publishoncentral to v5.0.13 ([c75f699](https://github.com/DanySK/jirf/commit/c75f69900afeca3c980f2099692eb57264e3a05e))
+* **deps:** update plugin publishoncentral to v5.0.14 ([80ebea7](https://github.com/DanySK/jirf/commit/80ebea7f51c77d1863299964a8154ea6193e7b6e))
+* **deps:** update plugin publishoncentral to v5.0.15 ([5e8c413](https://github.com/DanySK/jirf/commit/5e8c4133085258eb3c7ead77d4993460595158f8))
+
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v3.6.0 ([553dfef](https://github.com/DanySK/jirf/commit/553dfeff0b72f138447b542f779b101c6891433c))
+* **deps:** update actions/checkout action to v4 ([9511619](https://github.com/DanySK/jirf/commit/951161915b396dada57cc22ec13595e92ba54695))
+* **deps:** update actions/checkout action to v4.1.0 ([e13732e](https://github.com/DanySK/jirf/commit/e13732e81b58c7646e3b8677734d53ddb3c9c6e4))
+* **deps:** update danysk/action-checkout action to v0.2.11 ([d4dea42](https://github.com/DanySK/jirf/commit/d4dea4223fcf021e5356218d7522c3da091f6141))
+* **deps:** update danysk/action-checkout action to v0.2.12 ([a93365e](https://github.com/DanySK/jirf/commit/a93365eb1fe7e0cce367ca233c21c308812bfb39))
+* **deps:** update danysk/action-checkout action to v0.2.13 ([3ba0067](https://github.com/DanySK/jirf/commit/3ba00673a3b043600d5fc49d3a68240e6dddbabf))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.10 ([ea0dc35](https://github.com/DanySK/jirf/commit/ea0dc3584c44aff4163a59646b86d04ea3a40bdf))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.9 ([a50809e](https://github.com/DanySK/jirf/commit/a50809e91d808115bbf579d430083ceb75c532dd))
+
 ## [0.4.14](https://github.com/DanySK/jirf/compare/0.4.13...0.4.14) (2023-07-31)
 
 
