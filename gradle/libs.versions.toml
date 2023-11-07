@@ -6,7 +6,7 @@ commons-lang3 = "org.apache.commons:commons-lang3:3.13.0"
 guava = "com.google.guava:guava:32.1.3-jre"
 jgrapht-core = "org.jgrapht:jgrapht-core:1.5.2"
 junit4 = "junit:junit:4.13.2"
-spotbugs-annotations = "com.github.spotbugs:spotbugs-annotations:4.8.0"
+spotbugs-annotations = "com.github.spotbugs:spotbugs-annotations:4.8.1"
 
 [plugins]
 gitSemVer = { id = "org.danilopianini.git-sensitive-semantic-versioning", version = "2.0.1" }
