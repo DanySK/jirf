@@ -1,3 +1,34 @@
+## [0.4.18](https://github.com/DanySK/jirf/compare/0.4.17...0.4.18) (2024-01-19)
+
+
+### Dependency updates
+
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.85 ([1380712](https://github.com/DanySK/jirf/commit/13807124f00a269760746c88e8377b7037a13e41))
+* **deps:** update node.js to 20.11 ([ef2f75e](https://github.com/DanySK/jirf/commit/ef2f75effae31cd58f55877317e8d119e3fb4b98))
+* **deps:** update plugin gitsemver to v2.0.5 ([6bffa8d](https://github.com/DanySK/jirf/commit/6bffa8d71955a62c6defda2ea6709332460273d2))
+* **deps:** update plugin java-qa to v1.31.1 ([95bdcd0](https://github.com/DanySK/jirf/commit/95bdcd0cab75d32f99af0ec3b33ca2306251d1d8))
+* **deps:** update plugin java-qa to v1.32.0 ([13c64e7](https://github.com/DanySK/jirf/commit/13c64e7cb49c3827a24c2007fc349557e6743b30))
+* **deps:** update plugin java-qa to v1.33.0 ([56cbde1](https://github.com/DanySK/jirf/commit/56cbde1aba4096bd566987d1e82968eb1f49e947))
+* **deps:** update plugin java-qa to v1.34.0 ([5a70258](https://github.com/DanySK/jirf/commit/5a702584274163b5cab54b723169de629d2ad0c7))
+* **deps:** update plugin kotlin-qa to v0.57.1 ([283b15c](https://github.com/DanySK/jirf/commit/283b15c5782588aa7ffe1a94f80e24f66f918e59))
+* **deps:** update plugin kotlin-qa to v0.58.0 ([376a0f5](https://github.com/DanySK/jirf/commit/376a0f5ff5f8e1e8510c7d79ef5653518dea6422))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.17 ([c9c0b31](https://github.com/DanySK/jirf/commit/c9c0b310beac35707ffc159907dddbb03c39659c))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.18 ([1bd1049](https://github.com/DanySK/jirf/commit/1bd1049b680fec46029613f177d05abf667fb9d5))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2 ([446cbb1](https://github.com/DanySK/jirf/commit/446cbb1e1e2b0b97485c9d63442e920b233f3c4a))
+* **deps:** update plugin org.gradle.toolchains.foojay-resolver-convention to v0.8.0 ([8ed5805](https://github.com/DanySK/jirf/commit/8ed58055f4a12859aeafd5a21253a9400f32e754))
+* **deps:** update plugin publishoncentral to v5.0.22 ([b6d1063](https://github.com/DanySK/jirf/commit/b6d1063c57d138bceb0a56d52680e7a4ee503f05))
+
+
+### Bug Fixes
+
+* fix unexpected NPE thrown when documenting how a constructor failed and trying to read the class of null ([0d6c71c](https://github.com/DanySK/jirf/commit/0d6c71cfb94854ff27025c2987b366e5e3949c76))
+
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.13 ([4000842](https://github.com/DanySK/jirf/commit/4000842679db18aa2ab6828c7c2f4d6af34c047b))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.14 ([2d76782](https://github.com/DanySK/jirf/commit/2d767820decec844850eda4d300183833c992afb))
+
 ## [0.4.17](https://github.com/DanySK/jirf/compare/0.4.16...0.4.17) (2023-12-19)
 
 
