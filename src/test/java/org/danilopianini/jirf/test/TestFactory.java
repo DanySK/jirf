@@ -1,9 +1,9 @@
 package org.danilopianini.jirf.test;
 
 import com.google.common.collect.ImmutableList;
+import org.danilopianini.jirf.CreationResult;
 import org.danilopianini.jirf.Factory;
 import org.danilopianini.jirf.FactoryBuilder;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.math.BigInteger;
@@ -13,7 +13,9 @@ import java.util.Objects;
 import java.util.TimeZone;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -115,18 +117,18 @@ public final class TestFactory {
                 .build();
         final Object o = new Object();
         f.registerSingleton(o);
-        Assert.assertSame(o, f.build(Object.class).getCreatedObjectOrThrowException());
+        assertSame(o, f.build(Object.class).getCreatedObjectOrThrowException());
         final BigInteger s = new BigInteger("25");
         f.registerSingleton(Number.class, Object.class, s);
-        Assert.assertSame(s, f.build(Number.class).getCreatedObjectOrThrowException());
-        Assert.assertSame(s, f.build(Object.class).getCreatedObjectOrThrowException());
+        assertSame(s, f.build(Number.class).getCreatedObjectOrThrowException());
+        assertSame(s, f.build(Object.class).getCreatedObjectOrThrowException());
         final var bigInteger = f.build(BigInteger.class);
         assertTrue(bigInteger.getCreatedObject().isEmpty());
         assertNotNull(bigInteger.getExceptions());
-        Assert.assertFalse(bigInteger.getExceptions().isEmpty());
+        assertFalse(bigInteger.getExceptions().isEmpty());
         final var bigInteger2 = f.build(BigInteger.class, "ciao");
         assertTrue(bigInteger2.getCreatedObject().isEmpty());
-        Assert.assertFalse(bigInteger2.getExceptions().isEmpty());
+        assertFalse(bigInteger2.getExceptions().isEmpty());
     }
 
     /**
@@ -143,6 +145,17 @@ public final class TestFactory {
         f.registerSingleton(Calendar.class, GregorianCalendar.getInstance());
         f.registerSingleton(TimeZone.class, TimeZone.getDefault());
         assertTrue(f.build(ReproduceGPSTrace.class, "gpsTrace", true, "AlignToSimulationTime").getCreatedObject().isPresent());
+    }
+
+    /**
+     * Makes sure that no unexpected exceptions are thrown when a null parameter is passed and the object construction
+     * correctly fails.
+     */
+    @Test
+    public void testErrorWhenNullIsAParameter() {
+        final Factory factory = new FactoryBuilder().build();
+        final CreationResult<MyObj> result = factory.build(MyObj.class, null, "foo");
+        assertFalse(result.getExceptions().isEmpty());
     }
 
     // CHECKSTYLE: EmptyStatement OFF

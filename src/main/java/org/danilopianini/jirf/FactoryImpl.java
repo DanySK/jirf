@@ -61,7 +61,7 @@ final class FactoryImpl implements Factory {
                                     it.score >= 0 ? null : new InstancingImpossibleException(
                                         it.constructor,
                                         "discarded because incompatible with provided parameters " + argumentTypes.stream()
-                                            .map(Class::getSimpleName)
+                                            .map(argType -> argType == null ? "null" : argType.getSimpleName())
                                             .collect(Collectors.toList())
                                     )
                                 )
