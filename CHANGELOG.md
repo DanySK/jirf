@@ -1,3 +1,54 @@
+## [0.4.20](https://github.com/DanySK/jirf/compare/0.4.19...0.4.20) (2024-05-02)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency com.google.guava:guava to v33.2.0-jre ([7a28a3a](https://github.com/DanySK/jirf/commit/7a28a3a4da91d96c0dce4104a6abcf07eb04b0a6))
+* **deps:** update dependency com.github.spotbugs:spotbugs-annotations to v4.8.4 ([5883090](https://github.com/DanySK/jirf/commit/58830901831914ff9930a91682f3c97bbfc2ea79))
+* **deps:** update dependency gradle to v8.7 ([9a80e4d](https://github.com/DanySK/jirf/commit/9a80e4d5eb457c7dcc74873a88bd97d2d991eca9))
+* **deps:** update node.js to 20.12 ([2330d65](https://github.com/DanySK/jirf/commit/2330d657e0fc1e8a61022762c200ffc66273cc13))
+* **deps:** update plugin com.gradle.enterprise to v3.17 ([5e84529](https://github.com/DanySK/jirf/commit/5e84529705fd876883337a5ec935c48602f9aea1))
+* **deps:** update plugin com.gradle.enterprise to v3.17.1 ([7fa16fa](https://github.com/DanySK/jirf/commit/7fa16fa7f2fc528be9256e7143d61a7bffe24546))
+* **deps:** update plugin com.gradle.enterprise to v3.17.2 ([09fb00f](https://github.com/DanySK/jirf/commit/09fb00f5889374385a0cdaf37ebe7715084abb9e))
+* **deps:** update plugin gitsemver to v3.1.4 ([ab49fc9](https://github.com/DanySK/jirf/commit/ab49fc9ff4edc01dc5cc27733e692ca59a10f60a))
+* **deps:** update plugin java-qa to v1.40.0 ([1f0747c](https://github.com/DanySK/jirf/commit/1f0747cd27ddd2238316f5e4f9bc5687bd3ac62a))
+* **deps:** update plugin java-qa to v1.41.0 ([5583092](https://github.com/DanySK/jirf/commit/55830928b3d4e5dd089189963a15955184eec7bf))
+* **deps:** update plugin java-qa to v1.42.0 ([15d26ee](https://github.com/DanySK/jirf/commit/15d26ee266273077b658d916fd4fbe226820c7c7))
+* **deps:** update plugin java-qa to v1.43.0 ([9941ece](https://github.com/DanySK/jirf/commit/9941ece715ccf3b57668b8fb3c65b90e352e3f01))
+* **deps:** update plugin java-qa to v1.43.1 ([5fd8328](https://github.com/DanySK/jirf/commit/5fd8328080cb87043de4ad7e46f5a87375fca3c3))
+* **deps:** update plugin java-qa to v1.44.0 ([917e107](https://github.com/DanySK/jirf/commit/917e10796eb73213e0dd601828efbd8616367dae))
+* **deps:** update plugin java-qa to v1.45.0 ([9ad9a06](https://github.com/DanySK/jirf/commit/9ad9a0661103358aae49a2bcb61d01dcc5f9826b))
+* **deps:** update plugin java-qa to v1.46.0 ([47e2557](https://github.com/DanySK/jirf/commit/47e2557159001e98df8c96fdd4012a2f9651d19d))
+* **deps:** update plugin java-qa to v1.46.1 ([d32a810](https://github.com/DanySK/jirf/commit/d32a810a73450e73596f3d59bf10712d03258647))
+* **deps:** update plugin java-qa to v1.47.0 ([bfed1b6](https://github.com/DanySK/jirf/commit/bfed1b685721d4c22bad1b5d8f94021fa4ce0e39))
+* **deps:** update plugin java-qa to v1.48.0 ([0303db7](https://github.com/DanySK/jirf/commit/0303db72d5aef7e24cc9f3784092b413ce79bbc7))
+* **deps:** update plugin kotlin-qa to v0.60.4 ([2396f6e](https://github.com/DanySK/jirf/commit/2396f6ee573c49378438090cda0058746c759bef))
+* **deps:** update plugin kotlin-qa to v0.61.0 ([12704af](https://github.com/DanySK/jirf/commit/12704afcde8a945a68624bd17c84fdb4f7d4af96))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.4 ([e77e940](https://github.com/DanySK/jirf/commit/e77e940495d85fbd4eb52a6e1fb6f2fea1c9c8bc))
+* **deps:** update plugin publishoncentral to v5.0.26 ([052e83f](https://github.com/DanySK/jirf/commit/052e83f64d5e31b692ee206179d30f816213a606))
+* **deps:** update plugin publishoncentral to v5.1.0 ([8b89812](https://github.com/DanySK/jirf/commit/8b89812b77044a91b5f4fe492008987274f55dd9))
+* **deps:** update plugin tasktree to v3 ([62236a2](https://github.com/DanySK/jirf/commit/62236a2f4127c17d14c0303b6eadb8afd4891281))
+
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v4.1.3 ([868f7cc](https://github.com/DanySK/jirf/commit/868f7cce2e318827c91ddfb9b8c2025bcf747f39))
+* **deps:** update actions/checkout action to v4.1.4 ([f27c37a](https://github.com/DanySK/jirf/commit/f27c37a47b8691702fdb7167a020b611d708385c))
+* **deps:** update danysk/action-checkout action to v0.2.15 ([ae22702](https://github.com/DanySK/jirf/commit/ae22702a31a9cb92b2d36186ff0225cf5f989c4f))
+* **deps:** update danysk/action-checkout action to v0.2.16 ([de3e42d](https://github.com/DanySK/jirf/commit/de3e42d475e6309ad5bf0aa7ed660a9b5a90713c))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.10 ([8c1bc46](https://github.com/DanySK/jirf/commit/8c1bc461197efbb2be48f6548d89c342e1c1e681))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.11 ([1c9c73a](https://github.com/DanySK/jirf/commit/1c9c73a203cb7f825e5dfad7c485197c63cef98f))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.12 ([06c0937](https://github.com/DanySK/jirf/commit/06c0937513a8b20394b44de319f2813d3ae21c62))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.13 ([acd96e7](https://github.com/DanySK/jirf/commit/acd96e7ae3f7d6714d7fa2217cdd34269d793033))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.14 ([d56b61c](https://github.com/DanySK/jirf/commit/d56b61c8319b2c7583792f41dd33e9a88d2c35d3))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.15 ([3b2bb19](https://github.com/DanySK/jirf/commit/3b2bb199998a44a050163549521ec63586f6131e))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.16 ([d5c58c0](https://github.com/DanySK/jirf/commit/d5c58c01de5cac508e83d2fdeb0e203eb8c32cab))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.17 ([cb05284](https://github.com/DanySK/jirf/commit/cb05284c41c81f3c1907d8dcd78fd3b59c606577))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.18 ([a1d566c](https://github.com/DanySK/jirf/commit/a1d566c4dde30bebb9b42e54b6f12b3ed2b7661f))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.8 ([f181fad](https://github.com/DanySK/jirf/commit/f181fad02e5d71b135eeb70cb85288cf97322897))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.9 ([645bbcc](https://github.com/DanySK/jirf/commit/645bbcce496f0e28e54fb84dd9cee8936d04f827))
+* **mergify:** inherit the account configuration ([1cda77e](https://github.com/DanySK/jirf/commit/1cda77ef320018c0a8b33dfda43e35b723b1a1e2))
+
 ## [0.4.19](https://github.com/DanySK/jirf/compare/0.4.18...0.4.19) (2024-03-13)
 
 
