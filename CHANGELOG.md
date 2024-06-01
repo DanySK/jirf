@@ -1,3 +1,38 @@
+## [0.4.21](https://github.com/DanySK/jirf/compare/0.4.20...0.4.21) (2024-06-01)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency com.google.guava:guava to v33.2.1-jre ([e5cd110](https://github.com/DanySK/jirf/commit/e5cd110c4319fa7e3a2016ebbf996b19fe26174e))
+* **deps:** update dependency com.github.spotbugs:spotbugs-annotations to v4.8.5 ([9e1877b](https://github.com/DanySK/jirf/commit/9e1877bcb367a85ae8234cee36414853eb682fac))
+* **deps:** update dependency gradle to v8.8 ([897cf54](https://github.com/DanySK/jirf/commit/897cf54a22a01a9e4fca0b9036e2ebe55f896d29))
+* **deps:** update node.js to 20.13 ([96a3b51](https://github.com/DanySK/jirf/commit/96a3b51c4639aa5f48885e1f0cc62a166286d3ef))
+* **deps:** update node.js to 20.14 ([e3d7594](https://github.com/DanySK/jirf/commit/e3d75944116478c8bea1b1a3bbaf12ce60257366))
+* **deps:** update plugin com.gradle.enterprise to v3.17.3 ([263ce95](https://github.com/DanySK/jirf/commit/263ce95bf1b26d7b75cbc943f3dc09f30d76d200))
+* **deps:** update plugin com.gradle.enterprise to v3.17.4 ([9f7e9c0](https://github.com/DanySK/jirf/commit/9f7e9c0b08b1e8eb1eb6a7e3472106b63d00858f))
+* **deps:** update plugin gitsemver to v3.1.5 ([d95f8fd](https://github.com/DanySK/jirf/commit/d95f8fd9fb5b3c335393ee10a86a177872612e97))
+* **deps:** update plugin gitsemver to v3.1.6 ([c37fa57](https://github.com/DanySK/jirf/commit/c37fa57c2847ea33b2fcc6006fc8eff4371f7cba))
+* **deps:** update plugin gitsemver to v3.1.7 ([17428fa](https://github.com/DanySK/jirf/commit/17428faa3708ea1956fd18978a8410b193704c5e))
+* **deps:** update plugin java-qa to v1.49.0 ([a8183a8](https://github.com/DanySK/jirf/commit/a8183a8fc26a8e2e067e216a3084ce0af8c8c83e))
+* **deps:** update plugin java-qa to v1.50.0 ([556dab6](https://github.com/DanySK/jirf/commit/556dab69da5c0c61867df5dce20a290726c8a41f))
+* **deps:** update plugin java-qa to v1.51.0 ([a810cb8](https://github.com/DanySK/jirf/commit/a810cb886cf32d97007ac34f5dedc218a78e6bc2))
+* **deps:** update plugin java-qa to v1.52.0 ([8b8a637](https://github.com/DanySK/jirf/commit/8b8a6371469d6578002af4ddf60369677896cea4))
+* **deps:** update plugin kotlin-qa to v0.61.1 ([39a8e41](https://github.com/DanySK/jirf/commit/39a8e4171c185e269a29f1174e7bf328705f846f))
+* **deps:** update plugin kotlin-qa to v0.62.0 ([0b6ea73](https://github.com/DanySK/jirf/commit/0b6ea73f8e4919369c60cf6115001c6a3869b8ad))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.5 ([b92b43f](https://github.com/DanySK/jirf/commit/b92b43f7776230adc02ac3de843edae4f1394744))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.6 ([77eacdf](https://github.com/DanySK/jirf/commit/77eacdf00549ad4f12ddc4656eb2121ab803cd01))
+* **deps:** update plugin publishoncentral to v5.1.1 ([28ce131](https://github.com/DanySK/jirf/commit/28ce1318aa44c4b579ae75161ed211008a68f1b2))
+
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v4.1.5 ([fbb5fbc](https://github.com/DanySK/jirf/commit/fbb5fbcc0e9c21b22890a088bd03eea1d95e25a6))
+* **deps:** update actions/checkout action to v4.1.6 ([e47ff53](https://github.com/DanySK/jirf/commit/e47ff53138f2808dc49f3f0999ee3fb6831f4225))
+* **deps:** update danysk/action-checkout action to v0.2.17 ([3d887b8](https://github.com/DanySK/jirf/commit/3d887b8fb6b1c104614e9b862833b8377543c177))
+* **deps:** update danysk/action-checkout action to v0.2.18 ([9185a2e](https://github.com/DanySK/jirf/commit/9185a2e4a0278d1e41f8c265b77b3bc90b3f1307))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.19 ([de35db0](https://github.com/DanySK/jirf/commit/de35db0ce41eeffee42c281ee3945f8edbd88059))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.20 ([a7602ad](https://github.com/DanySK/jirf/commit/a7602adc54d597e51f331db564568d446c3c4e1e))
+
 ## [0.4.20](https://github.com/DanySK/jirf/compare/0.4.19...0.4.20) (2024-05-02)
 
 
