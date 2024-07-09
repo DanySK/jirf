@@ -1,6 +1,8 @@
 name: CI/CD
 on:
   push:
+    branches-ignore:
+      - 'dependabot/**'
     paths-ignore:
       - '.gitignore'
       - 'CHANGELOG.md'
@@ -11,6 +13,10 @@ on:
   workflow_dispatch:
 
 jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo '${{ github.head_ref }}'
   dispatcher:
     runs-on: ubuntu-latest
     if: >-
