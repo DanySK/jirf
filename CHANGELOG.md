@@ -1,3 +1,55 @@
+## [0.4.22](https://github.com/DanySK/jirf/compare/0.4.21...0.4.22) (2024-07-18)
+
+### Dependency updates
+
+* **core-deps:** update dependency org.apache.commons:commons-lang3 to v3.15.0 ([67dfc73](https://github.com/DanySK/jirf/commit/67dfc7328adff15bc0057cd2510d23de0084fb11))
+* **deps:** update dependency com.github.spotbugs:spotbugs-annotations to v4.8.6 ([e8bd620](https://github.com/DanySK/jirf/commit/e8bd62006f75bb0c72f3596d29bf9d1f1be9e150))
+* **deps:** update dependency gradle to v8.9 ([8607db0](https://github.com/DanySK/jirf/commit/8607db0b98938b2e938beb1a1ea45c6211819da4))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.86 ([4071053](https://github.com/DanySK/jirf/commit/4071053d02b395039973baa8c87ff09d3c4572ea))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.87 ([1e51773](https://github.com/DanySK/jirf/commit/1e51773b8584b961ec5a3e9803df6314baea8590))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.91 ([0f302cd](https://github.com/DanySK/jirf/commit/0f302cd12b5ce51af9aaf55bebc839a56c50bc86))
+* **deps:** update node.js to 20.15 ([e5ee09e](https://github.com/DanySK/jirf/commit/e5ee09e36b8d9f7f06b8412e4fcfe878164518f6))
+* **deps:** update plugin com.gradle.enterprise to v3.17.5 ([2bd2422](https://github.com/DanySK/jirf/commit/2bd2422bb3bfe8fff790f4f716aff1677902a97e))
+* **deps:** update plugin java-qa to v1.53.0 ([7cad5ef](https://github.com/DanySK/jirf/commit/7cad5efbe5d8ce590436acc748bd5f413a54da35))
+* **deps:** update plugin java-qa to v1.55.0 ([4d9ca47](https://github.com/DanySK/jirf/commit/4d9ca47361d5fe6cbc116a8df1c661bca98fed19))
+* **deps:** update plugin java-qa to v1.57.1 ([ffcf8c7](https://github.com/DanySK/jirf/commit/ffcf8c745d05e965d56806be04ad2e626bee9377))
+* **deps:** update plugin kotlin-qa to v0.62.1 ([f5871ec](https://github.com/DanySK/jirf/commit/f5871ecd50b3ace05a36bf4826e330b510b8338c))
+* **deps:** update plugin kotlin-qa to v0.62.3 ([ea2f592](https://github.com/DanySK/jirf/commit/ea2f59257a9870c19bf98bcb111028d894056625))
+* **deps:** update plugin kotlin-qa to v0.62.4 ([9ce9404](https://github.com/DanySK/jirf/commit/9ce94047a0e0878cdeea6d83ad2f968ed945a6a0))
+* **deps:** update plugin kotlin-qa to v0.63.0 ([7b8ca50](https://github.com/DanySK/jirf/commit/7b8ca503041147156f431ace02172ecf83338e1c))
+* **deps:** update plugin multijvmtesting to v1 ([eabe556](https://github.com/DanySK/jirf/commit/eabe556c4341ab8ba3f56ef347c95a3eaf79b33a))
+* **deps:** update plugin multijvmtesting to v1.0.1 ([a3d38a7](https://github.com/DanySK/jirf/commit/a3d38a7e504c053d03d9c7e493f54326808da9d5))
+* **deps:** update plugin multijvmtesting to v1.0.4 ([354f1de](https://github.com/DanySK/jirf/commit/354f1de4819816274e83ec3b3f4d45b7b609fe84))
+* **deps:** update plugin multijvmtesting to v1.1.0 ([58885fb](https://github.com/DanySK/jirf/commit/58885fbad2b04b326da91ee15ca41237b5125da6))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.7 ([9e00936](https://github.com/DanySK/jirf/commit/9e00936a494092345eb88485ef599ccec5b51ed7))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.8 ([bc3e8a5](https://github.com/DanySK/jirf/commit/bc3e8a5da1508f2947e2533e0e30d160ea98f8d0))
+* **deps:** update plugin publishoncentral to v5.1.2 ([70acbda](https://github.com/DanySK/jirf/commit/70acbda147c5479a237a1d82c86ddd9aaf95fcfe))
+* **deps:** update plugin publishoncentral to v5.1.3 ([d49d760](https://github.com/DanySK/jirf/commit/d49d760236054a2d66e5394ccbf55fc7f7326556))
+* **deps:** update plugin publishoncentral to v5.1.4 ([267f8b0](https://github.com/DanySK/jirf/commit/267f8b0ee2a37bba2426b84104c2cdf0ecc5e37a))
+* **deps:** update plugin tasktree to v4 ([a1f4ed2](https://github.com/DanySK/jirf/commit/a1f4ed2f301a347b7989d4d28ad9b3eff5adc905))
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v4.1.7 ([bab733f](https://github.com/DanySK/jirf/commit/bab733f5e3efb31915fc5109490c913837f7331f))
+* **deps:** update actions/setup-node action to v4.0.3 ([18bac17](https://github.com/DanySK/jirf/commit/18bac17794237f097ce65d7f6af51675cb173d09))
+* **deps:** update danysk/action-checkout action to v0.2.19 ([6f439ed](https://github.com/DanySK/jirf/commit/6f439ed1e249539667f82becc84af5a5ad9d394a))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.21 ([027efe1](https://github.com/DanySK/jirf/commit/027efe19be09adf362dd26b640b0f6ff9a6c548d))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.22 ([7503eea](https://github.com/DanySK/jirf/commit/7503eea4e235fee529da940ede0c913cf2416a1e))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.24 ([e410f84](https://github.com/DanySK/jirf/commit/e410f8469846fd26d6f7f6c0ee4d5706905d6041))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3 ([408a686](https://github.com/DanySK/jirf/commit/408a6864ee413fdf6a12fd29571c66fc3426c416))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.1.0 ([e018882](https://github.com/DanySK/jirf/commit/e01888214302ce6cb5773ea9428aeffab5cd1ad1))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.1.1 ([0d457a8](https://github.com/DanySK/jirf/commit/0d457a8186f0ce91bdb7bb41aa5795c68783d08b))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.3.0 ([92c03db](https://github.com/DanySK/jirf/commit/92c03db61409fb19f5d6fd70dd6174194c8d27d8))
+* disable fail-fast for matrix jobs ([4c89295](https://github.com/DanySK/jirf/commit/4c89295c91cea04d5cf7c53a0436c575291ad36c))
+* explicitly read the username from the repository secrets ([261ba5c](https://github.com/DanySK/jirf/commit/261ba5c0b52fd3f78e09c946c297db640f4721df))
+* install the version of node from the package.json ([ca1b49f](https://github.com/DanySK/jirf/commit/ca1b49fe1724761b1cf8cf5ece45662c37a7ecd4))
+* **release:** switch to a ECMA6-compliant semantic release configuration ([89528ce](https://github.com/DanySK/jirf/commit/89528ce7bd4ee1766db231425167daa38906de81))
+* switch to Develocity ([c3fc14a](https://github.com/DanySK/jirf/commit/c3fc14aeeb3f0a5ff9c17ad50c4abb4362269079))
+
+### General maintenance
+
+* **deps-dev:** bump braces from 3.0.2 to 3.0.3 ([#779](https://github.com/DanySK/jirf/issues/779)) ([706afdc](https://github.com/DanySK/jirf/commit/706afdc12e8259d8f3412f23cfa007a71674fcce))
+
 ## [0.4.21](https://github.com/DanySK/jirf/compare/0.4.20...0.4.21) (2024-06-01)
 
 
