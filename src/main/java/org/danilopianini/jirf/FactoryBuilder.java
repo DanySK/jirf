@@ -26,7 +26,7 @@ public class FactoryBuilder {
 
     /**
      * Enables the widening conversions that the Java language provides by default.
-     * 
+     *
      * @return the {@link FactoryBuilder} itself, for method chaining
      */
     public FactoryBuilder withWideningConversions() {
@@ -41,9 +41,9 @@ public class FactoryBuilder {
         factory.registerImplicit(short.class, float.class, Number::floatValue);
         factory.registerImplicit(short.class, double.class, Number::doubleValue);
         factory.registerImplicit(char.class, int.class, Character::getNumericValue);
-        factory.registerImplicit(char.class, long.class, c -> (long) Character.getNumericValue(c));
-        factory.registerImplicit(char.class, float.class, c -> (float) Character.getNumericValue(c));
-        factory.registerImplicit(char.class, double.class, c -> (double) Character.getNumericValue(c));
+        factory.registerImplicit(char.class, long.class, c -> (long) Character.getNumericValue(c)); // NOPMD
+        factory.registerImplicit(char.class, float.class, c -> (float) Character.getNumericValue(c)); // NOPMD
+        factory.registerImplicit(char.class, double.class, c -> (double) Character.getNumericValue(c)); // NOPMD
         factory.registerImplicit(int.class, long.class, Number::longValue);
         factory.registerImplicit(int.class, float.class, Number::floatValue);
         factory.registerImplicit(int.class, double.class, Number::doubleValue);
@@ -55,10 +55,10 @@ public class FactoryBuilder {
 
     /**
      * Enables the auto (un) boxing that the Java language provides by default.
-     * 
+     *
      * @param <S>
      *            used internally to make Javac happy
-     * 
+     *
      * @return the {@link FactoryBuilder} itself, for method chaining
      */
     @SuppressWarnings("unchecked")
@@ -75,7 +75,7 @@ public class FactoryBuilder {
     /**
      * Enables the narrowing conversions between primitives. Includes widening
      * conversions.
-     * 
+     *
      * @return the {@link FactoryBuilder} itself, for method chaining
      */
     public FactoryBuilder withNarrowingConversions() {
@@ -91,7 +91,7 @@ public class FactoryBuilder {
 
     /**
      * Enables autoboxing for linear arrays (e.g. byte[] and Byte[] become interchangeable)
-     * 
+     *
      * @return the {@link FactoryBuilder} itself, for method chaining
      */
     public FactoryBuilder withArrayBoxing() {
@@ -114,7 +114,7 @@ public class FactoryBuilder {
 
     /**
      * Enables converting booleans to integers.
-     * 
+     *
      * @return the {@link FactoryBuilder} itself, for method chaining
      */
     public FactoryBuilder withBooleanIntConversions() {
@@ -127,7 +127,7 @@ public class FactoryBuilder {
 
     /**
      * Automatically converts objects to {@link String} when needed, by means of {@link Object#toString()}.
-     * 
+     *
      * @return the {@link FactoryBuilder} itself, for method chaining
      */
     public FactoryBuilder withAutomaticToString() {
@@ -138,7 +138,7 @@ public class FactoryBuilder {
     /**
      * Enables widening conversions for linear arrays (e.g. int[] can get
      * converted to long[]). Includes array autoboxing.
-     * 
+     *
      * @return the {@link FactoryBuilder} itself, for method chaining
      */
     public FactoryBuilder withArrayWideningConversions() {
@@ -168,7 +168,7 @@ public class FactoryBuilder {
     /**
      * Enables narrowing conversions for linear arrays (e.g. double[] can get
      * converted to int[]). Includes widening conversions.
-     * 
+     *
      * @return the {@link FactoryBuilder} itself, for method chaining
      */
     public FactoryBuilder withArrayNarrowingConversions() {
@@ -192,7 +192,7 @@ public class FactoryBuilder {
     /**
      * Enables converting linear arrays of booleans to linear arrays of
      * integers. Includes array boxing.
-     * 
+     *
      * @return the {@link FactoryBuilder} itself, for method chaining
      */
     public FactoryBuilder withArrayBooleanIntConversions() {
@@ -215,7 +215,7 @@ public class FactoryBuilder {
     /**
      * Enables converting linear arrays to lists for the provided classes and
      * Object. Includes array autoboxing.
-     * 
+     *
      * @param classes
      *            the target classes
      * @return the {@link FactoryBuilder} itself, for method chaining
