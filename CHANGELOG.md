@@ -1,3 +1,38 @@
+## [0.4.23](https://github.com/DanySK/jirf/compare/0.4.22...0.4.23) (2024-08-07)
+
+### Dependency updates
+
+* **core-deps:** update dependency org.apache.commons:commons-lang3 to v3.16.0 ([21046c1](https://github.com/DanySK/jirf/commit/21046c10c4614d04d0d3e17ac9a2f004726d7f1b))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.92 ([bdd3860](https://github.com/DanySK/jirf/commit/bdd38604b3d7cbe3c673baa6f0320599f8776a0d))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.93 ([a52da09](https://github.com/DanySK/jirf/commit/a52da09abc21088a2ad67903acaf797260dae5a4))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.94 ([67477b8](https://github.com/DanySK/jirf/commit/67477b8bbdcb0561a5849eaa747c29ad36a47c51))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.95 ([d926167](https://github.com/DanySK/jirf/commit/d92616790508c2dfa5fdea37a56d8afd7651408b))
+* **deps:** update node.js to 20.16 ([d367e93](https://github.com/DanySK/jirf/commit/d367e9386b76c2a53d4aef0be351c24f6ad8b6df))
+* **deps:** update plugin com.gradle.develocity to v3.17.6 ([41df659](https://github.com/DanySK/jirf/commit/41df659d0d798ade40bcd1ae425212273459cfa7))
+* **deps:** update plugin java-qa to v1.60.2 ([70a641b](https://github.com/DanySK/jirf/commit/70a641bd6ec3837727d864c8692c0798a0190e0e))
+* **deps:** update plugin kotlin-qa to v0.64.0 ([c9416a7](https://github.com/DanySK/jirf/commit/c9416a76ecd471336db4ca3eda84783da48b53ab))
+* **deps:** update plugin kotlin-qa to v0.64.1 ([c04a8d3](https://github.com/DanySK/jirf/commit/c04a8d37b9d5802586c9fc06bb7a06e5b3167eec))
+* **deps:** update plugin kotlin-qa to v0.64.2 ([d124ce4](https://github.com/DanySK/jirf/commit/d124ce4c52bf940b63d7fb34a07c7859274a37d0))
+* **deps:** update plugin kotlin-qa to v0.64.3 ([e64c0af](https://github.com/DanySK/jirf/commit/e64c0afe6af544098280329751086c3f3997d10f))
+* **deps:** update plugin kotlin-qa to v0.65.0 ([dc83f39](https://github.com/DanySK/jirf/commit/dc83f39c7cb7e98e68e72beba6c52365e20b874e))
+* **deps:** update plugin kotlin-qa to v0.65.1 ([000ac62](https://github.com/DanySK/jirf/commit/000ac62d9950b06e9181530573946fcf224957e2))
+* **deps:** update plugin multijvmtesting to v1.1.1 ([ca2d720](https://github.com/DanySK/jirf/commit/ca2d720bfa0d3e43494a6265437081700bc2e7a0))
+* **deps:** update plugin multijvmtesting to v1.2.2 ([bd054d5](https://github.com/DanySK/jirf/commit/bd054d56b2353ddc46fc27ac89d79daa1c51431a))
+* **deps:** update plugin multijvmtesting to v1.2.3 ([2ac2109](https://github.com/DanySK/jirf/commit/2ac210907e44da17aa55fd2419d6469149d77c9f))
+* **deps:** update plugin publishoncentral to v5.1.5 ([626aeb0](https://github.com/DanySK/jirf/commit/626aeb089c9a3b4d53c25a401eb210190200ea78))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.4.0 ([e66d32c](https://github.com/DanySK/jirf/commit/e66d32c5ef9cd47191e0bc864b0f575b5a011a22))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.5.0 ([d48daa0](https://github.com/DanySK/jirf/commit/d48daa0bc5a743b2ca10bbd7b746001c7907172e))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.5.1 ([56f60aa](https://github.com/DanySK/jirf/commit/56f60aa62860e8f0e04c6649f8aa4cc86823d2a0))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.5.2 ([61cb92e](https://github.com/DanySK/jirf/commit/61cb92e6736cd673dc68ddb75ea048b3a51973ee))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.5.3 ([fb46c69](https://github.com/DanySK/jirf/commit/fb46c699dedcf98a202a6087c745dc860f6c7fe4))
+
+### Style improvements
+
+* suppress PMD false positives ([6e0e856](https://github.com/DanySK/jirf/commit/6e0e856f8e28f9820eeff94160075212809ff6a2))
+
 ## [0.4.22](https://github.com/DanySK/jirf/compare/0.4.21...0.4.22) (2024-07-18)
 
 ### Dependency updates
