@@ -1,3 +1,16 @@
+## [0.4.24](https://github.com/DanySK/jirf/compare/0.4.23...0.4.24) (2024-08-17)
+
+### Dependency updates
+
+* **core-deps:** update dependency com.google.guava:guava to v33.3.0-jre ([681e005](https://github.com/DanySK/jirf/commit/681e00590cd7765e89631ad4c257fd5c7370c21d))
+* **deps:** update dependency gradle to v8.10 ([d2cedd4](https://github.com/DanySK/jirf/commit/d2cedd46a95fe00d95d67db1f61bc98b2970ceca))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.96 ([3183b24](https://github.com/DanySK/jirf/commit/3183b24ca4e1e30b039831a7ea0e92349cf14cee))
+* **deps:** update plugin java-qa to v1.61.0 ([c8ee222](https://github.com/DanySK/jirf/commit/c8ee222e6d270d343b083d15212f57882b35ff8f))
+* **deps:** update plugin kotlin-qa to v0.65.2 ([8a891ea](https://github.com/DanySK/jirf/commit/8a891ea5f637c23b2bcae2932c6a21512927d9d0))
+* **deps:** update plugin multijvmtesting to v1.2.4 ([f365f09](https://github.com/DanySK/jirf/commit/f365f09252b47d768db7abb172b84cedeba72ff4))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.9 ([58f7227](https://github.com/DanySK/jirf/commit/58f72271f0115a6aebf0f217bc149cb00eddcb37))
+* **deps:** update plugin publishoncentral to v5.1.6 ([e5d20eb](https://github.com/DanySK/jirf/commit/e5d20eb0093ef9eecab5cf6a0a4e6caaaec05ecb))
+
 ## [0.4.23](https://github.com/DanySK/jirf/compare/0.4.22...0.4.23) (2024-08-07)
 
 ### Dependency updates
