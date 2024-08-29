@@ -1,3 +1,21 @@
+## [0.4.25](https://github.com/DanySK/jirf/compare/0.4.24...0.4.25) (2024-08-29)
+
+### Dependency updates
+
+* **core-deps:** update dependency org.apache.commons:commons-lang3 to v3.17.0 ([b2b30d4](https://github.com/DanySK/jirf/commit/b2b30d423a9243c912a173f37805b478f2b6fd08))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.100 ([8889d65](https://github.com/DanySK/jirf/commit/8889d650471ed4cfb0169386ee51b052720ccfd1))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.101 ([37a7813](https://github.com/DanySK/jirf/commit/37a781385553ed80171af960f16ba70b995997e5))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.97 ([65d724d](https://github.com/DanySK/jirf/commit/65d724dc57ab059f7d41df7be41712d79118403a))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.98 ([c40fbfa](https://github.com/DanySK/jirf/commit/c40fbfa7465d09205403c28c2074c92cfdb10f2d))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.99 ([1949853](https://github.com/DanySK/jirf/commit/194985352413891e5b2144cfb6d6ace0ecc273b9))
+* **deps:** update node.js to 20.17 ([5c52ad0](https://github.com/DanySK/jirf/commit/5c52ad0584f8dc6d91b7fdfeaeac5b8a9e4dc8d0))
+* **deps:** update plugin com.gradle.develocity to v3.18 ([c7d004d](https://github.com/DanySK/jirf/commit/c7d004d7e58b97c105f98373e8c5d7707b320b5a))
+* **deps:** update plugin multijvmtesting to v1.2.5 ([4cddf29](https://github.com/DanySK/jirf/commit/4cddf29848342447cdf87a187314a81cc12e5de6))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.5.4 ([22b8195](https://github.com/DanySK/jirf/commit/22b8195621e2fd8973c57e1d660dc390eef294f5))
+
 ## [0.4.24](https://github.com/DanySK/jirf/compare/0.4.23...0.4.24) (2024-08-17)
 
 ### Dependency updates
