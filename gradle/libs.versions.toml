@@ -2,7 +2,7 @@
 
 [libraries]
 boilerplate = "org.danilopianini:boilerplate:0.2.2"
-commons-lang3 = "org.apache.commons:commons-lang3:3.16.0"
+commons-lang3 = "org.apache.commons:commons-lang3:3.17.0"
 guava = "com.google.guava:guava:33.3.0-jre"
 jgrapht-core = "org.jgrapht:jgrapht-core:1.5.2"
 junit4 = "junit:junit:4.13.2"
