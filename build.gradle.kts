@@ -37,6 +37,7 @@ tasks.withType<Test> {
 
 group = "org.danilopianini"
 publishOnCentral {
+    repoOwner = "DanySK"
     projectDescription.set("An advanced factory supporting implicit type conversions")
     projectLongName.set("Java Implicit Reflective Factory")
     repository("https://maven.pkg.github.com/danysk/jirf") {
