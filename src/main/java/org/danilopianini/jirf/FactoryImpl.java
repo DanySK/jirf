@@ -30,9 +30,11 @@ import java.util.stream.Collectors;
 
 final class FactoryImpl implements Factory {
 
+    private static final String UNCHECKED = "unchecked";
+    private static final String TO = " to ";
+    private static final String FROM = " from ";
     private final Map<Class<?>, Object> singletons = new LinkedHashMap<>();
     private final Graph<Class<?>, FunctionEdge> implicits = new DefaultDirectedGraph<>(null, null, false);
-    private static final String UNCHECKED = "unchecked";
 
     /*
      * The returned Pair is actually used somewhat like a functional Either
@@ -179,7 +181,9 @@ final class FactoryImpl implements Factory {
         }
         try {
             return constructor.newInstance(actualArgs);
-        } catch (Exception e) { // NOPMD
+            //CHECKSTYLE: IllegalCatch OFF
+        } catch (final Exception e) { // NOPMD
+            //CHECKSTYLE: IllegalCatch ON
             return new InstancingImpossibleException(constructor, e);
         }
     }
@@ -194,8 +198,8 @@ final class FactoryImpl implements Factory {
             }
             return new InstancingImpossibleException(constructor,
                     "Couldn't convert " + param
-                            + " from " + param.getClass().getName()
-                            + " to " + expected.getName());
+                            + FROM + param.getClass().getName()
+                            + TO + expected.getName());
         }
     }
 
@@ -230,7 +234,7 @@ final class FactoryImpl implements Factory {
         loader.invalidateAll();
         implicits.removeEdge(source, target);
         if (!implicits.addEdge(source, target, new FunctionEdge(source, target, implicit))) {
-            throw new IllegalStateException("edge from " + source + " to " + target + " was not added."
+            throw new IllegalStateException("edge from " + source + TO + target + " was not added."
                     + "This is likely a bug in jirf.");
         }
     }
@@ -313,7 +317,7 @@ final class FactoryImpl implements Factory {
     @Override
     public <I, O> O convertOrFail(final Class<O> clazz, final I target) {
         return this.convert(clazz, target)
-                .orElseThrow(() -> new IllegalArgumentException("Unable to convert " + target + " to " + clazz));
+                .orElseThrow(() -> new IllegalArgumentException("Unable to convert " + target + TO + clazz));
     }
 
     @Override

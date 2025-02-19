@@ -9,6 +9,7 @@ import java.util.Optional;
  * In case of success, an {@link Optional} gets populated with the created object,
  * the result is {@link Optional#empty()} instead.
  *
+ * <p>
  * Since multiple constructors could have been tried before achieving success or having to fail,
  * a {@link Map} mapping all the constructors to the error experienced on invocation is returned
  * by getExceptions.
@@ -29,8 +30,8 @@ public interface CreationResult<T> {
 
     /**
      * @return a {@link Map} containing, for each constructor that failed, the failure cause.
-     * The iteration order of this map is guaranteed to return its {@link java.util.Map.Entry} in the order they were
-     * produced (from the most suitable constructor to the last).
+     *     The iteration order of this map is guaranteed to return its {@link java.util.Map.Entry} in the order they were
+     *     produced (from the most suitable constructor to the last).
      */
     Map<Constructor<T>, InstancingImpossibleException> getExceptions();
 }

@@ -24,7 +24,7 @@ import static org.junit.Assert.assertTrue;
 public final class TestFactory {
 
     /**
-     * 
+     *
      */
     @Test
     public void testWideningPrimitivesAndWrappers() {
@@ -35,7 +35,7 @@ public final class TestFactory {
     }
 
     /**
-     * 
+     *
      */
     @Test
     public void testNonWidening() {
@@ -46,7 +46,7 @@ public final class TestFactory {
     }
 
     /**
-     * 
+     *
      */
     @Test
     public void testEmptyVarargs() {
@@ -58,7 +58,7 @@ public final class TestFactory {
     }
 
     /**
-     * 
+     *
      */
     @Test
     public void testSingleValuedVarargs() {
@@ -70,7 +70,7 @@ public final class TestFactory {
     }
 
     /**
-     * 
+     *
      */
     @Test
     public void testExpandedVarargs() {
@@ -82,7 +82,7 @@ public final class TestFactory {
     }
 
     /**
-     * 
+     *
      */
     @Test
     public void testListEmbeddedVarargs() {
@@ -97,7 +97,7 @@ public final class TestFactory {
     }
 
     /**
-     * 
+     *
      */
     @Test
     public void testSuperclasses() {
@@ -109,7 +109,7 @@ public final class TestFactory {
     }
 
     /**
-     * 
+     *
      */
     @Test
     public void testSingleton() {
@@ -163,11 +163,14 @@ public final class TestFactory {
     // CHECKSTYLE: JavadocType OFF
     // CHECKSTYLE: JavadocMethod OFF
     public static final class MyObj {
+
         public MyObj(final double a, final Double b, final byte c) { } // NOPMD
+
         public MyObj(final String a, final double... b) { // NOPMD
             for (int i = 0; i < b.length; i++); // NOPMD
         }
     }
+
     public static final class ReproduceGPSTrace {
         public ReproduceGPSTrace(
             final Calendar calendar,

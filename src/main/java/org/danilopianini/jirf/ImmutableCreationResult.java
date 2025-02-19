@@ -48,8 +48,8 @@ public final class ImmutableCreationResult<T> implements CreationResult<T> {
 
     @Override
     public String toString() {
-        final var result = getCreatedObject();
-        return "Result{" + (result.isPresent() ? result.get() : exceptions) + '}';
+        final var createdObject = getCreatedObject();
+        return "Result{" + (createdObject.isPresent() ? createdObject.get() : exceptions) + '}';
     }
 
     @Override
@@ -85,7 +85,7 @@ public final class ImmutableCreationResult<T> implements CreationResult<T> {
         private boolean isBuilt;
         private final ImmutableMap.Builder<Constructor<T>, InstancingImpossibleException> mapBuilder =
             new ImmutableMap.Builder<>();
-        private T result;
+        private T maybeResult;
 
         /**
          * @param constructor the constructor that failed
@@ -106,10 +106,10 @@ public final class ImmutableCreationResult<T> implements CreationResult<T> {
          * @return this buider for method chaining
          */
         public Builder<T> withResult(@Nonnull final T result) {
-            if (this.result != null) {
+            if (this.maybeResult != null) {
                 throw new IllegalStateException("The result of this build has already been set.");
             }
-            this.result = result;
+            this.maybeResult = result;
             return this;
         }
 
@@ -125,7 +125,7 @@ public final class ImmutableCreationResult<T> implements CreationResult<T> {
          */
         public ImmutableCreationResult<T> build() {
             isBuilt = true;
-            return new ImmutableCreationResult<>(this.result, this.mapBuilder.build());
+            return new ImmutableCreationResult<>(this.maybeResult, this.mapBuilder.build());
         }
     }
 }

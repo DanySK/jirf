@@ -17,11 +17,11 @@ import com.google.common.primitives.Primitives;
  */
 public class FactoryBuilder {
 
-    private final Factory factory = new FactoryImpl();
     private static final Function<Boolean, Integer> BOOL_TO_INT = b -> b ? 1 : 0;
     private static final Function<Integer, Boolean> INT_TO_BOOL = i -> i == 0;
 
     private final Semaphore mutex = new Semaphore(1);
+    private final Factory factory = new FactoryImpl();
     private boolean consumed;
 
     /**
@@ -187,7 +187,6 @@ public class FactoryBuilder {
         factory.registerImplicit(Number[].class, double[].class, PrimitiveArrays::toDoubleArray);
         return this;
     }
-
 
     /**
      * Enables converting linear arrays of booleans to linear arrays of

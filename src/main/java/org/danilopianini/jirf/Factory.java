@@ -43,7 +43,7 @@ public interface Factory {
     /**
      * Applies the available implicit conversions and tries to convert the
      * provided object to the provided class.
-     * 
+     *
      * @param clazz
      *            the target {@link Class}
      * @param target
@@ -60,7 +60,7 @@ public interface Factory {
     /**
      * Applies the available implicit conversions and tries to convert the
      * provided object to the provided class.
-     * 
+     *
      * @param clazz
      *            the target {@link Class}
      * @param target
@@ -79,7 +79,7 @@ public interface Factory {
 
     /**
      * Removes a registered singleton.
-     * 
+     *
      * @param object
      *            the object that should be forgot
      * @param <E>
@@ -97,7 +97,7 @@ public interface Factory {
      * Registers an implicit conversion function. All the superclasses and
      * implemented interfaces of the source are registered as well as
      * convertible.
-     * 
+     *
      * @param source
      *            origin class
      * @param destination
@@ -116,7 +116,7 @@ public interface Factory {
      * lower bound and the provided upper bound (both must be superclasses of
      * the object's own class). If the bound is an interface, all the
      * sub-interfaces that the class implements get registered too.
-     * 
+     *
      * @param lowerBound
      *            the lower bound class
      * @param upperBound
@@ -133,7 +133,7 @@ public interface Factory {
      * (discovered by using {@link Object#getClass()} and the provided upper
      * bound. If the bound is an interface, all the sub-interfaces that the
      * class implements get registered too.
-     * 
+     *
      * @param bound
      *            the upper bound class
      * @param object
@@ -145,7 +145,7 @@ public interface Factory {
 
     /**
      * Registers a singleton. It only gets mapped to its own class (discovered by using {@link Object#getClass()}.
-     * 
+     *
      * @param object
      *            the object that should be registered
      * @param <E>
