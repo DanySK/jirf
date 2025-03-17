@@ -1,7 +1,6 @@
 package org.danilopianini.jirf;
 
 import com.google.common.collect.ImmutableMap;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -42,7 +41,7 @@ public final class ImmutableCreationResult<T> implements CreationResult<T> {
             for (final var entry: exceptions.values()) {
                 exception.addSuppressed(entry);
             }
-            throw exception;
+            return exception;
         });
     }
 
@@ -70,7 +69,6 @@ public final class ImmutableCreationResult<T> implements CreationResult<T> {
     }
 
     @Override
-    @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "the field is immutable")
     public ImmutableMap<Constructor<T>, InstancingImpossibleException> getExceptions() {
         return exceptions;
     }

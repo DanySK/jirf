@@ -3,7 +3,6 @@ package org.danilopianini.jirf;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -43,10 +42,6 @@ final class FactoryImpl implements Factory {
         CacheBuilder.newBuilder()
             .build(new CacheLoader<>() {
                 @SuppressWarnings("unchecked")
-                @SuppressFBWarnings(
-                    value = "THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION",
-                    justification = "False positive, there's no throws clause"
-                )
                 @Nonnull
                 @Override
                 public List<Pair<Constructor<?>, InstancingImpossibleException>> load(
