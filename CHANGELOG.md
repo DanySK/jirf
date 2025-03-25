@@ -1,3 +1,18 @@
+## [0.4.29](https://github.com/DanySK/jirf/compare/0.4.28...0.4.29) (2025-03-25)
+
+### Dependency updates
+
+* **core-deps:** update dependency com.google.guava:guava to v33.4.6-jre ([#1072](https://github.com/DanySK/jirf/issues/1072)) ([2af5ac7](https://github.com/DanySK/jirf/commit/2af5ac770f12b6c65beb3fb3f75a14c41647063b))
+* **deps:** update plugin kotlin-qa to v0.79.0 ([#1067](https://github.com/DanySK/jirf/issues/1067)) ([c9b1e7d](https://github.com/DanySK/jirf/commit/c9b1e7dc4dff9dc95ec93cc776e2d271d96d47f4))
+* **deps:** update plugin multijvmtesting to v3.2.4 ([#1063](https://github.com/DanySK/jirf/issues/1063)) ([1b58af9](https://github.com/DanySK/jirf/commit/1b58af9dcb00a28f572f50b4816d9dd2f375c5f4))
+* **deps:** update plugin multijvmtesting to v3.3.0 ([#1066](https://github.com/DanySK/jirf/issues/1066)) ([a392fba](https://github.com/DanySK/jirf/commit/a392fba8b4e47c706b88b5323e4f82268d5b258c))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.22 ([#1065](https://github.com/DanySK/jirf/issues/1065)) ([18fa704](https://github.com/DanySK/jirf/commit/18fa704573fc9f33992b9a8a7f97a2eeedaaca6e))
+* **deps:** update plugin publishoncentral to v8.0.5 ([#1064](https://github.com/DanySK/jirf/issues/1064)) ([72736b8](https://github.com/DanySK/jirf/commit/72736b8ff859b1c79b45f3ac4fa341408ce60480))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.7.13 ([#1062](https://github.com/DanySK/jirf/issues/1062)) ([ccca19d](https://github.com/DanySK/jirf/commit/ccca19dad7f46ba0f5ba5d6ef8338f74fc1021e0))
+
 ## [0.4.28](https://github.com/DanySK/jirf/compare/0.4.27...0.4.28) (2025-03-20)
 
 ### Dependency updates
