@@ -1,3 +1,22 @@
+## [0.4.30](https://github.com/DanySK/jirf/compare/0.4.29...0.4.30) (2025-04-08)
+
+### Dependency updates
+
+* **core-deps:** update dependency com.google.guava:guava to v33.4.7-android ([#1080](https://github.com/DanySK/jirf/issues/1080)) ([7ccb2eb](https://github.com/DanySK/jirf/commit/7ccb2eb3fe4b3c39876a05468e8cdb0a3495f8b1))
+* **deps:** update plugin java-qa to v1.105.0 ([#1074](https://github.com/DanySK/jirf/issues/1074)) ([d09c3ee](https://github.com/DanySK/jirf/commit/d09c3eeb841fdb0bc2a837f7a0de6582c6c095be))
+* **deps:** update plugin java-qa to v1.106.0 ([#1076](https://github.com/DanySK/jirf/issues/1076)) ([927eb2a](https://github.com/DanySK/jirf/commit/927eb2ac6de0d4e66bf213c9f8625e5364b15187))
+* **deps:** update plugin java-qa to v1.107.0 ([#1077](https://github.com/DanySK/jirf/issues/1077)) ([e34e850](https://github.com/DanySK/jirf/commit/e34e85094f74a8337e00503f33a3b344dd62c469))
+* **deps:** update plugin java-qa to v1.108.0 ([#1078](https://github.com/DanySK/jirf/issues/1078)) ([5e048e9](https://github.com/DanySK/jirf/commit/5e048e929157b044e24396c358b59359e87de654))
+* **deps:** update plugin kotlin-qa to v0.82.0 ([#1069](https://github.com/DanySK/jirf/issues/1069)) ([fd1f0f1](https://github.com/DanySK/jirf/commit/fd1f0f1a836740c48003e8b100a0a6b063111008))
+* **deps:** update plugin kotlin-qa to v0.83.1 ([#1070](https://github.com/DanySK/jirf/issues/1070)) ([7b27494](https://github.com/DanySK/jirf/commit/7b274942d0a53dab842c50cfd34a75db26a15a4d))
+* **deps:** update plugin kotlin-qa to v0.84.1 ([#1071](https://github.com/DanySK/jirf/issues/1071)) ([bc8033c](https://github.com/DanySK/jirf/commit/bc8033cd6df6253fb4d56d065c4b5765040d0b1f))
+* **deps:** update plugin kotlin-qa to v0.85.0 ([#1075](https://github.com/DanySK/jirf/issues/1075)) ([97ae503](https://github.com/DanySK/jirf/commit/97ae503dceaa10ca3c3c61b0434fbe8074d3da46))
+* **deps:** update plugin publishoncentral to v8.0.6 ([#1079](https://github.com/DanySK/jirf/issues/1079)) ([a360748](https://github.com/DanySK/jirf/commit/a3607480b185523b2a5b56aed47a49021fb71edf))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.7.14 ([#1073](https://github.com/DanySK/jirf/issues/1073)) ([ef17db1](https://github.com/DanySK/jirf/commit/ef17db157935230c24ef7a3f6d9dbfbd13d6ce69))
+
 ## [0.4.29](https://github.com/DanySK/jirf/compare/0.4.28...0.4.29) (2025-03-25)
 
 ### Dependency updates
