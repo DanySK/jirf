@@ -1,3 +1,14 @@
+## [0.4.31](https://github.com/DanySK/jirf/compare/0.4.30...0.4.31) (2025-04-09)
+
+### Dependency updates
+
+* **core-deps:** update dependency com.google.guava:guava to v33.4.7-jre ([#1083](https://github.com/DanySK/jirf/issues/1083)) ([7338a9c](https://github.com/DanySK/jirf/commit/7338a9ce57fb91c041a7ce1788b65c731391746c))
+* **deps:** update plugin com.gradle.develocity to v4 ([#1081](https://github.com/DanySK/jirf/issues/1081)) ([6d732d8](https://github.com/DanySK/jirf/commit/6d732d8d283980d36d555660535baaf70379e1dc))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.7.15 ([#1082](https://github.com/DanySK/jirf/issues/1082)) ([1a35ca9](https://github.com/DanySK/jirf/commit/1a35ca9946fc98eb79078dd5cabde3d1d35038f7))
+
 ## [0.4.30](https://github.com/DanySK/jirf/compare/0.4.29...0.4.30) (2025-04-08)
 
 ### Dependency updates
