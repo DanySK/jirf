@@ -1,3 +1,17 @@
+## [0.4.32](https://github.com/DanySK/jirf/compare/0.4.31...0.4.32) (2025-04-14)
+
+### Dependency updates
+
+* **core-deps:** update dependency com.google.guava:guava to v33.4.8-jre ([#1089](https://github.com/DanySK/jirf/issues/1089)) ([41e8e3a](https://github.com/DanySK/jirf/commit/41e8e3a1fa41cf8d463c52d83999e8c09c249954))
+* **deps:** update plugin gitsemver to v5 ([#1088](https://github.com/DanySK/jirf/issues/1088)) ([adc9008](https://github.com/DanySK/jirf/commit/adc9008d0b4cbcfbc171c7f7b9ec83adc7b9bde3))
+* **deps:** update plugin org.gradle.toolchains.foojay-resolver-convention to v0.10.0 ([#1086](https://github.com/DanySK/jirf/issues/1086)) ([65d1a89](https://github.com/DanySK/jirf/commit/65d1a895cb0ba4fd785999e78a8647a5a01de293))
+
+### Build and continuous integration
+
+* **deps:** update actions/setup-node action to v4.4.0 ([#1087](https://github.com/DanySK/jirf/issues/1087)) ([032df49](https://github.com/DanySK/jirf/commit/032df4907f5b280b7d258dfb66eb5ae2b9f7b35f))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.7.16 ([#1085](https://github.com/DanySK/jirf/issues/1085)) ([90d23b8](https://github.com/DanySK/jirf/commit/90d23b80123786ef7bfe259777cb7e5a291370dc))
+* **deps:** update dependency windows github actions runner to v2025 ([#1084](https://github.com/DanySK/jirf/issues/1084)) ([566e484](https://github.com/DanySK/jirf/commit/566e484b5b801d1ede900dfa7d639be96a9b8219))
+
 ## [0.4.31](https://github.com/DanySK/jirf/compare/0.4.30...0.4.31) (2025-04-09)
 
 ### Dependency updates
