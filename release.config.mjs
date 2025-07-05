@@ -1,8 +1,8 @@
 const publishCmd = `
 git tag -a -f \${nextRelease.version} \${nextRelease.version} -F CHANGELOG.md
 git push --force origin \${nextRelease.version}
-./gradlew uploadAll releaseStagingRepositoryOnMavenCentral || exit 1
-./gradlew publishJavaOSSRHPublicationToGithubRepository || true
+./gradlew publishAllPublicationsToProjectLocalRepository zipMavenCentralPortalPublication releaseMavenCentralPortalPublication || exit 1
+./gradlew publishOSSRHPublicationToGithubRepository || true
 `
 import config from 'semantic-release-preconfigured-conventional-commits' with { type: "json" };
 config.plugins.push(
