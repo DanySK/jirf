@@ -41,9 +41,9 @@ public class FactoryBuilder {
         factory.registerImplicit(short.class, float.class, Number::floatValue);
         factory.registerImplicit(short.class, double.class, Number::doubleValue);
         factory.registerImplicit(char.class, int.class, Character::getNumericValue);
-        factory.registerImplicit(char.class, long.class, c -> (long) Character.getNumericValue(c)); // NOPMD
-        factory.registerImplicit(char.class, float.class, c -> (float) Character.getNumericValue(c)); // NOPMD
-        factory.registerImplicit(char.class, double.class, c -> (double) Character.getNumericValue(c)); // NOPMD
+        factory.registerImplicit(char.class, long.class, c -> (long) Character.getNumericValue(c));
+        factory.registerImplicit(char.class, float.class, c -> (float) Character.getNumericValue(c));
+        factory.registerImplicit(char.class, double.class, c -> (double) Character.getNumericValue(c));
         factory.registerImplicit(int.class, long.class, Number::longValue);
         factory.registerImplicit(int.class, float.class, Number::floatValue);
         factory.registerImplicit(int.class, double.class, Number::doubleValue);
