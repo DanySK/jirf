@@ -1,3 +1,16 @@
+## [0.4.34](https://github.com/DanySK/jirf/compare/0.4.33...0.4.34) (2025-07-10)
+
+### Dependency updates
+
+* **core-deps:** update dependency org.apache.commons:commons-lang3 to v3.18.0 ([#1164](https://github.com/DanySK/jirf/issues/1164)) ([c34f82f](https://github.com/DanySK/jirf/commit/c34f82fdd1f6fd9b0b9b2725d3f049f659b9115f))
+* **deps:** update dependency gradle to v8.14.3 ([#1161](https://github.com/DanySK/jirf/issues/1161)) ([f83e7be](https://github.com/DanySK/jirf/commit/f83e7be32afc086761fbb3a1e82888c7fb48fa72))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.136 ([#1160](https://github.com/DanySK/jirf/issues/1160)) ([e21366f](https://github.com/DanySK/jirf/commit/e21366fa43a07fe8f334c79f2203eeed30fdd9c0))
+* **deps:** update plugin gitsemver to v5.1.7 ([#1158](https://github.com/DanySK/jirf/issues/1158)) ([47bbbe3](https://github.com/DanySK/jirf/commit/47bbbe3bea6c0f2238b220051783db4231b8ded2))
+* **deps:** update plugin java-qa to v1.124.0 ([f76358e](https://github.com/DanySK/jirf/commit/f76358e3f3bf6e002afc7a7ee1ae13c16399439e))
+* **deps:** update plugin kotlin-qa to v0.90.2 ([#1162](https://github.com/DanySK/jirf/issues/1162)) ([cfca623](https://github.com/DanySK/jirf/commit/cfca62368bcf5d94d7db2c5f6a3a30433892b15e))
+* **deps:** update plugin kotlin-qa to v0.91.0 ([#1163](https://github.com/DanySK/jirf/issues/1163)) ([3cf26c8](https://github.com/DanySK/jirf/commit/3cf26c8a08289a6ccd994b7b907a78d9db40d9c4))
+* **deps:** update plugin multijvmtesting to v3.5.4 ([#1159](https://github.com/DanySK/jirf/issues/1159)) ([da0c31d](https://github.com/DanySK/jirf/commit/da0c31d2705ba48a9581800ac7da1a208c23b69d))
+
 ## [0.4.33](https://github.com/DanySK/jirf/compare/0.4.32...0.4.33) (2025-07-05)
 
 ### Dependency updates
