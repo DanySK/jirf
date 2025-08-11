@@ -9,7 +9,7 @@ junit4 = "junit:junit:4.13.2"
 spotbugs-annotations = "com.github.spotbugs:spotbugs-annotations:4.9.4"
 
 [plugins]
-gitSemVer = { id = "org.danilopianini.git-sensitive-semantic-versioning", version = "5.1.7" }
+gitSemVer = { id = "org.danilopianini.git-sensitive-semantic-versioning", version = "5.1.8" }
 kotlin-qa = { id = "org.danilopianini.gradle-kotlin-qa", version = "0.93.0" }
 java-qa = { id = "org.danilopianini.gradle-java-qa", version = "1.125.0" }
 multiJvmTesting = { id = "org.danilopianini.multi-jvm-test-plugin", version = "3.6.1" }
