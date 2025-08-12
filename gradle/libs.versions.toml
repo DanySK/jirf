@@ -5,7 +5,10 @@ boilerplate = "org.danilopianini:boilerplate:0.2.2"
 commons-lang3 = "org.apache.commons:commons-lang3:3.18.0"
 guava = "com.google.guava:guava:33.4.8-jre"
 jgrapht-core = "org.jgrapht:jgrapht-core:1.5.2"
-junit4 = "junit:junit:4.13.2"
+junit-bom = "org.junit:junit-bom:5.13.4"
+junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api" }
+junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine" }
+junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
 spotbugs-annotations = "com.github.spotbugs:spotbugs-annotations:4.9.4"
 
 [plugins]
