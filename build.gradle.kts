@@ -30,7 +30,7 @@ dependencies {
     testRuntimeOnly(libs.junit.platform.launcher)
 }
 
-tasks.withType<Test> {
+tasks.withType<Test>().configureEach {
     failFast = true
     useJUnitPlatform()
     testLogging {
