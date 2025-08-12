@@ -39,6 +39,10 @@ tasks.withType<Test>().configureEach {
     }
 }
 
+tasks.withType<Checkstyle>().configureEach {
+    javaLauncher = javaToolchains.launcherFor { languageVersion.set(JavaLanguageVersion.of(17)) }
+}
+
 group = "org.danilopianini"
 publishOnCentral {
     repoOwner = "DanySK"
