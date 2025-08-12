@@ -1,15 +1,15 @@
 package org.danilopianini.jirf.test;
 
 import com.google.common.collect.ImmutableList;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import org.danilopianini.jirf.CreationResult;
 import org.danilopianini.jirf.Factory;
 import org.danilopianini.jirf.FactoryBuilder;
 
 import java.math.BigInteger;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.Objects;
-import java.util.TimeZone;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -127,8 +127,9 @@ class TestFactory {
             .withArrayListConversions(String[].class, Number[].class)
             .withArrayNarrowingConversions()
             .withAutomaticToString().build();
-        f.registerSingleton(Calendar.class, GregorianCalendar.getInstance());
-        f.registerSingleton(TimeZone.class, TimeZone.getDefault());
+        final ZonedDateTime now = ZonedDateTime.ofInstant(Instant.now(), ZoneId.systemDefault());
+        f.registerSingleton(ZonedDateTime.class, now);
+        f.registerSingleton(ZoneId.class, ZoneId.systemDefault());
         assertTrue(f.build(ReproduceGPSTrace.class, "gpsTrace", true, "AlignToSimulationTime").getCreatedObject().isPresent());
     }
 
@@ -159,8 +160,8 @@ class TestFactory {
 
     public static final class ReproduceGPSTrace {
         public ReproduceGPSTrace(
-            final Calendar calendar,
-            final TimeZone timezone,
+            final ZonedDateTime calendar,
+            final ZoneId timezone,
             final String path,
             final boolean cycle,
             final String normalizer,
@@ -170,8 +171,8 @@ class TestFactory {
         }
 
         public ReproduceGPSTrace(
-            final Calendar calendar,
-            final TimeZone timezone,
+            final ZonedDateTime calendar,
+            final ZoneId timezone,
             final double speed,
             final String path,
             final boolean cycle,
