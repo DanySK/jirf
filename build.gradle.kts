@@ -24,11 +24,15 @@ dependencies {
     implementation(libs.guava)
     implementation(libs.commons.lang3)
     implementation(libs.jgrapht.core)
-    testImplementation(libs.junit4)
+    testImplementation(platform(libs.junit.bom))
+    testImplementation(libs.junit.jupiter.api)
+    testRuntimeOnly(libs.junit.jupiter.engine)
+    testRuntimeOnly(libs.junit.platform.launcher)
 }
 
 tasks.withType<Test> {
     failFast = true
+    useJUnitPlatform()
     testLogging {
         events("passed", "skipped", "failed", "standardError")
         exceptionFormat = TestExceptionFormat.FULL
