@@ -1,3 +1,20 @@
+## [0.4.36](https://github.com/DanySK/jirf/compare/0.4.35...0.4.36) (2025-09-24)
+
+### Dependency updates
+
+* **core-deps:** update dependency org.apache.commons:commons-lang3 to v3.19.0 ([#1256](https://github.com/DanySK/jirf/issues/1256)) ([9190030](https://github.com/DanySK/jirf/commit/919003020c29ac08f175744ce45d3396f081c9c3))
+* **deps:** update gradle to v9.1.0 ([#1250](https://github.com/DanySK/jirf/issues/1250)) ([397a9d6](https://github.com/DanySK/jirf/commit/397a9d6d2fc200bd4f7b78fe8f2923f18df2d53a))
+* **deps:** update plugin gitsemver to v7.0.4 ([#1248](https://github.com/DanySK/jirf/issues/1248)) ([5d55877](https://github.com/DanySK/jirf/commit/5d5587791833f7dc495244c6719269e483867a1f))
+* **deps:** update plugin kotlin-qa to v0.95.1 ([#1252](https://github.com/DanySK/jirf/issues/1252)) ([e94838b](https://github.com/DanySK/jirf/commit/e94838b4870a8ea813a46d95f4a6098e84ef3d0d))
+* **deps:** update plugin multijvmtesting to v4.1.2 ([#1253](https://github.com/DanySK/jirf/issues/1253)) ([c8ca751](https://github.com/DanySK/jirf/commit/c8ca751e64d5dacaff3f400d18bc382fadbc91fc))
+* **deps:** update plugin multijvmtesting to v4.2.0 ([#1254](https://github.com/DanySK/jirf/issues/1254)) ([d597e7c](https://github.com/DanySK/jirf/commit/d597e7c6b7732d223b4db3a913a1544fc1c2ed14))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.2 ([#1251](https://github.com/DanySK/jirf/issues/1251)) ([76d54cc](https://github.com/DanySK/jirf/commit/76d54cc2bb1b9b425ac65a14d1849956149cc910))
+* **deps:** update plugin publishoncentral to v9.1.5 ([#1249](https://github.com/DanySK/jirf/issues/1249)) ([bc5f71d](https://github.com/DanySK/jirf/commit/bc5f71df59f4323784d3e0c6e559e347f6c117e8))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.8 ([#1255](https://github.com/DanySK/jirf/issues/1255)) ([eb032ba](https://github.com/DanySK/jirf/commit/eb032ba542323fc8b1f445605c187ef113101fbe))
+
 ## [0.4.35](https://github.com/DanySK/jirf/compare/0.4.34...0.4.35) (2025-09-18)
 
 ### Dependency updates
