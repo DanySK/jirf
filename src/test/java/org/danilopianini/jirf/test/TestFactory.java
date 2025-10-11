@@ -153,7 +153,7 @@ class TestFactory {
 
         public MyObj(final double a, final Double b, final byte c) { } // NOPMD
 
-        public MyObj(final String a, final double... b) { // NOPMD
+        public MyObj(final String a, final double... b) {
             for (int i = 0; i < b.length; i++); // NOPMD
         }
     }
