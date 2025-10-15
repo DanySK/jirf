@@ -9,7 +9,7 @@ junit-bom = "org.junit:junit-bom:5.14.0"
 junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api" }
 junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine" }
 junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
-spotbugs-annotations = "com.github.spotbugs:spotbugs-annotations:4.9.6"
+spotbugs-annotations = "com.github.spotbugs:spotbugs-annotations:4.9.7"
 
 [plugins]
 gitSemVer = { id = "org.danilopianini.git-sensitive-semantic-versioning", version = "7.0.4" }
