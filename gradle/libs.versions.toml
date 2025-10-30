@@ -13,7 +13,7 @@ spotbugs-annotations = "com.github.spotbugs:spotbugs-annotations:4.9.8"
 
 [plugins]
 gitSemVer = { id = "org.danilopianini.git-sensitive-semantic-versioning", version = "7.0.6" }
-kotlin-qa = { id = "org.danilopianini.gradle-kotlin-qa", version = "0.95.2" }
+kotlin-qa = { id = "org.danilopianini.gradle-kotlin-qa", version = "0.95.3" }
 java-qa = { id = "org.danilopianini.gradle-java-qa", version = "1.151.0" }
 multiJvmTesting = { id = "org.danilopianini.multi-jvm-test-plugin", version = "4.3.2" }
 publishOnCentral = { id = "org.danilopianini.publish-on-central", version = "9.1.7" }
