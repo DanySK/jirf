@@ -5,7 +5,7 @@ boilerplate = "org.danilopianini:boilerplate:0.2.2"
 commons-lang3 = "org.apache.commons:commons-lang3:3.19.0"
 guava = "com.google.guava:guava:33.5.0-jre"
 jgrapht-core = "org.jgrapht:jgrapht-core:1.5.2"
-junit-bom = "org.junit:junit-bom:5.14.0"
+junit-bom = "org.junit:junit-bom:5.14.1"
 junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api" }
 junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine" }
 junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
