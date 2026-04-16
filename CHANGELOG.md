@@ -1,3 +1,21 @@
+## [1.0.0](https://github.com/DanySK/jirf/compare/0.4.38...1.0.0) (2026-04-16)
+
+### ⚠ BREAKING CHANGES
+
+* require Java 17+ (#1423)
+
+### Features
+
+* require Java 17+ ([#1423](https://github.com/DanySK/jirf/issues/1423)) ([b51958e](https://github.com/DanySK/jirf/commit/b51958e7581cb535ec9c37f75eac874dbef10de5))
+
+### Dependency updates
+
+* **deps:** update plugin java-qa to v1.172.0 ([#1422](https://github.com/DanySK/jirf/issues/1422)) ([aea44b5](https://github.com/DanySK/jirf/commit/aea44b5d13a601264eadf8aeb57783ea9643c4bb))
+
+### General maintenance
+
+* create AGENTS.md ([97f6b00](https://github.com/DanySK/jirf/commit/97f6b00fbc294ac79db787f45e93f41fc32b12dc))
+
 ## [0.4.38](https://github.com/DanySK/jirf/compare/0.4.37...0.4.38) (2026-04-15)
 
 ### Dependency updates
