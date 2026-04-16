@@ -40,7 +40,7 @@ tasks.withType<Test>().configureEach {
 }
 
 tasks.withType<Checkstyle>().configureEach {
-    javaLauncher = javaToolchains.launcherFor { languageVersion.set(JavaLanguageVersion.of(17)) }
+    javaLauncher = javaToolchains.launcherFor { languageVersion.set(JavaLanguageVersion.of(21)) }
 }
 
 group = "org.danilopianini"
