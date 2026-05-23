@@ -9,10 +9,8 @@ import org.danilopianini.jirf.Factory;
 import org.danilopianini.jirf.FactoryBuilder;
 
 import java.math.BigInteger;
-import java.util.Objects;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -143,50 +141,4 @@ class TestFactory {
         final CreationResult<MyObj> result = factory.build(MyObj.class, null, "foo");
         assertFalse(result.getExceptions().isEmpty());
     }
-
-    // CHECKSTYLE: EmptyStatement OFF
-    // CHECKSTYLE: NeedBraces OFF
-    // CHECKSTYLE: JavadocType OFF
-    // CHECKSTYLE: JavadocMethod OFF
-    // CHECKSTYLE: RedundantModifier OFF
-    public static final class MyObj {
-
-        public MyObj(final double a, final Double b, final byte c) { } // NOPMD
-
-        public MyObj(final String a, final double... b) {
-            for (int i = 0; i < b.length; i++); // NOPMD
-        }
-    }
-
-    public static final class ReproduceGPSTrace {
-        public ReproduceGPSTrace(
-            final ZonedDateTime calendar,
-            final ZoneId timezone,
-            final String path,
-            final boolean cycle,
-            final String normalizer,
-            final Object... normalizerArgs
-        ) {
-            this(calendar, timezone, 0, path, cycle, normalizer, normalizerArgs);
-        }
-
-        public ReproduceGPSTrace(
-            final ZonedDateTime calendar,
-            final ZoneId timezone,
-            final double speed,
-            final String path,
-            final boolean cycle,
-            final String normalizer,
-            final Object... normalizerArgs
-        ) {
-            Objects.requireNonNull(calendar);
-            Objects.requireNonNull(timezone);
-            assertEquals(0, speed, 0d);
-            Objects.requireNonNull(path);
-            assertTrue(cycle);
-            Objects.requireNonNull(normalizer);
-            Objects.requireNonNull(normalizerArgs);
-        }
-    }
-
 }
