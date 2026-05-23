@@ -9,7 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 // CHECKSTYLE: JavadocType OFF
 // CHECKSTYLE: JavadocMethod OFF
-// CHECKSTYLE: RedundantModifier OFF
 public final class ReproduceGPSTrace {
 
     public ReproduceGPSTrace(

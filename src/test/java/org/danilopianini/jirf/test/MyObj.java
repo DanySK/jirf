@@ -4,7 +4,6 @@ package org.danilopianini.jirf.test;
 // CHECKSTYLE: NeedBraces OFF
 // CHECKSTYLE: JavadocType OFF
 // CHECKSTYLE: JavadocMethod OFF
-// CHECKSTYLE: RedundantModifier OFF
 public final class MyObj {
 
     public MyObj(final double a, final Double b, final byte c) { } // NOPMD

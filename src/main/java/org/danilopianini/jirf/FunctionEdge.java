@@ -19,15 +19,15 @@ final class FunctionEdge {
         this.function = Objects.requireNonNull(function);
     }
 
-    Class<?> getSource() {
+    public Class<?> getSource() {
         return source;
     }
 
-    Class<?> getDestination() {
+    public Class<?> getDestination() {
         return destination;
     }
 
-    Function<?, ?> getFunction() {
+    public Function<?, ?> getFunction() {
         return function;
     }
 
