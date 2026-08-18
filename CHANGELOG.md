@@ -1,3 +1,13 @@
+## [1.0.2](https://github.com/DanySK/jirf/compare/1.0.1...1.0.2) (2026-08-18)
+
+### Dependency updates
+
+* **core-deps:** update dependency com.google.guava:guava to v33.7.1-jre ([#1542](https://github.com/DanySK/jirf/issues/1542)) ([4eb7563](https://github.com/DanySK/jirf/commit/4eb7563d1f8d8be37a067047b9300d27f2f66328))
+
+### General maintenance
+
+* **deps-dev:** bump js-yaml from 4.2.0 to 4.3.1 ([8024bd1](https://github.com/DanySK/jirf/commit/8024bd14b48530066690c7cbbfa1129b8d6f80a5))
+
 ## [1.0.1](https://github.com/DanySK/jirf/compare/1.0.0...1.0.1) (2026-08-17)
 
 ### Dependency updates
